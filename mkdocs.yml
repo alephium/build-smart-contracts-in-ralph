@@ -1,0 +1,6 @@
+site_name: Smart Contracts Development in Ralph
+theme:
+  name: readthedocs
+  navigation_depth: 5
+extra_css:
+  - css/extra.css
