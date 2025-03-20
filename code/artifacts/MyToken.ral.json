@@ -1,0 +1,98 @@
+{
+  "version": "v3.12.2",
+  "name": "MyToken",
+  "bytecode": "0204402040354043405101020000000fd3a248861cb4a000450c7ba000b1134064ab05a0001340640c60010001010008d34f58efe6b4a000450c7b1600a100010000000103d3f4544ae5ce0002010000000103d34ffef083a00002",
+  "codeHash": "4794d2ec9ca21bb94d985f5174670257277ea958251fcb4ba4269bdac38ab2e4",
+  "fieldsSig": {
+    "names": [
+      "name",
+      "owner"
+    ],
+    "types": [
+      "ByteVec",
+      "Address"
+    ],
+    "isMutable": [
+      false,
+      true
+    ]
+  },
+  "eventsSig": [
+    {
+      "name": "Transfer",
+      "fieldNames": [
+        "to",
+        "amount",
+        "version"
+      ],
+      "fieldTypes": [
+        "Address",
+        "U256",
+        "U256"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "withdraw",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    },
+    {
+      "name": "updateOwner",
+      "paramNames": [
+        "newOwner"
+      ],
+      "paramTypes": [
+        "Address"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "getName",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "getOwner",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "Address"
+      ]
+    }
+  ],
+  "constants": [
+    {
+      "name": "VERSION",
+      "value": {
+        "type": "U256",
+        "value": "0"
+      }
+    }
+  ],
+  "enums": [
+    {
+      "name": "ErrorCodes",
+      "fields": [
+        {
+          "name": "INVALID_CALLER",
+          "value": {
+            "type": "U256",
+            "value": "0"
+          }
+        }
+      ]
+    }
+  ]
+}

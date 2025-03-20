@@ -1,0 +1,22 @@
+Contract Array() {
+    pub fn test() -> () {
+
+        let a0 = [0, 1, 2, 3]  // [U256; 4]
+        assert!(a0[2] == 2, 0)
+
+        let a1 = [[0, 1], [2, 3]] // [[U256, 2]; 2]
+        assert!(a1[0][1] == 1, 1)
+
+        let a2 = [0i; 3]  // [I256; 3]
+        assert!(a2[2] == 0i, 2)
+
+        let a3 = [#00, #11, #22, #33]  // [ByteVec; 4]
+        assert!(a3[2] == #22, 3)
+
+        let a4 = [Foo{ x: 1, y: 2 }, Foo{ x: 3, y: 4 }] // [Foo; 2]
+        assert!(a4[0].x == 1, 4)
+        assert!(a4[1].y == 4, 5)
+
+        emit Debug(`Test successful for Array`)
+  }
+}

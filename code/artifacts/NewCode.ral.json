@@ -1,0 +1,56 @@
+{
+  "version": "v3.12.2",
+  "name": "NewCode",
+  "bytecode": "02030e4026403a010000000103d3f36cd8e4a0000201000101010ad3168527a2b4ce00450c7b1600a100a00002010200000008d38e18691cb4ce00450c7bce00b0",
+  "codeHash": "59f64d3c90d6a1ca6efd331b85d3bdde412d59ad686a3936e89c63d2e6730a18",
+  "fieldsSig": {
+    "names": [
+      "owner",
+      "n"
+    ],
+    "types": [
+      "Address",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      true
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "get",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "set",
+      "paramNames": [
+        "m"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "destroy",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

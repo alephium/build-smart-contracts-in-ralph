@@ -1,0 +1,23 @@
+Contract FunctionCalls(fib: Fib, mut result: U256) {
+    @using(checkExternalCaller = false)
+    pub fn runFib(n: U256) -> () {
+      let res = fib.cal(n)
+      updateResult(res)
+    }
+  
+    @using(updateFields = true)
+    fn updateResult(res: U256) -> () {
+      result = res
+    }
+}
+  
+Contract Fib() {
+    @using(checkExternalCaller = false)
+    pub fn cal(n: U256) -> U256 {
+      if (n <= 1) {
+        return n
+      }
+      // Recursive function calls to calculate Fibonacci number
+      return cal(n - 1) + cal(n - 2)
+    }
+}

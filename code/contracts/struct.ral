@@ -1,0 +1,51 @@
+// Structs have to be defined globally
+struct Foo { x: U256, mut y: U256 }
+struct Bar { z: U256, mut foo: Foo }
+
+Contract Struct() {
+   pub fn test1() -> () {
+       let f0 = Foo { x: 1, y: 2 }
+       // f0.y = 3 won't work as f0 is immutable despite the field y being mutable
+
+       let mut f1 = Foo { x: 1, y: 2 }
+       f1.y = 3 // This works as both f1 and y are mutable
+       assert!(f1.y == 3, 0)
+
+       // let b0 = Bar { z: 4, foo: f0 }
+       // b0.foo.y = 5 won't work as b0 is immutable
+
+       let mut b1 = Bar { z: 5, foo: f0 }
+       b1.foo.y = 6
+       assert!(b1.foo.y == 6, 1)
+
+       emit Debug(`Test 1 successful for Struct`)
+  }
+
+  pub fn test2() -> () {
+      let foo0 = Foo { x: 0, y: 1 }
+      let mut foo1 = foo0
+
+      // Modifying foo1.y will not change foo0.y
+      foo1.y = 2
+      assert!(foo0.y == 1, 0)
+      assert!(foo1.y == 2, 1)
+
+      emit Debug(`Test 2 successful for Struct`)
+  }
+
+  pub fn test3() -> () {
+      let foo = Foo { x: 0, y: 1 }
+
+      let Foo { mut x, y } = foo
+      assert!(x == 0, 0)
+      assert!(y == 1, 1)
+      x = 1
+
+      // Variables `x` and `y` already exist, create two new variables `x1` and `y1`
+      let Foo { x: x1, y: y1 } = foo
+      assert!(x1 == 0, 2)
+      assert!(y1 == 1, 3)
+
+      emit Debug(`Test 3 successful for Struct`)
+  }
+}

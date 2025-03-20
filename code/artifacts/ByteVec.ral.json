@@ -1,0 +1,23 @@
+{
+  "version": "v3.12.2",
+  "name": "ByteVec",
+  "bytecode": "000140b101000004004046d362d460121404001122331700140017011402001114022233441600410c7b16001601441600410d7b140548656c6c6f17021405576f726c641703160214012044160344140b48656c6c6f20576f726c64410e7b031e140101410f7b041e14010041107b134064401402406441117b127f9c3e14027f9c4113067b140b48656c6c6f20576f726c6443130b2f13077b140b48656c6c6f20576f726c640c1162140548656c6c6f4113087b",
+  "codeHash": "5793e1d27b59ab002a58a88e95dfb317e9f18b738b7d63d186b7d53f866df0be",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "test",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

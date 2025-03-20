@@ -1,0 +1,85 @@
+{
+  "version": "v3.12.2",
+  "name": "SoftwareEngineer",
+  "bytecode": "0206124029403f404d405b4069010101010106d35d880ee0b41600a9160002010000000103d33022c7681409436f64696e672e2e2e02010000000103d37c49bd431408536f66747761726502010000000103d3f4544ae5ce0002010000000103d389148c31ce0102010000000103d3754e1787132802",
+  "codeHash": "b01e49bf45d5d736cffc6383420e9fe4bb260b2b045fa402c588aeff5fdc10cd",
+  "fieldsSig": {
+    "names": [
+      "name",
+      "id"
+    ],
+    "types": [
+      "ByteVec",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      false
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "pay",
+      "paramNames": [
+        "amount"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "status",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "getSpecialization",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "getName",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "getId",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "getStandardWorkingHours",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

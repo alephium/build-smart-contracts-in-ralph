@@ -1,0 +1,29 @@
+{
+  "version": "v3.12.2",
+  "name": "Counter",
+  "bytecode": "010111010000000005d361e6323ca0000d2aa100",
+  "codeHash": "25bfef57ab064636404cf459647d2d97b3dfdd4e38d66410c1fd138b673be452",
+  "fieldsSig": {
+    "names": [
+      "counter"
+    ],
+    "types": [
+      "U256"
+    ],
+    "isMutable": [
+      true
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "increase",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

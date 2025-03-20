@@ -1,0 +1,76 @@
+{
+  "version": "v3.12.2",
+  "name": "Director",
+  "bytecode": "02051c4035404c405a406801010102010cd35d880ee01600130c2c130a2d1701b41601a9160102010000000103d33022c768140b4d616e6167696e672e2e2e02010000000103d3b07b3b19140945786563757469766502010000000103d3f4544ae5ce0002010000000103d389148c31ce0102",
+  "codeHash": "2d094b9e73c8f0c3584a45d119653e70fb9fce8b5c3ab37de3838bb6a4df09f9",
+  "fieldsSig": {
+    "names": [
+      "name",
+      "id"
+    ],
+    "types": [
+      "ByteVec",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      false
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "pay",
+      "paramNames": [
+        "amount"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "status",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "getManagementLevel",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "getName",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "getId",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

@@ -1,0 +1,12 @@
+TxScript Chain {
+    emit Debug(`Network id: ${networkId!()}`)
+    emit Debug(`Block timestamp: ${blockTimeStamp!()}`)
+    emit Debug(`Block target: ${blockTarget!()}`)
+    emit Debug(`Transaction id: ${txId!()}`)
+    emit Debug(`Transaction input size: ${txInputsSize!()}`)
+    emit Debug(`First transaction input address: ${txInputAddress!(0)}`)
+    emit Debug(`Gas fee: ${txGasFee!()}`)
+    emit Debug(`Gas amount: ${txGasAmount!()}`)
+    assert!(dustAmount!() == 0.001 alph, 0)
+    verifyAbsoluteLocktime!(blockTimeStamp!() - 1)
+}

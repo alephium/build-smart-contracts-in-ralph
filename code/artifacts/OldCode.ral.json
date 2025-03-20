@@ -1,0 +1,66 @@
+{
+  "version": "v3.12.2",
+  "name": "OldCode",
+  "bytecode": "02030e4022403a010000000103d3f36cd8e4ce0102010001010008d3c7e7c76db4ce00450c7b1600ba01000303000ad3faf4fa3cb4ce00450c7b160016011602bb",
+  "codeHash": "029d9cc9b9a0129893b0fb1d8d77d8193e865c219d50749cd04a64351d71da47",
+  "fieldsSig": {
+    "names": [
+      "owner",
+      "n"
+    ],
+    "types": [
+      "Address",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      false
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "get",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "migrate",
+      "paramNames": [
+        "newCode"
+      ],
+      "paramTypes": [
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "migrateWithFields",
+      "paramNames": [
+        "newCode",
+        "immFields",
+        "mutFields"
+      ],
+      "paramTypes": [
+        "ByteVec",
+        "ByteVec",
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false,
+        false,
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

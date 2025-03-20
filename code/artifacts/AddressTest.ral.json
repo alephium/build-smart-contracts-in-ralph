@@ -1,0 +1,38 @@
+{
+  "version": "v3.12.2",
+  "name": "AddressTest",
+  "bytecode": "00020d41110000010101061600470c0d620201000004004039d362d460121500bee85f379545a2ed9f6cceb331288842f378cf0f04012ad4ac8824aae7d6f80a1700150102063dadebf8f19501b4c3f774c3b707503469a5b13b3b8f6da59608ebbf888ef3f5a3424febc1d0d7d0e3d59d39ba24edc2ca91b5afba0af38e1209014a97bcaa01170115026a1e211ae526e1ee600b21edec0997cf1313af796b59eb7a913b9f42f4aebb8717021503b2d71c116408ae47b931482a440f675dc9ea64453db24ee931dacd578cae9002170316000000140100410c7b16010000140101410d7b16020000140102410e7b16030000140103410f7b16008c0c2f107b16018c0c2f117b16028c0c2f13067b16038c0e2f13077b",
+  "codeHash": "22026f41f9144b02e1eaa6c35fb3b31e46fc1e6153b6c35e5fd3f35756970178",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "prefix",
+      "paramNames": [
+        "address"
+      ],
+      "paramTypes": [
+        "Address"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "test",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

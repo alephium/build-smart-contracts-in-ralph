@@ -1,0 +1,24 @@
+Contract AssetFunctions() {
+    @using(preapprovedAssets = true, checkExternalCaller = false)
+    pub fn burn() -> () {
+      burnToken!(callerAddress!(), selfTokenId!(), 1)
+    }
+
+    @using(preapprovedAssets = true, checkExternalCaller = false)
+    pub fn lock(amount: U256) -> () {
+        let caller = callerAddress!()
+        lockApprovedAssets!{caller -> ALPH: dustAmount!(), selfTokenId!(): amount}(
+            caller, blockTimeStamp!() + 86400000  // 1 day
+        )
+    }
+
+    @using(preapprovedAssets = true, checkExternalCaller = false, assetsInContract = true)
+    pub fn withdraw(amount: U256) -> () {
+        transferTokenFromSelf!(callerAddress!(), selfTokenId!(), amount)
+    }
+
+    @using(preapprovedAssets = true, checkExternalCaller = false, assetsInContract = true)
+    pub fn deposit(amount: U256) -> () {
+        transferTokenToSelf!(callerAddress!(), selfTokenId!(), amount)
+    }
+}

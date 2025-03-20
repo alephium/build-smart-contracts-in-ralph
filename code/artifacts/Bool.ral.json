@@ -1,0 +1,23 @@
+{
+  "version": "v3.12.2",
+  "name": "Bool",
+  "bytecode": "0001406101000002004045d362d4601203170004170116001601041c1a0c7b160016011b031c0d7b160019041c0e7b160016011b160119031c1a0f7b160016011a19160016011b031c1b107b110f330e1031031c1a117b130a130a34110f32031c1b13067b",
+  "codeHash": "3f67ef96d22a357ad79c38ee9689aaaa37575f42a10b0cba09eedd70409f6849",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "test",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

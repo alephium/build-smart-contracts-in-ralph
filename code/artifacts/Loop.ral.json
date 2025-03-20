@@ -1,0 +1,34 @@
+{
+  "version": "v3.12.2",
+  "name": "Loop",
+  "bytecode": "000240294067010000020114d33abfd6850c17000c1701160010324c09160116002a170116000d2a17004a3316010201000007014023d3469852130d0e0f1011170417031702170117000c17050c1706160611324c0e160516067a11314d782a170516060d2a17064a2e160502",
+  "codeHash": "6c1aa99473cb6cb4fb2be43c55169e2e2821972f122eb94e1b1722c50241ea60",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "whileStmt",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "forStmt",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

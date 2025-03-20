@@ -1,0 +1,6 @@
+Contract Counter(mut counter: U256) {
+    @using(updateFields = true, checkExternalCaller = false)
+    pub fn increase() -> () {
+      counter += 1
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "version": "v3.12.2",
+  "name": "HelloWeb3",
+  "bytecode": "00010b010000000001d36c28e6d7",
+  "codeHash": "466369e9203f2fbfaa13fdbdce67aa6b27f0a73f3cd5157477dfe68f45753e85",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "main",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

@@ -1,0 +1,31 @@
+{
+  "version": "v3.12.2",
+  "name": "SubDomain",
+  "bytecode": "01010e010000000103d3d5be4f97ce0002",
+  "codeHash": "fced46b77d552aaf826aae11354f3218c7420adfc917cb8159d6babf3e73e606",
+  "fieldsSig": {
+    "names": [
+      "url"
+    ],
+    "types": [
+      "ByteVec"
+    ],
+    "isMutable": [
+      false
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "getUrl",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

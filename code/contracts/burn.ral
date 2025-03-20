@@ -1,0 +1,15 @@
+Contract Burn() {
+    // Requires asset approval to call `burn` since it burns assets
+    @using(preapprovedAssets = true)
+    fn burn(caller: Address, tokenId: ByteVec) -> () {
+      burnToken!(caller, tokenId, 1)
+    }
+  
+    @using(preapprovedAssets = true, checkExternalCaller = false)
+    pub fn main(tokenId: ByteVec) -> () {
+      let caller = callerAddress!()
+      // Approves 1 token from caller to call `burn`
+      burn{caller -> tokenId: 1}(caller, tokenId)
+    }
+  }
+  

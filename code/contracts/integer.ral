@@ -1,0 +1,56 @@
+Contract Integer () {
+    pub fn test() -> () {
+      // The type of `a` ... `e` is U256.
+      let a = 10
+      let b = 10u
+      let c = 1_000_000_000
+      let d = 1e18
+      let e = 0xff
+
+      // The type of `f` ... `h` is I256.
+      let f = -10
+      let g = 10i
+      let h = -1e18
+
+      // Basic arithmetic
+      assert!(a + b == 20, 0)
+      assert!(f - g == -20, 1)
+      assert!(c * 2 == 2000000000, 2)
+      assert!(h / 1000i == -1e15, 3)
+      assert!(2 ** 8 == 256, 4)
+      assert!(10 % 3 == 1, 5)
+
+      // More complex expressions
+      assert!((a * b + c) / d == 0, 6)
+
+      // Overflow examples:
+      // let h = u256Max!() + 1
+      // let i = 0 - 1
+      // let j = i256Max!() + 1i
+      // let k = i256Min!() - 1i
+
+      // Modulo 2^256 operators for U256 type
+      assert!(u256Max!() |+| 1 == 0, 7) // Addition modulo 2^256
+      assert!(0 |-| 1 == u256Max!(), 8) // Subtraction modulo 2^256
+      assert!(u256Max!() |*| 2 == u256Max!() - 1, 9) // Multiplication modulo 2^256
+      assert!((1 << 128) |**| 2 == 0, 10) // Power modulo 2^256
+
+      // Modulo N operators for U256 type
+      assert!(mulModN!(2, 3, 4) == 2, 11) // (2 * 3) % 4
+      assert!(mulModN!(1 << 128, 1 << 128, u256Max!() - 1) == 2, 12)
+      assert!(mulModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 13)
+      assert!(addModN!(2, 3, 4) == 1, 14) // (2 + 3) % 4
+      assert!(addModN!(1 << 128, 1 << 128, u256Max!()) == 1 << 129, 15)
+      assert!(addModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 16)
+
+      // Bitwise Operators for U256 type
+      assert!(e & 0xf0 == 0xf0, 17)
+      assert!(e | 0xf0 == 0xff, 18)
+      assert!(e ^ 0xf0 == 0x0f, 19)
+      assert!(e << 8 == 0xff00, 20)
+      assert!(u256Max!() << 2 == u256Max!() - 3, 21)
+      assert!(e >> 4 == 0x0f, 22)
+
+      emit Debug(`Test successful for Integer`)
+    }
+}

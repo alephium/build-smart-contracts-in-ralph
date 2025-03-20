@@ -1,0 +1,16 @@
+Contract TupleExample() {
+    fn createTuple() -> (U256, ByteVec, Bool) {
+        return 100, b`tuple example`, false
+    }
+
+    pub fn test() -> () {
+        // A tuple with different types
+        let (mut first, second, third) = createTuple()
+        first = first + 1
+
+        assert!(first == 101, 0)
+        assert!(second == b`tuple example`, 1)
+        assert!(third == false, 2)
+        emit Debug(`Tuple test successful`)
+    }
+}

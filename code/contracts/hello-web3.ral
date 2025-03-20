@@ -1,0 +1,5 @@
+Contract HelloWeb3() {
+    pub fn main() -> () {
+        emit Debug(`Hello Web3!`)
+    }
+}

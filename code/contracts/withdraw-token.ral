@@ -1,0 +1,8 @@
+Contract WithdrawToken() {
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn withdraw() -> () {
+      let caller = callerAddress!()
+      transferTokenFromSelf!(caller, selfTokenId!(), 1)
+      transferTokenFromSelf!(caller, ALPH, dustAmount!())
+    }
+}

@@ -1,0 +1,28 @@
+Contract MyToken(name: ByteVec, mut owner: Address) {
+    event Transfer(to: Address, amount: U256, version: U256)
+    const VERSION = 0
+    enum ErrorCodes {
+      INVALID_CALLER = 0
+    }
+
+    @using(assetsInContract = true)
+    pub fn withdraw() -> () {
+      checkCaller!(callerAddress!() == owner, ErrorCodes.INVALID_CALLER)
+      transferTokenFromSelf!(owner, selfTokenId!(), 100)
+      emit Transfer(owner, 100, VERSION)
+    }
+
+    @using(updateFields = true)
+    pub fn updateOwner(newOwner: Address) -> () {
+      checkCaller!(callerAddress!() == owner, ErrorCodes.INVALID_CALLER)
+      owner = newOwner
+    }
+
+    pub fn getName() -> ByteVec {
+      return name
+    }
+
+    pub fn getOwner() -> Address {
+        return owner
+    }
+}

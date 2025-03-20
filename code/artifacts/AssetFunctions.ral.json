@@ -1,0 +1,62 @@
+{
+  "version": "v3.12.2",
+  "name": "AssetFunctions",
+  "bytecode": "00040f403840484058010300000005d3a7bdfa69b4b10dbd01030102000fd30628da6db4170116017a13c3038d7ea4c68000a2b11600a31601561385265c002abe010101010005d30fb898ceb4b11600ab010101010005d3d385e15cb4b11600ac",
+  "codeHash": "88236b38440622ec6e1c24d85567bd1f2ecb587c0caa01b3e24d872aa932db88",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "burn",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    },
+    {
+      "name": "lock",
+      "paramNames": [
+        "amount"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "withdraw",
+      "paramNames": [
+        "amount"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "deposit",
+      "paramNames": [
+        "amount"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

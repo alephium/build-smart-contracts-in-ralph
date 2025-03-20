@@ -1,0 +1,25 @@
+{
+  "version": "v3.12.2",
+  "name": "DepositTwice",
+  "bytecodeTemplate": "01010300010012b41700160013c40de0b6b3a7640000a216000d0c{0}0100160013c40de0b6b3a7640000a216000d0c{0}0100",
+  "fieldsSig": {
+    "names": [
+      "contract"
+    ],
+    "types": [
+      "Deposit"
+    ],
+    "isMutable": [
+      false
+    ]
+  },
+  "functions": [
+    {
+      "name": "main",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ]
+}

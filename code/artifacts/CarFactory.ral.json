@@ -1,0 +1,97 @@
+{
+  "version": "v3.12.2",
+  "name": "CarFactory",
+  "bytecode": "0103402f405e408f010304070117d339aa8b1a16011602130264160313016417051704b4d1a2160016041605ad1706160677a100160602010304070117d36c7148b516011602130264160313016417051704b4d1a2160016041605af1706160677a100160602010305080118d369b5b73016011602130264160313016417061705b4d1a21600160516061604bc1707160777a100160702",
+  "codeHash": "745e27a5263bc699605f477866d98839cedfdc9b5d73a4b78d61a6e71d887f62",
+  "fieldsSig": {
+    "names": [
+      "carAddress"
+    ],
+    "types": [
+      "Address"
+    ],
+    "isMutable": [
+      true
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "createCar",
+      "paramNames": [
+        "carByteCode",
+        "model",
+        "year",
+        "price"
+      ],
+      "paramTypes": [
+        "ByteVec",
+        "ByteVec",
+        "U256",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "returnTypes": [
+        "Car"
+      ]
+    },
+    {
+      "name": "copyCreateCar",
+      "paramNames": [
+        "carContractId",
+        "model",
+        "year",
+        "price"
+      ],
+      "paramTypes": [
+        "ByteVec",
+        "ByteVec",
+        "U256",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "returnTypes": [
+        "Car"
+      ]
+    },
+    {
+      "name": "copyCreateCarWithToken",
+      "paramNames": [
+        "carContractId",
+        "model",
+        "year",
+        "price",
+        "tokenAmount"
+      ],
+      "paramTypes": [
+        "ByteVec",
+        "ByteVec",
+        "U256",
+        "U256",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "returnTypes": [
+        "Car"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

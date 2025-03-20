@@ -1,0 +1,76 @@
+Interface Payable {
+    @using(preapprovedAssets = true)
+    pub fn pay(amount: U256) -> U256
+ }
+ 
+ Interface WorkStatus {
+     pub fn status() -> ByteVec
+ }
+ 
+ Abstract Contract Employee(name: ByteVec, id: U256) {
+     pub fn getName() -> ByteVec {
+         return name
+     }
+     pub fn getId() -> U256 {
+         return id
+     }
+ }
+ 
+ Abstract Contract TechnicalStaff(name: ByteVec, id: U256) {
+     pub fn getSpecialization() -> ByteVec
+     pub fn getStandardWorkingHours() -> U256 {
+         return 40
+     }
+ }
+ 
+Abstract Contract ManagementStaff(name: ByteVec, id: U256) {
+   pub fn getManagementLevel() -> ByteVec
+}
+
+Contract SoftwareEngineer(name: ByteVec, id: U256) extends Employee(name, id), TechnicalStaff(name, id) implements Payable, WorkStatus {
+    @using(preapprovedAssets = true, assetsInContract = true, checkExternalCaller = false)
+    pub fn pay(amount: U256) -> U256 {
+        transferTokenToSelf!(callerAddress!(), ALPH, amount)
+        return amount
+    }
+
+    pub fn status() -> ByteVec {
+        return b`Coding...`
+    }
+
+    pub fn getSpecialization() -> ByteVec {
+        return b`Software`
+    }
+}
+
+Contract Director(name: ByteVec, id: U256) extends Employee(name, id), ManagementStaff(name, id) implements Payable, WorkStatus {
+    @using(preapprovedAssets = true, assetsInContract = true, checkExternalCaller = false)
+    pub fn pay(amount: U256) -> U256 {
+        let finalAmount = amount * 12 / 10
+        transferTokenToSelf!(callerAddress!(), ALPH, finalAmount)
+        return finalAmount
+    }
+
+    pub fn status() -> ByteVec {
+        return b`Managing...`
+    }
+
+    pub fn getManagementLevel() -> ByteVec {
+        return b`Executive`
+    }
+}
+
+Contract Company() {
+   @using(checkExternalCaller = false)
+   pub fn getStatus(contractId: ByteVec) -> ByteVec {
+       return WorkStatus(contractId).status()  // OK
+   }
+   //@using(checkExternalCaller = false)
+   //pub fn getName(contractId: ByteVec) -> ByteVec {
+   //    return Employee(contractId).getName()  // Compiler reports "Employee" is not instantiable
+   //}
+   @using(checkExternalCaller = false)
+   pub fn getName(contractId: ByteVec) -> ByteVec {
+       return SoftwareEngineer(contractId).getName()  // OK
+   }
+}

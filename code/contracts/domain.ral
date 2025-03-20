@@ -1,0 +1,22 @@
+Contract Domain(url: ByteVec, subDomainTemplateId: ByteVec) {
+    @using(preapprovedAssets = true, checkExternalCaller = false)
+    pub fn createSubDomain(
+        subDomainUrl: ByteVec
+    ) -> Address {
+        let (immFields, mutFields) = SubDomain.encodeFields!(url ++ b`/` ++ subDomainUrl)
+        let subDomainId = copyCreateSubContract!{callerAddress!() -> ALPH: minimalContractDeposit!()}(
+            subDomainUrl, subDomainTemplateId, immFields, mutFields
+        )
+        return contractIdToAddress!(subDomainId)
+    }
+
+    pub fn getSubDomain(subDomainUrl: ByteVec) -> Address {
+        return contractIdToAddress!(subContractId!(subDomainUrl))
+    }
+}
+
+Contract SubDomain(url: ByteVec) {
+    pub fn getUrl() -> ByteVec {
+        return url
+    }
+}

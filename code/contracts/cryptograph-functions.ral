@@ -1,0 +1,31 @@
+Contract CryptographyFunctions() {
+    pub fn verifyHash() -> () {
+        let input = b`Hello World1`
+        assert!(blake2b!(input) == #8947bee8a082f643a8ceab187d866e8ec0be8c2d7d84ffa8922a6db77644b37a, 0)
+        assert!(keccak256!(input) == #2744686CE50A2A5AE2A94D18A3A51149E2F21F7EEB4178DE954A2DFCADC21E3C, 0)
+        assert!(sha256!(input) == #6D1103674F29502C873DE14E48E9E432EC6CF6DB76272C7B0DAD186BB92C9A9A, 0)
+        assert!(sha3!(input) == #f5ad69e6b85ae4a51264df200c2bd19fbc337e4160c77dfaa1ea98cbae8ed743, 0)
+    }
+
+    pub fn verifySignature() -> () {
+        let message = #0000000000000000000000000000000000000000000000000000000000000000
+        let p256PubKey = #0326e4868d3fc321680ccbecd6d12cfb75640f229515c674e84a43d7585c9c69a5
+        let p256Sig = #2a970fde2bdf8ad911787aeca7efceddba5927696c15a9c56cec78fe2a16a9d50d883e519733370a4baa7d0c8b15cdf10d7cfca19b84fea44d9827474516cfee
+        verifySecP256K1!(message, p256PubKey, p256Sig)
+
+        let ed25519PubKey = #64bfbce13535b2ab9fa15d5dc73788ebf9552dd05aed5952d208712f653f87cd
+        let ed25519Sig = #77006f93e346282b18753b563f5bf4b47a879659b25aa0766bcff215691cdb5fa547616ac43ad71b3cb65b58c9ab9653fd0016efed1415c5cfac2e6bb944fe03
+        verifyED25519!(message, ed25519PubKey, ed25519Sig)
+
+        let bip340PubKey = #b72540c454b7ee2e92b062cdcc6cb8bb2774c2e0dc8d8d5274e9c641b38a284a
+        let bip340Sig = #48d18651d3399889acc4813b517c39fe88463796a5d6e6c154cdc05d3caf0fa1dff1f08561617679f6a5a9e1a05c8f2c46bc329b633080a31c7816a964134e8e
+        verifyBIP340Schnorr!(message, bip340PubKey, bip340Sig)
+    }
+
+    pub fn verifyEthEcRecover() -> () {
+        let messageHash = #d058b58f0b2cd0612f1619f3936dd1012cbc1a1616e02d1d83d43ea0129cb650
+        let signature = #2c6401216c9031b9a6fb8cbfccab4fcec6c951cdf40e2320108d1856eb532250576865fbcd452bcdc4c57321b619ed7a9cfd38bd973c3e1e0243ac2777fe9d5b1b
+        let address = ethEcRecover!(messageHash, signature)
+        assert!(address == #31b26e43651e9371c88af3d36c14cfd938baf4fd, 0)
+    }
+}

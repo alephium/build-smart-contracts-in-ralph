@@ -1,0 +1,23 @@
+{
+  "version": "v3.12.2",
+  "name": "Array",
+  "bytecode": "0001407301000013004045d362d460120c0d0e0f170317021701170016020e2f0c7b0c0d0e0f170717061705170416050d2f0d7b050505170a17091708160a05240e7b140100140111140122140133170e170d170c170b160d140122410f7b0d0e0f10171217111710170f160f0d2f107b1612102f117b",
+  "codeHash": "57f7d5358bc7114dbb806818dba684102c7770a9413a2c73491d2ae775c3794b",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "test",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

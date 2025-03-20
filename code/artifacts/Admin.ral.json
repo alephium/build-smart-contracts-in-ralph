@@ -1,0 +1,47 @@
+{
+  "version": "v3.12.2",
+  "name": "Admin",
+  "bytecode": "01011b01000101000cd3f7def6a4b4a000450c7b05a00016005f1600a100",
+  "codeHash": "9da5f16f66434d1a0e0d2f48b0c2300ab14faaef9f7718f9c8231dd866fde62b",
+  "fieldsSig": {
+    "names": [
+      "admin"
+    ],
+    "types": [
+      "Address"
+    ],
+    "isMutable": [
+      true
+    ]
+  },
+  "eventsSig": [
+    {
+      "name": "AdminUpdated",
+      "fieldNames": [
+        "previous",
+        "new"
+      ],
+      "fieldTypes": [
+        "Address",
+        "Address"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "updateAdmin",
+      "paramNames": [
+        "newAdmin"
+      ],
+      "paramTypes": [
+        "Address"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

@@ -1,0 +1,69 @@
+{
+  "version": "v3.12.2",
+  "name": "CheckExternal",
+  "bytecode": "02040e40234032403b010000000103d341030341000302010001010008d3757677cdb4ce00450c7b1600a100010001010003d31d24b36f1600a100000000000102a00002",
+  "codeHash": "48a6579f3a1d24bfc543af68c864106b67b3165a4b00b9f4e59abe2e3831366b",
+  "fieldsSig": {
+    "names": [
+      "owner",
+      "value"
+    ],
+    "types": [
+      "Address",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      true
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "getValue",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "setValue",
+      "paramNames": [
+        "v"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "setValueUnsafe",
+      "paramNames": [
+        "v"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "getValuePrivate",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

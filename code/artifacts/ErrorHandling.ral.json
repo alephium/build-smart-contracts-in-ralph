@@ -1,0 +1,72 @@
+{
+  "version": "v3.12.2",
+  "name": "ErrorHandling",
+  "bytecode": "00030f40254039010001010004d35973c03016000c7b01000101010ad36cc9207c16004b050c047c7b180c02010001010108d3b5d269b416004b03044d180c02",
+  "codeHash": "f97a233d1a8d5bae3ff4d6e49cd9b4518cf1172b3eeede5ba9b0f2e3e4a0a37b",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "assert",
+      "paramNames": [
+        "cond"
+      ],
+      "paramTypes": [
+        "Bool"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "panicWithErrorCode",
+      "paramNames": [
+        "cond"
+      ],
+      "paramTypes": [
+        "Bool"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "panicWithoutErrorCode",
+      "paramNames": [
+        "cond"
+      ],
+      "paramTypes": [
+        "Bool"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": [
+    {
+      "name": "ErrorCodes",
+      "fields": [
+        {
+          "name": "InvalidContractState",
+          "value": {
+            "type": "U256",
+            "value": "0"
+          }
+        }
+      ]
+    }
+  ]
+}

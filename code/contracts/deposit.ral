@@ -1,0 +1,16 @@
+Contract Deposit() {
+  @using(
+    preapprovedAssets = true,
+    payToContractOnly = true,
+    checkExternalCaller = false
+  )
+  pub fn deposit(caller: Address) -> () {
+    transferTokenToSelf!(caller, ALPH, 1 alph)
+  }
+}
+  
+TxScript DepositTwice(contract: Deposit) {
+  let caller = callerAddress!()
+  contract.deposit{caller -> ALPH: 1 alph}(caller)
+  contract.deposit{caller -> ALPH: 1 alph}(caller)
+}

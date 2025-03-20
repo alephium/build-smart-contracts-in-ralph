@@ -1,0 +1,23 @@
+{
+  "version": "v3.12.2",
+  "name": "WithdrawToken",
+  "bytecode": "00011f01020001000ad3a248861cb417001600b10dab160013c3038d7ea4c68000a8",
+  "codeHash": "dd2f159729700b2b233f41a27561c000b7b80578560c86d9b234f1019026abdc",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "withdraw",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

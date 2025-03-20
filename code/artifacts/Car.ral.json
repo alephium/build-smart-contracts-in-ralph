@@ -1,0 +1,52 @@
+{
+  "version": "v3.12.2",
+  "name": "Car",
+  "bytecode": "03020f4021010001010003d3ca24b9da1600a100010000000305d3cc021aa2ce00ce01a00002",
+  "codeHash": "2d3fda158b1ee9ca828ca9cdab0333a9d6607ab0b80726606df0a94fc066ce0b",
+  "fieldsSig": {
+    "names": [
+      "model",
+      "year",
+      "price"
+    ],
+    "types": [
+      "ByteVec",
+      "U256",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      false,
+      true
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "updatePrice",
+      "paramNames": [
+        "newPrice"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "getCarInfo",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "ByteVec",
+        "U256",
+        "U256"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

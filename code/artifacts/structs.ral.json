@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Foo",
+    "fieldNames": [
+      "x",
+      "y"
+    ],
+    "fieldTypes": [
+      "U256",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      true
+    ]
+  },
+  {
+    "name": "Bar",
+    "fieldNames": [
+      "z",
+      "foo"
+    ],
+    "fieldTypes": [
+      "U256",
+      "Foo"
+    ],
+    "isMutable": [
+      false,
+      true
+    ]
+  }
+]

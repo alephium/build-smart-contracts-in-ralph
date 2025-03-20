@@ -1,0 +1,10 @@
+Contract Admin(mut admin: Address) {
+    event AdminUpdated(previous: Address, new: Address)
+
+    @using(updateFields = true)
+    pub fn updateAdmin(newAdmin: Address) -> () {
+        checkCaller!(callerAddress!() == admin, 0)
+        emit AdminUpdated(admin, newAdmin)
+        admin = newAdmin
+    }
+}

@@ -1,0 +1,27 @@
+Contract ByteVec () {
+    pub fn test() -> ()  {
+      // ByteVec literals must start with `#` followed by a hex string.
+      let a = #00112233
+      let b = #  // Empty ByteVec
+
+      // ByteVec concatenation
+      assert!(#0011 ++ #2233 == a, 0)
+      assert!(a ++ b == a, 1)
+
+      // String literals starts with `b`.
+      let c = b`Hello`
+      let d = b`World`
+      assert!(c ++ b` ` ++ d == b`Hello World`, 2)
+
+      // Convert other types to ByteVec
+      assert!(toByteVec!(true) == #01, 3)
+      assert!(toByteVec!(false) == #00, 4)
+      assert!(toByteVec!(100) == #4064, 5)
+      assert!(toByteVec!(-100i) == #7f9c, 6)
+
+      assert!(size!(b`Hello World`) == 11, 7)
+      assert!(byteVecSlice!(b`Hello World`, 0, 5) == b`Hello`, 8)
+
+      emit Debug(`Test successful for ByteVec`)
+   }
+}

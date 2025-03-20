@@ -1,0 +1,45 @@
+{
+  "version": "v3.12.2",
+  "name": "Burn",
+  "bytecode": "00020c4026000302020004160016010dbd01030102000ad38b1a27a9b41701160116000da3160116000000",
+  "codeHash": "c450bef21a0fbee19e8ba57d1b95939bb704eda48af4b216748a946c0ab99e04",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "burn",
+      "paramNames": [
+        "caller",
+        "tokenId"
+      ],
+      "paramTypes": [
+        "Address",
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false,
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "main",
+      "paramNames": [
+        "tokenId"
+      ],
+      "paramTypes": [
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

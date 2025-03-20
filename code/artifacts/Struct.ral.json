@@ -1,0 +1,37 @@
+{
+  "version": "v3.12.2",
+  "name": "Struct",
+  "bytecode": "00034036405e409b01000007001dd36f8605a30d0e170117000d0e170317020f170316030f2f0c7b111600160117061705170413061706160613062f0d7b010000040015d3bc8042640c0d1701170016001601170317020e170316010d2f0c7b16030e2f0d7b01000006004023d3097a7f250c0d17011700160017021601170316020c2f0c7b16030d2f0d7b0d1702160017041601170516040c2f0e7b16050d2f0f7b",
+  "codeHash": "4a6970546eeafb14a54dfe590d338bd3d36093401516caf17baca46a6397b9ab",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "test1",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    },
+    {
+      "name": "test2",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    },
+    {
+      "name": "test3",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

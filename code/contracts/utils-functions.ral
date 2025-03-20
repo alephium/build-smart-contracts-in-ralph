@@ -1,0 +1,13 @@
+Contract UtilsFunctions() {
+    pub fn test() -> () {
+        assert!(zeros!(2) == #0000, 1)
+        assert!(groupOfAddress!(@1H5irSsGHAZSQKcetPPtTDXmS4tZVcM9bEi57jSWhY4CZ) == 3, 2)
+        assert!(isAssetAddress!(@1H5irSsGHAZSQKcetPPtTDXmS4tZVcM9bEi57jSWhY4CZ) == true, 3)
+        assert!(isContractAddress!(@1H5irSsGHAZSQKcetPPtTDXmS4tZVcM9bEi57jSWhY4CZ) == false, 4)
+        assert!(isContractAddress!(@weQT3a8gsdGoZSEFeXsCVJqGQ9fWdufE2nNsDysdojBf) == true, 5)
+        assert!(len!([1,2,3,4]) == 4, 6)
+        assert!(nullContractAddress!() == @tgx7VNFoP9DJiFMFgXXtafQZkUvyEdDHT9ryamHJYrjq, 7)
+        assert!(minimalContractDeposit!() == 0.1 alph, 8)
+        assert!(mapEntryDeposit!() == 0.1 alph, 9)
+    }
+}

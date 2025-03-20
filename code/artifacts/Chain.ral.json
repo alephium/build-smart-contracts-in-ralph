@@ -1,0 +1,19 @@
+{
+  "version": "v3.12.2",
+  "name": "Chain",
+  "bytecodeTemplate": "0101030000000913c3038d7ea4c6800013c3038d7ea4c680002f0c7b560d2b5b",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "functions": [
+    {
+      "name": "main",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ]
+}

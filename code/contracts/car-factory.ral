@@ -1,0 +1,58 @@
+Contract CarFactory(mut carAddress: Address) {
+    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
+    pub fn createCar(
+        carByteCode: ByteVec,
+        model: ByteVec,
+        year: U256,
+        price: U256
+    ) -> Car {
+        let (immFields, mutFields) = Car.encodeFields!(model, year, price)
+        let carId = createContract!{callerAddress!() -> ALPH: minimalContractDeposit!()}(
+            carByteCode, immFields, mutFields
+        )
+        carAddress = contractIdToAddress!(carId)
+        return Car(carId)
+    }
+
+    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
+    pub fn copyCreateCar(
+        carContractId: ByteVec,
+        model: ByteVec,
+        year: U256,
+        price: U256
+    ) -> Car {
+        let (immFields, mutFields) = Car.encodeFields!(model, year, price)
+        let carId = copyCreateContract!{callerAddress!() -> ALPH: minimalContractDeposit!()}(
+            carContractId, immFields, mutFields
+        )
+        carAddress = contractIdToAddress!(carId)
+        return Car(carId)
+    }
+
+    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
+    pub fn copyCreateCarWithToken(
+        carContractId: ByteVec,
+        model: ByteVec,
+        year: U256,
+        price: U256,
+        tokenAmount: U256
+    ) -> Car {
+        let (immFields, mutFields) = Car.encodeFields!(model, year, price)
+        let carId = copyCreateContractWithToken!{callerAddress!() -> ALPH: minimalContractDeposit!()}(
+            carContractId, immFields, mutFields, tokenAmount
+        )
+        carAddress = contractIdToAddress!(carId)
+        return Car(carId)
+    }
+}
+
+Contract Car(model: ByteVec, year: U256, mut price: U256) {
+    @using(checkExternalCaller = false, updateFields = true)
+    pub fn updatePrice(newPrice: U256) -> () {
+        price = newPrice
+    }
+
+    pub fn getCarInfo() -> (ByteVec, U256, U256) {
+        return model, year, price
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "version": "v3.12.2",
+  "name": "UtilsFunctions",
+  "bytecode": "0001410001000000004037d362d460120e6514020000410d7b1500eef0a308930606063da7db1645c67742f9e204096d49d420e04fa1efba53e1c28c0f2f0e7b1500eef0a308930606063da7db1645c67742f9e204096d49d420e04fa1efba53e1c248031c0f7b1500eef0a308930606063da7db1645c67742f9e204096d49d420e04fa1efba53e1c249041c107b15032bec190e36046a4114dd87e15d00161caa9b044562ecfd436a0f2f85820a490249031c117b0d0e0f1010102f13067bca150300000000000000000000000000000000000000000000000000000000000000004513077bd113c4016345785d8a00002f13087bd113c4016345785d8a00002f13097b",
+  "codeHash": "c697c137827a8edf1c7fa0d615d7ac36e1c3c15d064717e889b6aa148dc50fd9",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "test",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

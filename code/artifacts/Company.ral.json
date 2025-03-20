@@ -1,0 +1,46 @@
+{
+  "version": "v3.12.2",
+  "name": "Company",
+  "bytecode": "0002154027010001010106d36de0e87a0c0d1600d43022c76802010001010106d39d791ff70c0d1600010302",
+  "codeHash": "626bee02f289852e7c8a52c6e594f72d437f62467379efc41426d2921fa4732b",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "getStatus",
+      "paramNames": [
+        "contractId"
+      ],
+      "paramTypes": [
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "getName",
+      "paramNames": [
+        "contractId"
+      ],
+      "paramTypes": [
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

@@ -1,0 +1,23 @@
+Contract ErrorHandling() {
+    enum ErrorCodes {
+        InvalidContractState = 0
+    }
+
+    pub fn assert(cond: Bool) -> () {
+      assert!(cond, ErrorCodes.InvalidContractState)
+    }
+
+    pub fn panicWithErrorCode(cond: Bool) -> U256 {
+      if (!cond) {
+        panic!(ErrorCodes.InvalidContractState)
+      }
+      return 0
+    }
+
+    pub fn panicWithoutErrorCode(cond: Bool) -> U256 {
+      if (!cond) {
+        panic!()
+      }
+      return 0
+    }
+}

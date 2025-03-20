@@ -1,0 +1,31 @@
+{
+  "version": "v3.12.2",
+  "name": "Fib",
+  "bytecode": "00014022010001010111d39dd7020616000d324c0216000216000d2b000016000e2b00002a02",
+  "codeHash": "66afac8a6a1f0040eac054cf14d3e51c8437d36c0b9aa4db391da4519315a8ae",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "cal",
+      "paramNames": [
+        "n"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

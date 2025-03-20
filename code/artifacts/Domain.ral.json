@@ -1,0 +1,55 @@
+{
+  "version": "v3.12.2",
+  "name": "Domain",
+  "bytecode": "020240304040010301040118d3c822a360ce0014012f4416004413016413006417021701b4d1a21600ce0116011602c1170316037702010001010105d360d54aac1600cb7702",
+  "codeHash": "f5f9e5d2d83b98a5e1c74cbb91905518fd4eb6a35be2014e506e8b5e63927f4f",
+  "fieldsSig": {
+    "names": [
+      "url",
+      "subDomainTemplateId"
+    ],
+    "types": [
+      "ByteVec",
+      "ByteVec"
+    ],
+    "isMutable": [
+      false,
+      false
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "createSubDomain",
+      "paramNames": [
+        "subDomainUrl"
+      ],
+      "paramTypes": [
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "Address"
+      ]
+    },
+    {
+      "name": "getSubDomain",
+      "paramNames": [
+        "subDomainUrl"
+      ],
+      "paramTypes": [
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "Address"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

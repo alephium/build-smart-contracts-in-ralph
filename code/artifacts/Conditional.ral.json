@@ -1,0 +1,46 @@
+{
+  "version": "v3.12.2",
+  "name": "Conditional",
+  "bytecode": "00024025404c01000101010fd3ada6448416000c2f4c021401004a0716000d2f4c021401014a0114010202010001010111d3b55c4f8d16000c2f4c03140100024a0916000d2f4c03140101024a0214010202",
+  "codeHash": "b487a02e74fcd2e01d377ab305bd75f107db7dbe7a8ffc5bcf45682ee45b616c",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "ifExpr",
+      "paramNames": [
+        "a"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "ifStmt",
+      "paramNames": [
+        "a"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

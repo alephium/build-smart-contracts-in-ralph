@@ -1,0 +1,51 @@
+{
+  "version": "v3.12.2",
+  "name": "FunctionCalls",
+  "bytecode": "0202194023010001020009d3fc9825aa16000d0dce0001001701160100010000010100021600a100",
+  "codeHash": "2e648be17ab5c067881bb844d28eab423f93df59142f2d9dbc32afd684dcba21",
+  "fieldsSig": {
+    "names": [
+      "fib",
+      "result"
+    ],
+    "types": [
+      "Fib",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      true
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "runFib",
+      "paramNames": [
+        "n"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "updateResult",
+      "paramNames": [
+        "res"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

@@ -1,0 +1,29 @@
+{
+  "version": "v3.12.2",
+  "name": "Deposit",
+  "bytecode": "000118010701010004d388bd3230160013c40de0b6b3a7640000a9",
+  "codeHash": "132562d775d145ebd284c116f25dafe75d31c4a8fc84623662391ba6aa75d11e",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "deposit",
+      "paramNames": [
+        "caller"
+      ],
+      "paramTypes": [
+        "Address"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

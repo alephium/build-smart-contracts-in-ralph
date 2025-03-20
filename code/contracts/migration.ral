@@ -1,0 +1,39 @@
+Contract OldCode(owner: Address, n: U256) {
+    pub fn get() -> U256 {
+        return n
+    }
+
+    pub fn migrate(newCode: ByteVec) -> () {
+        checkCaller!(callerAddress!() == owner, 0)
+        migrate!(newCode)
+    }
+
+    @using(updateFields = true)
+    pub fn migrateWithFields(
+        newCode: ByteVec,
+        immFields: ByteVec,
+        mutFields: ByteVec
+    ) -> () {
+        checkCaller!(callerAddress!() == owner, 0)
+        migrateWithFields!(newCode, immFields, mutFields)
+    }
+}
+
+Contract NewCode(owner: Address, mut n: U256) {
+    pub fn get() -> U256 {
+        return n
+    }
+
+    @using(updateFields = true)
+    pub fn set(m: U256) -> U256 {
+        checkCaller!(callerAddress!() == owner, 0)
+        n = m
+        return n
+    }
+
+    @using(assetsInContract = true)
+    pub fn destroy() -> () {
+        checkCaller!(callerAddress!() == owner, 0)
+        destroySelf!(owner)
+    }
+}

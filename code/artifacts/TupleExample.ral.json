@@ -1,0 +1,34 @@
+{
+  "version": "v3.12.2",
+  "name": "TupleExample",
+  "bytecode": "00021a4055000000000304134064140d7475706c65206578616d706c650402010000030018d362d46012000017021701170016000d2a170016001340652f0c7b1601140d7475706c65206578616d706c65410d7b1602041c0e7b",
+  "codeHash": "eae585d03456a657c01eee758c108e11a7147c9530d1addfae09d3d2671bdf90",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "createTuple",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "U256",
+        "ByteVec",
+        "Bool"
+      ]
+    },
+    {
+      "name": "test",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

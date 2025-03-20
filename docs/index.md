@@ -4,7 +4,8 @@ Smart contract development in Ralph is designed with two key principles in mind:
 
 The design philosophy of the Ralph language focuses on explicit asset management and clear control flow. This approach helps developers better understand and reason about their code. By making asset flows and state changes more visible and predictable, Ralph reduces the chances of subtle bugs that could lead to security issues. Additionally, Ralph makes common smart contract vulnerabilities, such as reentrancy attacks, impossible by design.
 
-The UTXO-based asset management model offers additional security benefits. It prevents unlimited authorization of assets by restricting access to only the UTXOs included in a transaction. It also disables flashloans because assets cannot be borrowed and returned within the same transaction.
+The UTXO-based asset management model offers additional security benefits. It prevents unlimited authorization of assets by restricting access to only the UTXOs included in a transaction. It also disables flashloans because assets cannot be borrowed and returned within the same transaction.import { web3 } from '@alephium/web3'
+
 
 These features create a development environment where security is not an afterthought but an integral part of the language's design. As we delve deeper into Ralph's features and capabilities throughout this chapter, you'll discover how this emphasis on simplicity and security translates into practical benefits for smart contract development.
 
@@ -805,13 +806,13 @@ Under Alephium's sUTXO model, a contract has exactly one UTXO that manages all o
 - It creates a lock on the function to prevent re-entrancy attacks
 
 ```rust
-Contract Withdraw() {
-  @using(assetsInContract = true, checkExternalCaller = false)
-  pub fn withdraw() -> () {
-    let caller = callerAddress!()
-    transferTokenFromSelf!(caller, selfTokenId!(), 1)
-    transferTokenFromSelf!(caller, ALPH, dustAmount!())
-  }
+Contract WithdrawToken() {
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn withdraw() -> () {
+      let caller = callerAddress!()
+      transferTokenFromSelf!(caller, selfTokenId!(), 1)
+      transferTokenFromSelf!(caller, ALPH, dustAmount!())
+    }
 }
 ```
 
@@ -821,35 +822,35 @@ We can test the `Withdraw` contract using the TypeScript code below:
 
 ```typescript
 import { ONE_ALPH, web3 } from '@alephium/web3'
-import { getSigner, mintToken } from '@alephium/web3-test'
-import { Withdraw } from '../artifacts/ts'
+import { getSigner } from '@alephium/web3-test'
+import { WithdrawToken } from '../artifacts/ts'
 
 async function test() {
   web3.setCurrentNodeProvider('http://127.0.0.1:22973')
   const nodeProvider = web3.getCurrentNodeProvider()
 
   const signer = await getSigner()
-  const { contractInstance: withdraw } = await Withdraw.deploy(signer, {
+  const { contractInstance: withdrawToken } = await WithdrawToken.deploy(signer, {
     initialFields: {},
     initialAttoAlphAmount: ONE_ALPH,
     issueTokenAmount: 10n
   })
 
-  await withdraw.transact.withdraw({ signer })
+  await withdrawToken.transact.withdraw({ signer })
 
   async function getBalance(address: string) {
     return await nodeProvider.addresses.getAddressesAddressBalance(address)
   }
   const signerBalance = await getBalance(signer.address)
   console.assert(signerBalance.tokenBalances![0].amount === "1")
-  const contractBalance = await getBalance(withdraw.address)
+  const contractBalance = await getBalance(withdrawToken.address)
   console.assert(contractBalance.tokenBalances![0].amount === "9")
 }
 
 test()
 ```
 
-In the example above, we deploy the `Withdraw` contract with 1 ALPH and 10 tokens. After calling the `withdraw` function, the token balance of the contract goes from `10` to `9` and the token balance of the signer address goes from `0` to `1`.
+In the example above, we deploy the `WithdrawToken` contract with 1 ALPH and 10 tokens. After calling the `withdraw` function, the token balance of the contract goes from `10` to `9` and the token balance of the signer address goes from `0` to `1`.
 
 During compilation, the compiler will throw errors if:
 
@@ -932,13 +933,12 @@ Contract Counter(mut counter: U256) {
 In the example above, the `increase` function is annotated with `@using(updateFields = true)`, which means that the function updates the contract fields. We can test the `Counter` contract using the TypeScript code below:
 
 ```typescript
-import { ONE_ALPH, web3 } from '@alephium/web3'
-import { getSigner, mintToken } from '@alephium/web3-test'
+import { web3 } from '@alephium/web3'
+import { getSigner } from '@alephium/web3-test'
 import { Counter } from '../artifacts/ts'
 
 async function test() {
   web3.setCurrentNodeProvider('http://127.0.0.1:22973')
-  const nodeProvider = web3.getCurrentNodeProvider()
 
   const signer = await getSigner()
   const { contractInstance: counter } = await Counter.deploy(signer, {
@@ -2057,7 +2057,7 @@ async function test() {
   const tokenMetaData = await nodeProvider.fetchFungibleTokenMetaData(shinyTokenId)
   console.assert(tokenMetaData.name === stringToHex('ShinyToken'))
   console.assert(tokenMetaData.symbol === stringToHex('Stk'))
-  console.assert(tokenMetaData.decimals === 18)
+  console.assert(tokenMetaData.decimals === 0)
   console.assert(tokenMetaData.totalSupply === issueTokenAmount)
 }
 
