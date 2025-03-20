@@ -3431,7 +3431,7 @@ describe('integration tests', () => {
 Unit tests and integration tests can be run together using the following command:
 
 ```bash
-$ npx @alephium/cli test
+$ npm run test
 ...
 PASS  test/token.test.ts
   unit tests

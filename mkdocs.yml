@@ -2,5 +2,10 @@ site_name: Smart Contracts Development in Ralph
 theme:
   name: readthedocs
   navigation_depth: 5
+  highlightjs: true
+plugins:
+  - search
+markdown_extensions:
+  - admonition
 extra_css:
   - css/extra.css
