@@ -124,7 +124,7 @@ class Factory extends ContractFactory<
     getValue: async (
       params: Omit<
         TestContractParamsWithoutMaps<CheckExternalTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<bigint>> => {
       return testMethod(this, "getValue", params, getContractByCodeHash);
@@ -148,7 +148,7 @@ class Factory extends ContractFactory<
     getValuePrivate: async (
       params: Omit<
         TestContractParamsWithoutMaps<CheckExternalTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<bigint>> => {
       return testMethod(this, "getValuePrivate", params, getContractByCodeHash);

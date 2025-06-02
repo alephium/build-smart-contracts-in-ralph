@@ -112,7 +112,7 @@ class Factory extends ContractFactory<AssetFunctionsInstance, {}> {
     burn: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(

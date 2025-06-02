@@ -114,7 +114,7 @@ class Factory extends ContractFactory<CarInstance, CarTypes.Fields> {
     getCarInfo: async (
       params: Omit<
         TestContractParamsWithoutMaps<CarTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<[HexString, bigint, bigint]>> => {
       return testMethod(this, "getCarInfo", params, getContractByCodeHash);

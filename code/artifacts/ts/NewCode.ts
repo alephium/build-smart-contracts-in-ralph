@@ -113,7 +113,7 @@ class Factory extends ContractFactory<NewCodeInstance, NewCodeTypes.Fields> {
     get: async (
       params: Omit<
         TestContractParamsWithoutMaps<NewCodeTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<bigint>> => {
       return testMethod(this, "get", params, getContractByCodeHash);
@@ -126,7 +126,7 @@ class Factory extends ContractFactory<NewCodeInstance, NewCodeTypes.Fields> {
     destroy: async (
       params: Omit<
         TestContractParamsWithoutMaps<NewCodeTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(this, "destroy", params, getContractByCodeHash);

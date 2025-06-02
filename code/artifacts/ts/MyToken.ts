@@ -133,7 +133,7 @@ class Factory extends ContractFactory<MyTokenInstance, MyTokenTypes.Fields> {
     withdraw: async (
       params: Omit<
         TestContractParamsWithoutMaps<MyTokenTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(this, "withdraw", params, getContractByCodeHash);
@@ -149,7 +149,7 @@ class Factory extends ContractFactory<MyTokenInstance, MyTokenTypes.Fields> {
     getName: async (
       params: Omit<
         TestContractParamsWithoutMaps<MyTokenTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<HexString>> => {
       return testMethod(this, "getName", params, getContractByCodeHash);
@@ -157,7 +157,7 @@ class Factory extends ContractFactory<MyTokenInstance, MyTokenTypes.Fields> {
     getOwner: async (
       params: Omit<
         TestContractParamsWithoutMaps<MyTokenTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<Address>> => {
       return testMethod(this, "getOwner", params, getContractByCodeHash);

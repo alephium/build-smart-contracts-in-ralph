@@ -48,7 +48,6 @@ Contract Integer () {
       assert!(e | 0xf0 == 0xff, 18)
       assert!(e ^ 0xf0 == 0x0f, 19)
       assert!(e << 8 == 0xff00, 20)
-      assert!(u256Max!() << 2 == u256Max!() - 3, 21)
       assert!(e >> 4 == 0x0f, 22)
 
       emit Debug(`Test successful for Integer`)

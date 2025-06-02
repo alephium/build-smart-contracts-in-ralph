@@ -88,7 +88,7 @@ class Factory extends ContractFactory<IntegerInstance, {}> {
     test: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(
@@ -109,8 +109,8 @@ class Factory extends ContractFactory<IntegerInstance, {}> {
 export const Integer = new Factory(
   Contract.fromJson(
     IntegerContractJson,
-    "=6-2+89=13-1+b=712+7e011b54657374207375636365737366756c20666f7220496e7465676572",
-    "eeb0bee7aabc8eff8f465e94efb64ab566063893e3f028ad132635186d27f660",
+    "=6-2+88=13-1+9=710+7e011b54657374207375636365737366756c20666f7220496e7465676572",
+    "6d01f380b85cb966c0bb9fd9415e59f8eecb753d09efb1ef838638c5dca74e94",
     AllStructs
   )
 );

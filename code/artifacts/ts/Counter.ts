@@ -96,7 +96,7 @@ class Factory extends ContractFactory<CounterInstance, CounterTypes.Fields> {
     increase: async (
       params: Omit<
         TestContractParamsWithoutMaps<CounterTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(this, "increase", params, getContractByCodeHash);

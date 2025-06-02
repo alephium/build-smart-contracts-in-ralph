@@ -96,7 +96,7 @@ class Factory extends ContractFactory<TupleExampleInstance, {}> {
     createTuple: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<[bigint, HexString, boolean]>> => {
       return testMethod(
@@ -109,7 +109,7 @@ class Factory extends ContractFactory<TupleExampleInstance, {}> {
     test: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(

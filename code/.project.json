@@ -1,5 +1,5 @@
 {
-  "fullNodeVersion": "v3.12.2",
+  "fullNodeVersion": "v3.15.1",
   "compilerOptionsUsed": {
     "ignoreUnusedConstantsWarnings": false,
     "ignoreUnusedVariablesWarnings": false,
@@ -8,7 +8,8 @@
     "ignoreUpdateFieldsCheckWarnings": false,
     "ignoreCheckExternalCallerWarnings": false,
     "ignoreUnusedFunctionReturnWarnings": false,
-    "skipAbstractContractCheck": false
+    "skipAbstractContractCheck": false,
+    "skipTests": false
   },
   "infos": {
     "AddressTest": {
@@ -199,9 +200,9 @@
     },
     "Integer": {
       "sourceFile": "integer.ral",
-      "sourceCodeHash": "a22ef0168373bf43835738a532876ae32ea13e5bbe85db0235b717ecaf8ef0df",
-      "bytecodeDebugPatch": "=6-2+89=13-1+b=712+7e011b54657374207375636365737366756c20666f7220496e7465676572",
-      "codeHashDebug": "eeb0bee7aabc8eff8f465e94efb64ab566063893e3f028ad132635186d27f660"
+      "sourceCodeHash": "3d1b3be0a90d5073976fbe8b386b1bb7b161a97355f34ad1dad43e9d494d6b26",
+      "bytecodeDebugPatch": "=6-2+88=13-1+9=710+7e011b54657374207375636365737366756c20666f7220496e7465676572",
+      "codeHashDebug": "6d01f380b85cb966c0bb9fd9415e59f8eecb753d09efb1ef838638c5dca74e94"
     },
     "Loop": {
       "sourceFile": "loops.ral",

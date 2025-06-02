@@ -115,7 +115,7 @@ class Factory extends ContractFactory<CountersInstance, {}> {
     create: async (
       params?: Omit<
         TestContractParams<never, never, CountersTypes.Maps>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResult<null, CountersTypes.Maps>> => {
       return testMethod(
@@ -128,7 +128,7 @@ class Factory extends ContractFactory<CountersInstance, {}> {
     increase: async (
       params?: Omit<
         TestContractParams<never, never, CountersTypes.Maps>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResult<null, CountersTypes.Maps>> => {
       return testMethod(
@@ -149,7 +149,7 @@ class Factory extends ContractFactory<CountersInstance, {}> {
     clear: async (
       params?: Omit<
         TestContractParams<never, never, CountersTypes.Maps>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResult<bigint, CountersTypes.Maps>> => {
       return testMethod(
