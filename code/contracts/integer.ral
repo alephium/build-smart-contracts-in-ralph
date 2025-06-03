@@ -20,8 +20,13 @@ Contract Integer () {
       assert!(2 ** 8 == 256, 4)
       assert!(10 % 3 == 1, 5)
 
+      assert!(10 / 3 == 3, 6)       // round down
+      assert!(10 \ 3 == 4, 7)       // round up
+      assert!(-10i / 3i == -4i, 8)  // round down
+      assert!(-10i \ 3i == -3i, 9)  // round up
+
       // More complex expressions
-      assert!((a * b + c) / d == 0, 6)
+      assert!((a * b + c) / d == 0, 10)
 
       // Overflow examples:
       // let h = u256Max!() + 1
@@ -30,25 +35,25 @@ Contract Integer () {
       // let k = i256Min!() - 1i
 
       // Modulo 2^256 operators for U256 type
-      assert!(u256Max!() |+| 1 == 0, 7) // Addition modulo 2^256
-      assert!(0 |-| 1 == u256Max!(), 8) // Subtraction modulo 2^256
-      assert!(u256Max!() |*| 2 == u256Max!() - 1, 9) // Multiplication modulo 2^256
-      assert!((1 << 128) |**| 2 == 0, 10) // Power modulo 2^256
+      assert!(u256Max!() |+| 1 == 0, 11) // Addition modulo 2^256
+      assert!(0 |-| 1 == u256Max!(), 12) // Subtraction modulo 2^256
+      assert!(u256Max!() |*| 2 == u256Max!() - 1, 13) // Multiplication modulo 2^256
+      assert!((1 << 128) |**| 2 == 0, 14) // Power modulo 2^256
 
       // Modulo N operators for U256 type
-      assert!(mulModN!(2, 3, 4) == 2, 11) // (2 * 3) % 4
-      assert!(mulModN!(1 << 128, 1 << 128, u256Max!() - 1) == 2, 12)
-      assert!(mulModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 13)
-      assert!(addModN!(2, 3, 4) == 1, 14) // (2 + 3) % 4
-      assert!(addModN!(1 << 128, 1 << 128, u256Max!()) == 1 << 129, 15)
-      assert!(addModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 16)
+      assert!(mulModN!(2, 3, 4) == 2, 15) // (2 * 3) % 4
+      assert!(mulModN!(1 << 128, 1 << 128, u256Max!() - 1) == 2, 16)
+      assert!(mulModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 17)
+      assert!(addModN!(2, 3, 4) == 1, 18) // (2 + 3) % 4
+      assert!(addModN!(1 << 128, 1 << 128, u256Max!()) == 1 << 129, 19)
+      assert!(addModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 20)
 
       // Bitwise Operators for U256 type
-      assert!(e & 0xf0 == 0xf0, 17)
-      assert!(e | 0xf0 == 0xff, 18)
-      assert!(e ^ 0xf0 == 0x0f, 19)
-      assert!(e << 8 == 0xff00, 20)
-      assert!(e >> 4 == 0x0f, 22)
+      assert!(e & 0xf0 == 0xf0, 21)
+      assert!(e | 0xf0 == 0xff, 22)
+      assert!(e ^ 0xf0 == 0x0f, 23)
+      assert!(e << 8 == 0xff00, 24)
+      assert!(e >> 4 == 0x0f, 25)
 
       emit Debug(`Test successful for Integer`)
     }

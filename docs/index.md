@@ -252,8 +252,13 @@ Contract Integer () {
       assert!(2 ** 8 == 256, 4)
       assert!(10 % 3 == 1, 5)
 
+      assert!(10 / 3 == 3, 6)       // round down
+      assert!(10 \ 3 == 4, 7)       // round up
+      assert!(-10i / 3i == -4i, 8)  // round down
+      assert!(-10i \ 3i == -3i, 9)  // round up
+
       // More complex expressions
-      assert!((a * b + c) / d == 0, 6)
+      assert!((a * b + c) / d == 0, 10)
 
       // Overflow examples:
       // let h = u256Max!() + 1
@@ -262,26 +267,25 @@ Contract Integer () {
       // let k = i256Min!() - 1i
 
       // Modulo 2^256 operators for U256 type
-      assert!(u256Max!() |+| 1 == 0, 7) // Addition modulo 2^256
-      assert!(0 |-| 1 == u256Max!(), 8) // Subtraction modulo 2^256
-      assert!(u256Max!() |*| 2 == u256Max!() - 1, 9) // Multiplication modulo 2^256
-      assert!((1 << 128) |**| 2 == 0, 10) // Power modulo 2^256
+      assert!(u256Max!() |+| 1 == 0, 11) // Addition modulo 2^256
+      assert!(0 |-| 1 == u256Max!(), 12) // Subtraction modulo 2^256
+      assert!(u256Max!() |*| 2 == u256Max!() - 1, 13) // Multiplication modulo 2^256
+      assert!((1 << 128) |**| 2 == 0, 14) // Power modulo 2^256
 
       // Modulo N operators for U256 type
-      assert!(mulModN!(2, 3, 4) == 2, 11) // (2 * 3) % 4
-      assert!(mulModN!(1 << 128, 1 << 128, u256Max!() - 1) == 2, 12)
-      assert!(mulModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 13)
-      assert!(addModN!(2, 3, 4) == 1, 14) // (2 + 3) % 4
-      assert!(addModN!(1 << 128, 1 << 128, u256Max!()) == 1 << 129, 15)
-      assert!(addModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 16)
+      assert!(mulModN!(2, 3, 4) == 2, 15) // (2 * 3) % 4
+      assert!(mulModN!(1 << 128, 1 << 128, u256Max!() - 1) == 2, 16)
+      assert!(mulModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 17)
+      assert!(addModN!(2, 3, 4) == 1, 18) // (2 + 3) % 4
+      assert!(addModN!(1 << 128, 1 << 128, u256Max!()) == 1 << 129, 19)
+      assert!(addModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 20)
 
       // Bitwise Operators for U256 type
-      assert!(e & 0xf0 == 0xf0, 17)
-      assert!(e | 0xf0 == 0xff, 18)
-      assert!(e ^ 0xf0 == 0x0f, 19)
-      assert!(e << 8 == 0xff00, 20)
-      assert!(u256Max!() << 2 == u256Max!() - 3, 21)
-      assert!(e >> 4 == 0x0f, 22)
+      assert!(e & 0xf0 == 0xf0, 21)
+      assert!(e | 0xf0 == 0xff, 22)
+      assert!(e ^ 0xf0 == 0x0f, 23)
+      assert!(e << 8 == 0xff00, 24)
+      assert!(e >> 4 == 0x0f, 25)
 
       emit Debug(`Test successful for Integer`)
     }
@@ -289,6 +293,15 @@ Contract Integer () {
 ```
 
 Ralph supports standard arithmetic operators that you would expect in most programming languages: `+` (addition), `-` (subtraction), `*` (multiplication), `/` (division), `**` (exponentiation), and `%` (modulo). These operators work with both `I256` and `U256` types. Ralph performs automatic overflow checking at runtime to prevent silent arithmetic errors that could lead to security vulnerabilities.
+
+Ralph offers two division modes: round up (`/`) and round down (`\`). This is especially useful in DeFi applications where unintended rounding errors is a key exploitation vector.
+
+```rust
+assert!(10 / 3 == 3, 6)       // round down
+assert!(10 \ 3 == 4, 7)       // round up
+assert!(-10i / 3i == -4i, 8)  // round down
+assert!(-10i \ 3i == -3i, 9)  // round up
+```
 
 For the `U256` type, Ralph provides specialized arithmetic operators that perform calculations modulo `2^256`. These operators (`|+|`, `|-|`, `|*|`, and `|**|`) allow for efficient overflow-safe arithmetic operations without runtime checks, as they naturally wrap around when exceeding the maximum value, as shown in the `Integer` contract:
 
@@ -311,7 +324,7 @@ assert!(addModN!(1 << 128, 1 << 128, u256Max!()) == 1 << 129, 15)
 assert!(addModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 16)
 ```
 
-Ralph also supports bitwise operators for the `U256` type, allowing for low-level bit manipulation operations that are essential for cryptographic algorithms and efficient data processing. Here are examples demonstrating these operators:
+Additionally, Ralph supports bitwise operators for the `U256` type, allowing for low-level bit manipulation operations that are essential for cryptographic algorithms and efficient data processing. Here are examples demonstrating these operators:
 
 ```rust
 assert!(0xff & 0xf0 == 0xf0, 17)  // Bitwise AND
