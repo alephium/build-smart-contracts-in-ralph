@@ -63,6 +63,10 @@ export namespace CheckExternalTypes {
       params: Omit<CallContractParams<{}>, "args">;
       result: CallContractResult<bigint>;
     };
+    setValuePrivate: {
+      params: CallContractParams<{ v: bigint }>;
+      result: CallContractResult<null>;
+    };
   }
   export type CallMethodParams<T extends keyof CallMethodTable> =
     CallMethodTable[T]["params"];
@@ -95,6 +99,10 @@ export namespace CheckExternalTypes {
     };
     getValuePrivate: {
       params: Omit<SignExecuteContractMethodParams<{}>, "args">;
+      result: SignExecuteScriptTxResult;
+    };
+    setValuePrivate: {
+      params: SignExecuteContractMethodParams<{ v: bigint }>;
       result: SignExecuteScriptTxResult;
     };
   }
@@ -153,6 +161,14 @@ class Factory extends ContractFactory<
     ): Promise<TestContractResultWithoutMaps<bigint>> => {
       return testMethod(this, "getValuePrivate", params, getContractByCodeHash);
     },
+    setValuePrivate: async (
+      params: TestContractParamsWithoutMaps<
+        CheckExternalTypes.Fields,
+        { v: bigint }
+      >
+    ): Promise<TestContractResultWithoutMaps<null>> => {
+      return testMethod(this, "setValuePrivate", params, getContractByCodeHash);
+    },
   };
 
   stateForTest(
@@ -169,7 +185,7 @@ export const CheckExternal = new Factory(
   Contract.fromJson(
     CheckExternalContractJson,
     "",
-    "48a6579f3a1d24bfc543af68c864106b67b3165a4b00b9f4e59abe2e3831366b",
+    "c997b200345ee46980b4c1eefee941fbee504e624dc5c3fa5a2e51455876a471",
     AllStructs
   )
 );
@@ -230,6 +246,17 @@ export class CheckExternalInstance extends ContractInstance {
         getContractByCodeHash
       );
     },
+    setValuePrivate: async (
+      params: CheckExternalTypes.CallMethodParams<"setValuePrivate">
+    ): Promise<CheckExternalTypes.CallMethodResult<"setValuePrivate">> => {
+      return callMethod(
+        CheckExternal,
+        this,
+        "setValuePrivate",
+        params,
+        getContractByCodeHash
+      );
+    },
   };
 
   transact = {
@@ -256,6 +283,13 @@ export class CheckExternalInstance extends ContractInstance {
       CheckExternalTypes.SignExecuteMethodResult<"getValuePrivate">
     > => {
       return signExecuteMethod(CheckExternal, this, "getValuePrivate", params);
+    },
+    setValuePrivate: async (
+      params: CheckExternalTypes.SignExecuteMethodParams<"setValuePrivate">
+    ): Promise<
+      CheckExternalTypes.SignExecuteMethodResult<"setValuePrivate">
+    > => {
+      return signExecuteMethod(CheckExternal, this, "setValuePrivate", params);
     },
   };
 

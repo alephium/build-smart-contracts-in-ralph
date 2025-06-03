@@ -92,9 +92,9 @@
     },
     "CheckExternal": {
       "sourceFile": "check-external.ral",
-      "sourceCodeHash": "43903d33153e2400f5fcd27accba004ff30ffbf891b9809af28f9e4119a840b2",
+      "sourceCodeHash": "52c1ce321d2fcab69ebbb5d6400a9030365ffdea5350327a5a8dd0904f506de1",
       "bytecodeDebugPatch": "",
-      "codeHashDebug": "48a6579f3a1d24bfc543af68c864106b67b3165a4b00b9f4e59abe2e3831366b"
+      "codeHashDebug": "c997b200345ee46980b4c1eefee941fbee504e624dc5c3fa5a2e51455876a471"
     },
     "Company": {
       "sourceFile": "contract-inheritance.ral",

@@ -1040,8 +1040,10 @@ To check the identity of a function caller, Ralph provides the built-in function
 
 There are also a few built-in functions that can be used to get the caller's information:
 
-- `callerAddress!()`: Returns caller's address. When called from a `TxScript`, it returns the address of the user who initiated the transaction. When called by another contract, it returns the address of that contract.
-- `callerContractId!()`: Returns caller's contract ID. This function can only be used when the caller is a contract. If called from a `TxScript` it will fail the transaction with the `NoCaller` error.
+- `callerAddress!()` - Returns caller's address. When called from a `TxScript` or a contract function directly called from `TxScript`, it returns the address of the transaction caller. When called from a function invoked from another contract function, it returns the address of that contract.
+- `callerContractId!()` - Returns caller's contract ID. This function can only be used when the caller is a contract. If called from a `TxScript` it will fail the transaction with the `NoCaller` error.
+- `externalCallerAddress!()` - Behaves like `callerAddress!()`, except when invoked from a contract function called by another function within the same contract. In such cases, it returns the address of the first external caller in the call stack, skipping all internal calls from the current contract.
+- `externalCallerContractId!()` - Returns the contract id of the first external caller in the call stack, skipping all intermediate calls originating from the current contract.
 
 ```rust
 Contract CheckExternal(owner: Address, mut value: U256) {
@@ -1049,10 +1051,9 @@ Contract CheckExternal(owner: Address, mut value: U256) {
         return getValuePrivate()
     }
 
-    @using(updateFields = true)
     pub fn setValue(v: U256) -> () {
         checkCaller!(callerAddress!() == owner, 0)
-        value = v
+        setValuePrivate(v)
     }
 
     @using(updateFields = true, checkExternalCaller = false)
@@ -1063,10 +1064,19 @@ Contract CheckExternal(owner: Address, mut value: U256) {
     fn getValuePrivate() -> U256 {
         return value
     }
+
+    @using(updateFields = true)
+    fn setValuePrivate(v: U256) -> () {
+        checkCaller!(callerAddress!() == selfAddress!(), 1)
+        checkCaller!(externalCallerAddress!() == owner, 2)
+        value = v
+    }
 }
 ```
 
-In the `CheckExternal` contract, `getValue` is a `view` function, so no external caller checks are needed. The `setValue` function updates contract fields and properly checks the caller using `checkCaller!`. Meanwhile, `setValueUnsafe` also updates fields but deliberately bypasses the external caller check with the `@using(checkExternalCaller = false)` annotation.
+In the `CheckExternal` contract, `getValue` is a `view` function, so no external caller checks are needed. The `setValue` function calls the `setValuePrivate` function to update the contract field `value` and properly checks the caller using `checkCaller!`. Meanwhile, `setValueUnsafe` also updates fields but deliberately bypasses the external caller check with the `@using(checkExternalCaller = false)` annotation.
+
+Note that in `setValuePrivate`, `callerAddress!()` returns the address of the current contract because the function is invoked internally via `setValue`. In contrast, `externalCallerAddress!()` skips the internal contract calls and returns the address of the transaction caller.
 
 We can test the `CheckExternal` contract using the TypeScript code below:
 
