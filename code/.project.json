@@ -14,9 +14,9 @@
   "infos": {
     "AddressTest": {
       "sourceFile": "address.ral",
-      "sourceCodeHash": "e36a243ddbef1c051028c3fb0b541b1064145320e05cb880fe492f2e9fcf2a64",
-      "bytecodeDebugPatch": "=8-2+2f=39-1+a=506+7e011b54657374207375636365737366756c20666f722041646472657373",
-      "codeHashDebug": "f581f1ea92f8da236b32390fb91afea41631de8a56f7d5cde42d12947f67d8d7"
+      "sourceCodeHash": "83fd2fafe632b69ca6267c6a872bce1f80b3d2c4a2840fb0fd5d213d20590caa",
+      "bytecodeDebugPatch": "=8-2+a7=39-1+6=746+7e011b54657374207375636365737366756c20666f722041646472657373",
+      "codeHashDebug": "ea3611b6f332efd49ab7984611b6e8c04273286988e18d73eaee6fb92f6f8fb6"
     },
     "Admin": {
       "sourceFile": "admin.ral",
@@ -200,9 +200,9 @@
     },
     "Integer": {
       "sourceFile": "integer.ral",
-      "sourceCodeHash": "3d1b3be0a90d5073976fbe8b386b1bb7b161a97355f34ad1dad43e9d494d6b26",
-      "bytecodeDebugPatch": "=6-2+88=13-1+9=710+7e011b54657374207375636365737366756c20666f7220496e7465676572",
-      "codeHashDebug": "6d01f380b85cb966c0bb9fd9415e59f8eecb753d09efb1ef838638c5dca74e94"
+      "sourceCodeHash": "647cafff923ee55ae0240ba1f19906cd4ad565d614da73dbaf357da124796671",
+      "bytecodeDebugPatch": "=6-2+a4=13-1+d=766+7e011b54657374207375636365737366756c20666f7220496e7465676572",
+      "codeHashDebug": "209deb6260b9be03528e9df802b346e5825baa424ac51932d48d2173386a5ef8"
     },
     "Loop": {
       "sourceFile": "loops.ral",

@@ -109,8 +109,8 @@ class Factory extends ContractFactory<IntegerInstance, {}> {
 export const Integer = new Factory(
   Contract.fromJson(
     IntegerContractJson,
-    "=6-2+88=13-1+9=710+7e011b54657374207375636365737366756c20666f7220496e7465676572",
-    "6d01f380b85cb966c0bb9fd9415e59f8eecb753d09efb1ef838638c5dca74e94",
+    "=6-2+a4=13-1+d=766+7e011b54657374207375636365737366756c20666f7220496e7465676572",
+    "209deb6260b9be03528e9df802b346e5825baa424ac51932d48d2173386a5ef8",
     AllStructs
   )
 );

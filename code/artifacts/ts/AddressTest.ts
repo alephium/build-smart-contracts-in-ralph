@@ -125,8 +125,8 @@ class Factory extends ContractFactory<AddressTestInstance, {}> {
 export const AddressTest = new Factory(
   Contract.fromJson(
     AddressTestContractJson,
-    "=8-2+2f=39-1+a=506+7e011b54657374207375636365737366756c20666f722041646472657373",
-    "f581f1ea92f8da236b32390fb91afea41631de8a56f7d5cde42d12947f67d8d7",
+    "=8-2+a7=39-1+6=746+7e011b54657374207375636365737366756c20666f722041646472657373",
+    "ea3611b6f332efd49ab7984611b6e8c04273286988e18d73eaee6fb92f6f8fb6",
     AllStructs
   )
 );
