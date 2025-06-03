@@ -9,16 +9,22 @@ Contract AddressTest () {
       let p2mpkh = @2jW1n2icPtc55Cdm8TF9FjGH681cWthsaZW3gaUFekFZepJoeyY3ZbY7y5SCtAjyCjLL24c4L2Vnfv3KDdAypCddfAY
       let p2sh = @ibsc1yJLJxxVcsPfSDJoR3mzrasrZq2Rn63dFQGcDAYE
       let p2c = @26j4viXkBzJd5SaDtQzyGM6joqoECmajncT4QS3tmT9hb
+      let p2pk = @3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:1
+      let p2hmpk = @CSYxX7pdWvrbqAQFfHaUsrL4xpgXKktsQF2yJ8P53AmCyGiNbU:3
 
       assert!(prefix(p2pkh) == #00, 0)
       assert!(prefix(p2mpkh) == #01, 1)
       assert!(prefix(p2sh) == #02, 2)
       assert!(prefix(p2c) == #03, 3)
+      assert!(prefix(p2pk) == #04, 4)
+      assert!(prefix(p2hmpk) == #05, 5)
 
       assert!(groupOfAddress!(p2pkh) == 0, 4)
       assert!(groupOfAddress!(p2mpkh) == 0, 5)
       assert!(groupOfAddress!(p2sh) == 0, 6)
       assert!(groupOfAddress!(p2c) == 2, 7)
+      assert!(groupOfAddress!(p2pk) == 1, 8)
+      assert!(groupOfAddress!(p2hmpk) == 3, 9)
 
       emit Debug(`Test successful for Address`)
    }

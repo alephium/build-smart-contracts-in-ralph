@@ -4,8 +4,7 @@ Smart contract development in Ralph is designed with two key principles in mind:
 
 The design philosophy of the Ralph language focuses on explicit asset management and clear control flow. This approach helps developers better understand and reason about their code. By making asset flows and state changes more visible and predictable, Ralph reduces the chances of subtle bugs that could lead to security issues. Additionally, Ralph makes common smart contract vulnerabilities, such as reentrancy attacks, impossible by design.
 
-The UTXO-based asset management model offers additional security benefits. It prevents unlimited authorization of assets by restricting access to only the UTXOs included in a transaction. It also disables flashloans because assets cannot be borrowed and returned within the same transaction.import { web3 } from '@alephium/web3'
-
+The UTXO-based asset management model offers additional security benefits. It prevents unlimited authorization of assets by restricting access to only the UTXOs included in a transaction. It also disables flashloans because assets cannot be borrowed and returned within the same transaction.
 
 These features create a development environment where security is not an afterthought but an integral part of the language's design. As we delve deeper into Ralph's features and capabilities throughout this chapter, you'll discover how this emphasis on simplicity and security translates into practical benefits for smart contract development.
 
@@ -17,7 +16,7 @@ Before delving into the specifics of smart contract development in Ralph, it's i
 
 The UTXO (Unspent Transaction Output) model and the Account model represent two fundamentally different paradigms for managing blockchain state and transactions, each offering unique advantages and trade-offs.
 
-The UTXO model, introduced by Bitcoin, treats transactions as a series of digital cash transfers. Each transaction consumes previous unspent outputs and creates new ones, similar to how physical cash is exchanged. When you spend money, you use up existing bills (inputs) and may receive change back (outputs). This model offers several compelling benefits. Since UTXOs can be processed independently, the system enables natural parallelization for transaction validation. The model also enhances privacy as users can use different addresses for each transaction. Additionally, it allows for efficient batching of multiple payments into single transactions. Most importantly, the UTXO model has proven its security through Bitcoin's decade-plus history of securing billions in value.
+The UTXO model, introduced by Bitcoin, treats transactions as a series of digital cash transfers. Each transaction consumes previous unspent outputs and creates new ones, similar to how physical coin is exchanged. When you spend money, you use up existing coins (inputs) and may receive change back (outputs). This model offers several compelling benefits. Since UTXOs can be processed independently, the system enables natural parallelization for transaction validation. The model also enhances privacy as users can use different addresses for each transaction. Additionally, it allows for efficient batching of multiple payments into single transactions. Most importantly, the UTXO model has proven its security through Bitcoin's decade-plus history of securing billions in value.
 
 However, the UTXO model has significant limitations when it comes to smart contract development. The lack of persistent state between transactions makes it difficult to implement complex business logic. For example, tracking aggregated data such as a counter across transactions is challenging, even though it is a common scenario in modern smart contracts. Furthermore, the expressiveness of the UTXO scripting language is often deliberately restricted to enhance security.
 
@@ -114,7 +113,7 @@ To compile and test the contract, we also need to start the local Alephium devne
  ✔ Container devnet-explorer-frontend-1  Running
 ```
 
-Once the local devnet is running, compile the `HelloWeb3` contract like this:
+Once the local devnet is up and running, compile the `HelloWeb3` contract like this:
 
 ```bash
 $ npm install
@@ -372,12 +371,14 @@ ByteVec values can be concatenated using the `++` operator, and other types can 
 
 An address on Alephium is a unique identifier that represents an account or a contract. All networks (i.e. mainnet, testnet, devnet) share the same address format.
 
-There are currently 4 different address types on Alephium, each represented by a unique byte prefix:
+There are currently 6 different address types on Alephium, each represented by a unique byte prefix:
 
 - `0x00` - Pay to public key hash (`P2PKH`)
 - `0x01` - Pay to multiple public key Hash (`P2MPKH`)
 - `0x02` - Pay to script hash (`P2SH`)
 - `0x03` - Pay to contract (`P2C`)
+- `0x04` - Pay to public key (`P2PK`)
+- `0x05` - Pay to hash of mutiple public keys (`P2HMPK`)
 
 Each address type is followed by a specific content bytes format:
 
@@ -385,6 +386,8 @@ Each address type is followed by a specific content bytes format:
 - `P2MPKH` - serialized public key hashes and multisig threshold
 - `P2SH` - serialized script hash
 - `P2C` - serialized contract ID
+- `P2PK` - serialized public key with checksum + group info
+- `P2HMPK` - serialized hash of key type, multisig threshold and all public keys with check sum + group info
 
 The complete address in bytes is constructed by concatenating the address type and the content bytes:
 
@@ -392,7 +395,7 @@ The complete address in bytes is constructed by concatenating the address type a
 address = address type || content bytes
 ```
 
-The string representation of an address is the base58 encoding of its byte representation. Each address on Alephium belongs to a group, which can be derived deterministically from the address. In Ralph, address literals must start with `@` followed by a valid base58-encoded Alephium address.
+The string representation of an address is the base58 encoding of its byte representation. At the protocol level, each address on Alephium belongs to a group, which can be derived deterministically from the address. In Ralph, address literals must start with `@` followed by a valid base58-encoded Alephium address.
 
 ```rust
 Contract AddressTest () {
@@ -406,16 +409,22 @@ Contract AddressTest () {
       let p2mpkh = @2jW1n2icPtc55Cdm8TF9FjGH681cWthsaZW3gaUFekFZepJoeyY3ZbY7y5SCtAjyCjLL24c4L2Vnfv3KDdAypCddfAY
       let p2sh = @ibsc1yJLJxxVcsPfSDJoR3mzrasrZq2Rn63dFQGcDAYE
       let p2c = @26j4viXkBzJd5SaDtQzyGM6joqoECmajncT4QS3tmT9hb
+      let p2pk = @3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:1
+      let p2hmpk = @CSYxX7pdWvrbqAQFfHaUsrL4xpgXKktsQF2yJ8P53AmCyGiNbU:0
 
       assert!(prefix(p2pkh) == #00, 0)
       assert!(prefix(p2mpkh) == #01, 1)
       assert!(prefix(p2sh) == #02, 2)
       assert!(prefix(p2c) == #03, 3)
+      assert!(prefix(p2pk) == #04, 4)
+      assert!(prefix(p2hmpk) == #05, 5)
 
       assert!(groupOfAddress!(p2pkh) == 0, 4)
       assert!(groupOfAddress!(p2mpkh) == 0, 5)
       assert!(groupOfAddress!(p2sh) == 0, 6)
       assert!(groupOfAddress!(p2c) == 2, 7)
+      assert!(groupOfAddress!(p2pk) == 1, 8)
+      assert!(groupOfAddress!(p2hmpk) == 3, 9)
 
       emit Debug(`Test successful for Address`)
    }
@@ -424,7 +433,56 @@ Contract AddressTest () {
 
 The `prefix` function is a helper function that extracts the address type from an address. The `groupOfAddress!` function is a built-in function that returns the group of an address.
 
-With the Danube upgrade, Alephium will introduce groupless addresses known as `P2PK`. This enhancement enables wallets and dApps to abstract away the complexity of the group concept, offering a smoother and more user-friendly experience.
+###### Groupless Address
+
+Before the Danube upgrade, Alephium addresses included group information at both the protocol and application level. The Danube upgrade introduced groupless address types, which abstract away the complexity of groups at the application level. This enables wallets and dApps to offer a significantly smoother and more intuitive user experience.
+
+Note that group information is still required at the protocol level, for example in the Ralph code. Currently, the supported groupless address types include both `P2PK` and `P2HMPK`.
+
+```rust
+let p2pk = @3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:1  // explicit group required
+let p2hmpk = @CSYxX7pdWvrbqAQFfHaUsrL4xpgXKktsQF2yJ8P53AmCyGiNbU:0   // explicit group required
+
+assert!(prefix(p2pk) == #04, 4)
+assert!(prefix(p2hmpk) == #05, 5)
+
+assert!(groupOfAddress!(p2pk) == 1, 8)
+assert!(groupOfAddress!(p2hmpk) == 3, 9)
+```
+
+At the application level, `3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK` is a valid `P2PK` groupless address. This is what user would normally see and use. Under the hood, it contains the following grouped addresses:
+
+```
+3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:0
+3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:1
+3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:2
+3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:3
+```
+
+When user checks the balance of `3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK`, it returns the combined balance of all the underlying grouped addresses. When the user uses this address to transfer assets or interact with dApps, the system automatically picks the appropriate underlying grouped address and performs any neccessary internal transfers to complete the transaction seamlessly. The same logic applies to the `P2HMPK` addresses as well.
+
+For `P2PK` address, the content bytes of the address consist of the following components:
+
+```fundamental
+content bytes = public key type || public key || checksum || group
+```
+
+Unlike `P2PKH` which only supports the `SecP256K1` public keys, `P2PK` also supports the following public key types to enable more use cases such as `PassKey`:
+
+- `0x00` - SecP256K1
+- `0x01` - SecP256R1
+- `0x02` - ED25519
+- `0x03` - WebAuthn
+
+The checksum is a 4-byte `djb2` hash of the public key, the purpose is to provide simple integrity check for the public key. Group information is also included.
+
+For `P2HMPK` address, the address content bytes are composed of the following components:
+
+```fundamental
+content bytes = blake2b(address type || public keys || multisig threshold) | checksum | group
+```
+
+The content of the `P2HMPK` address is constructed by first computing a `Blake2b` hash over the concatenation of the address type (`06`), all public keys and the multisig threshold. This hash is then followed by a 4-byte `djb2` checksum of the hash and finally a single byte indicating the group.
 
 #### Composite Types
 
