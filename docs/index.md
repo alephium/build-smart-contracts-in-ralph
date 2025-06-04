@@ -800,6 +800,7 @@ Ralph functions support annotations to specify behavior and permissions. Current
 | `payToContractOnly`    | Whether the function only receives assets into the contract | `false`       |
 | `checkExternalCaller`  | Whether the function is required to check the caller        | `true`        |
 | `updateFields`         | Whether the function updates the contract fields            | `false`       |
+| `preserveCaller`       | Whether the function preseves the caller information        | `false`       |
 
 We will discuss each of these annotations in detail in the rest of this section, including how they affect function behavior and when they should be used.
 
@@ -1116,6 +1117,39 @@ test()
 ```
 
 In test code above, we deploy the `CheckExternal` contract and set the initial owner to `authorizedSigner.address` and initial value to `0`. We then call the `setValue` and `setValueUnsafe` functions to update the value to `1` and `2` respectively. Note that if `setValue` is not called using `authorizedSigner`, transaction will abort with error code `0`.
+
+##### Preserve Caller
+
+The Danube upgrade introduces the `@preserveCaller` function annotation, which ensures that the original caller's address is preserved and passed along to the next function in the call chain.
+
+More specifically, if a function annotated with `@preserveCaller` calls another function, the `callerAddress!()` in the called function returns the original caller of the annotated function, rather than the annotated function itself. This feature is particularly useful for implementing routing patterns in smart contracts, where preserving the identity of the original caller is crucial for enforcing access control and authorization. The same caller preservation logic also applies to the build-in functions `callerContractId!()`, `externalCallerAddress!()` and `externalCallerContractId!()`.
+
+Here's a simple example illustrating how `@preserveCaller` works in practice:
+
+```rust
+Contract Router(internal: Internal) {
+    pub fn default() -> Address {
+        let address = internal.call()
+        assert!(address == selfAddress!(), 0)
+        return address
+    }
+
+    @using(preserveCaller = true)
+    pub fn preserveCaller() -> Address {
+        let address = internal.call()
+        assert!(address == callerAddress!(), 1)
+        return address
+    }
+}
+
+Contract Internal() {
+    pub fn call() -> Address {
+        return callerAddress!()
+    }
+}
+```
+
+When `Router.default` is called, it returns the address of the `Router` contract since `Router.default` is the direct caller of `Internal.call()`. In contrast, when `Router.preserveCaller` is called from a `TxScript`, it returns the address of the original transaction caller instead. This is because the `@preserveCaller` annotation ensures that the caller’s information is preserved and passed along to the next function in the call chain.
 
 #### Function Calls
 
