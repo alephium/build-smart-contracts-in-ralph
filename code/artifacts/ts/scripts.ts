@@ -13,12 +13,23 @@ import {
 } from "@alephium/web3";
 import { getContractByCodeHash } from "./contracts";
 import { default as ChainScriptJson } from "../Chain.ral.json";
+import { default as ChainedSwapTokenScriptJson } from "../ChainedSwapToken.ral.json";
 import { default as DepositTwiceScriptJson } from "../DepositTwice.ral.json";
 import { default as WithdrawScriptJson } from "../Withdraw.ral.json";
 import { Bar, Foo, AllStructs } from "./types";
 
 export const Chain = new ExecutableScript<{}>(
   Script.fromJson(ChainScriptJson, "", AllStructs),
+  getContractByCodeHash
+);
+
+export const ChainedSwapToken = new ExecutableScript<{
+  tokenPair12: HexString;
+  tokenPair23: HexString;
+  token1: HexString;
+  token2: HexString;
+}>(
+  Script.fromJson(ChainedSwapTokenScriptJson, "", AllStructs),
   getContractByCodeHash
 );
 

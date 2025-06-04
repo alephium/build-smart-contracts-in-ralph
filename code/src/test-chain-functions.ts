@@ -3,7 +3,7 @@ import { Chain } from '../artifacts/ts/scripts'
 
 async function test() {
   const signer = await getSigner()
-  await Chain.execute(signer, { initialFields: {} })
+  await Chain.execute({ signer, initialFields: {} })
 }
 
 test()

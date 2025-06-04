@@ -1,0 +1,25 @@
+{
+  "version": "v3.15.1",
+  "name": "Internal",
+  "bytecode": "00010d010000000103d39ffec434b402",
+  "codeHash": "092813100f04c0e237f43fab51043db392ff88d094cf786cfb6c6c79d121947b",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "call",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "Address"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

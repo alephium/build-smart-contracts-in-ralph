@@ -1,0 +1,21 @@
+Contract FancyToken(name: ByteVec) {
+    pub fn getName() -> ByteVec {
+        return name
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn transferTokens(recipient: Address, amount: U256) -> () {
+       transferTokenFromSelf!(recipient, selfTokenId!(), amount)
+    }
+}
+
+Contract FancyTokenFactory(fancyTokenTemplateId: ByteVec) {
+  @using(checkExternalCaller = false)
+  pub fn mint(name: ByteVec) -> () {
+    let (immFields, mutFields) = FancyToken.encodeFields!(name)
+    let fancyTokenContractId = copyCreateSubContractWithToken!(
+        name, fancyTokenTemplateId, immFields, mutFields, 2
+    )
+    FancyToken(fancyTokenContractId).transferTokens(callerAddress!(), 1)
+  }
+}

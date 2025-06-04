@@ -99,7 +99,7 @@ class Factory extends ContractFactory<
     getUrl: async (
       params: Omit<
         TestContractParamsWithoutMaps<SubDomainTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<HexString>> => {
       return testMethod(this, "getUrl", params, getContractByCodeHash);

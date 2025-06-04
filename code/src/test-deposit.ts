@@ -12,7 +12,8 @@ async function test() {
     initialAttoAlphAmount: ONE_ALPH,
   })
 
-  await DepositTwice.execute(signer, {
+  await DepositTwice.execute({
+    signer,
     initialFields: {
       contract: deposit.contractId
     },

@@ -3,10 +3,9 @@ Contract CheckExternal(owner: Address, mut value: U256) {
         return getValuePrivate()
     }
 
-    @using(updateFields = true)
     pub fn setValue(v: U256) -> () {
         checkCaller!(callerAddress!() == owner, 0)
-        value = v
+        setValuePrivate(v)
     }
 
     @using(updateFields = true, checkExternalCaller = false)
@@ -16,5 +15,12 @@ Contract CheckExternal(owner: Address, mut value: U256) {
 
     fn getValuePrivate() -> U256 {
         return value
+    }
+
+    @using(updateFields = true)
+    fn setValuePrivate(v: U256) -> () {
+        checkCaller!(callerAddress!() == selfAddress!(), 1)
+        checkCaller!(externalCallerAddress!() == owner, 2)
+        value = v
     }
 }

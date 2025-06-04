@@ -104,7 +104,7 @@ class Factory extends ContractFactory<CryptographyFunctionsInstance, {}> {
     verifyHash: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(
@@ -117,7 +117,7 @@ class Factory extends ContractFactory<CryptographyFunctionsInstance, {}> {
     verifySignature: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(
@@ -130,7 +130,7 @@ class Factory extends ContractFactory<CryptographyFunctionsInstance, {}> {
     verifyEthEcRecover: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(

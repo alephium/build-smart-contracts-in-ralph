@@ -96,7 +96,7 @@ class Factory extends ContractFactory<LoopInstance, {}> {
     whileStmt: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<bigint>> => {
       return testMethod(
@@ -109,7 +109,7 @@ class Factory extends ContractFactory<LoopInstance, {}> {
     forStmt: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<bigint>> => {
       return testMethod(

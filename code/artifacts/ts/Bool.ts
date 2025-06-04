@@ -88,7 +88,7 @@ class Factory extends ContractFactory<BoolInstance, {}> {
     test: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(

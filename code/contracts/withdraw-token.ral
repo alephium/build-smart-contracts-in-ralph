@@ -3,6 +3,8 @@ Contract WithdrawToken() {
     pub fn withdraw() -> () {
       let caller = callerAddress!()
       transferTokenFromSelf!(caller, selfTokenId!(), 1)
-      transferTokenFromSelf!(caller, ALPH, dustAmount!())
+      // Prior to the Danube upgrade, dustAmount!() needs to be transferred explicitly
+      // After the Danube upgrade, transaction caller will fund the dust amount by default
+      // transferTokenFromSelf!(caller, ALPH, dustAmount!())
     }
 }

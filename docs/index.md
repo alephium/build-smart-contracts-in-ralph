@@ -4,8 +4,7 @@ Smart contract development in Ralph is designed with two key principles in mind:
 
 The design philosophy of the Ralph language focuses on explicit asset management and clear control flow. This approach helps developers better understand and reason about their code. By making asset flows and state changes more visible and predictable, Ralph reduces the chances of subtle bugs that could lead to security issues. Additionally, Ralph makes common smart contract vulnerabilities, such as reentrancy attacks, impossible by design.
 
-The UTXO-based asset management model offers additional security benefits. It prevents unlimited authorization of assets by restricting access to only the UTXOs included in a transaction. It also disables flashloans because assets cannot be borrowed and returned within the same transaction.import { web3 } from '@alephium/web3'
-
+The UTXO-based asset management model offers additional security benefits. It prevents unlimited authorization of assets by restricting access to only the UTXOs included in a transaction. It also disables flashloans because assets cannot be borrowed and returned within the same transaction.
 
 These features create a development environment where security is not an afterthought but an integral part of the language's design. As we delve deeper into Ralph's features and capabilities throughout this chapter, you'll discover how this emphasis on simplicity and security translates into practical benefits for smart contract development.
 
@@ -17,7 +16,7 @@ Before delving into the specifics of smart contract development in Ralph, it's i
 
 The UTXO (Unspent Transaction Output) model and the Account model represent two fundamentally different paradigms for managing blockchain state and transactions, each offering unique advantages and trade-offs.
 
-The UTXO model, introduced by Bitcoin, treats transactions as a series of digital cash transfers. Each transaction consumes previous unspent outputs and creates new ones, similar to how physical cash is exchanged. When you spend money, you use up existing bills (inputs) and may receive change back (outputs). This model offers several compelling benefits. Since UTXOs can be processed independently, the system enables natural parallelization for transaction validation. The model also enhances privacy as users can use different addresses for each transaction. Additionally, it allows for efficient batching of multiple payments into single transactions. Most importantly, the UTXO model has proven its security through Bitcoin's decade-plus history of securing billions in value.
+The UTXO model, introduced by Bitcoin, treats transactions as a series of digital cash transfers. Each transaction consumes previous unspent outputs and creates new ones, similar to how physical coin is exchanged. When you spend money, you use up existing coins (inputs) and may receive change back (outputs). This model offers several compelling benefits. Since UTXOs can be processed independently, the system enables natural parallelization for transaction validation. The model also enhances privacy as users can use different addresses for each transaction. Additionally, it allows for efficient batching of multiple payments into single transactions. Most importantly, the UTXO model has proven its security through Bitcoin's decade-plus history of securing billions in value.
 
 However, the UTXO model has significant limitations when it comes to smart contract development. The lack of persistent state between transactions makes it difficult to implement complex business logic. For example, tracking aggregated data such as a counter across transactions is challenging, even though it is a common scenario in modern smart contracts. Furthermore, the expressiveness of the UTXO scripting language is often deliberately restricted to enhance security.
 
@@ -114,7 +113,7 @@ To compile and test the contract, we also need to start the local Alephium devne
  ✔ Container devnet-explorer-frontend-1  Running
 ```
 
-Once the local devnet is running, compile the `HelloWeb3` contract like this:
+Once the local devnet is up and running, compile the `HelloWeb3` contract like this:
 
 ```bash
 $ npm install
@@ -253,8 +252,13 @@ Contract Integer () {
       assert!(2 ** 8 == 256, 4)
       assert!(10 % 3 == 1, 5)
 
+      assert!(10 / 3 == 3, 6)       // round down
+      assert!(10 \ 3 == 4, 7)       // round up
+      assert!(-10i / 3i == -4i, 8)  // round down
+      assert!(-10i \ 3i == -3i, 9)  // round up
+
       // More complex expressions
-      assert!((a * b + c) / d == 0, 6)
+      assert!((a * b + c) / d == 0, 10)
 
       // Overflow examples:
       // let h = u256Max!() + 1
@@ -263,26 +267,25 @@ Contract Integer () {
       // let k = i256Min!() - 1i
 
       // Modulo 2^256 operators for U256 type
-      assert!(u256Max!() |+| 1 == 0, 7) // Addition modulo 2^256
-      assert!(0 |-| 1 == u256Max!(), 8) // Subtraction modulo 2^256
-      assert!(u256Max!() |*| 2 == u256Max!() - 1, 9) // Multiplication modulo 2^256
-      assert!((1 << 128) |**| 2 == 0, 10) // Power modulo 2^256
+      assert!(u256Max!() |+| 1 == 0, 11) // Addition modulo 2^256
+      assert!(0 |-| 1 == u256Max!(), 12) // Subtraction modulo 2^256
+      assert!(u256Max!() |*| 2 == u256Max!() - 1, 13) // Multiplication modulo 2^256
+      assert!((1 << 128) |**| 2 == 0, 14) // Power modulo 2^256
 
       // Modulo N operators for U256 type
-      assert!(mulModN!(2, 3, 4) == 2, 11) // (2 * 3) % 4
-      assert!(mulModN!(1 << 128, 1 << 128, u256Max!() - 1) == 2, 12)
-      assert!(mulModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 13)
-      assert!(addModN!(2, 3, 4) == 1, 14) // (2 + 3) % 4
-      assert!(addModN!(1 << 128, 1 << 128, u256Max!()) == 1 << 129, 15)
-      assert!(addModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 16)
+      assert!(mulModN!(2, 3, 4) == 2, 15) // (2 * 3) % 4
+      assert!(mulModN!(1 << 128, 1 << 128, u256Max!() - 1) == 2, 16)
+      assert!(mulModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 17)
+      assert!(addModN!(2, 3, 4) == 1, 18) // (2 + 3) % 4
+      assert!(addModN!(1 << 128, 1 << 128, u256Max!()) == 1 << 129, 19)
+      assert!(addModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 20)
 
       // Bitwise Operators for U256 type
-      assert!(e & 0xf0 == 0xf0, 17)
-      assert!(e | 0xf0 == 0xff, 18)
-      assert!(e ^ 0xf0 == 0x0f, 19)
-      assert!(e << 8 == 0xff00, 20)
-      assert!(u256Max!() << 2 == u256Max!() - 3, 21)
-      assert!(e >> 4 == 0x0f, 22)
+      assert!(e & 0xf0 == 0xf0, 21)
+      assert!(e | 0xf0 == 0xff, 22)
+      assert!(e ^ 0xf0 == 0x0f, 23)
+      assert!(e << 8 == 0xff00, 24)
+      assert!(e >> 4 == 0x0f, 25)
 
       emit Debug(`Test successful for Integer`)
     }
@@ -290,6 +293,15 @@ Contract Integer () {
 ```
 
 Ralph supports standard arithmetic operators that you would expect in most programming languages: `+` (addition), `-` (subtraction), `*` (multiplication), `/` (division), `**` (exponentiation), and `%` (modulo). These operators work with both `I256` and `U256` types. Ralph performs automatic overflow checking at runtime to prevent silent arithmetic errors that could lead to security vulnerabilities.
+
+Ralph offers two division modes: round up (`\`) and round down (`/`). This is especially useful in DeFi applications where unintended rounding errors is a key exploitation vector.
+
+```rust
+assert!(10 / 3 == 3, 6)       // round down
+assert!(10 \ 3 == 4, 7)       // round up
+assert!(-10i / 3i == -4i, 8)  // round down
+assert!(-10i \ 3i == -3i, 9)  // round up
+```
 
 For the `U256` type, Ralph provides specialized arithmetic operators that perform calculations modulo `2^256`. These operators (`|+|`, `|-|`, `|*|`, and `|**|`) allow for efficient overflow-safe arithmetic operations without runtime checks, as they naturally wrap around when exceeding the maximum value, as shown in the `Integer` contract:
 
@@ -312,7 +324,7 @@ assert!(addModN!(1 << 128, 1 << 128, u256Max!()) == 1 << 129, 15)
 assert!(addModN!(u256Max!(), u256Max!(), u256Max!()) == 0, 16)
 ```
 
-Ralph also supports bitwise operators for the `U256` type, allowing for low-level bit manipulation operations that are essential for cryptographic algorithms and efficient data processing. Here are examples demonstrating these operators:
+Additionally, Ralph supports bitwise operators for the `U256` type, allowing for low-level bit manipulation operations that are essential for cryptographic algorithms and efficient data processing. Here are examples demonstrating these operators:
 
 ```rust
 assert!(0xff & 0xf0 == 0xf0, 17)  // Bitwise AND
@@ -372,12 +384,14 @@ ByteVec values can be concatenated using the `++` operator, and other types can 
 
 An address on Alephium is a unique identifier that represents an account or a contract. All networks (i.e. mainnet, testnet, devnet) share the same address format.
 
-There are currently 4 different address types on Alephium, each represented by a unique byte prefix:
+There are currently 6 different address types on Alephium, each represented by a unique byte prefix:
 
 - `0x00` - Pay to public key hash (`P2PKH`)
 - `0x01` - Pay to multiple public key Hash (`P2MPKH`)
 - `0x02` - Pay to script hash (`P2SH`)
 - `0x03` - Pay to contract (`P2C`)
+- `0x04` - Pay to public key (`P2PK`)
+- `0x05` - Pay to hash of mutiple public keys (`P2HMPK`)
 
 Each address type is followed by a specific content bytes format:
 
@@ -385,6 +399,8 @@ Each address type is followed by a specific content bytes format:
 - `P2MPKH` - serialized public key hashes and multisig threshold
 - `P2SH` - serialized script hash
 - `P2C` - serialized contract ID
+- `P2PK` - serialized public key with checksum + group info
+- `P2HMPK` - serialized hash of key type, multisig threshold and all public keys with check sum + group info
 
 The complete address in bytes is constructed by concatenating the address type and the content bytes:
 
@@ -392,7 +408,7 @@ The complete address in bytes is constructed by concatenating the address type a
 address = address type || content bytes
 ```
 
-The string representation of an address is the base58 encoding of its byte representation. Each address on Alephium belongs to a group, which can be derived deterministically from the address. In Ralph, address literals must start with `@` followed by a valid base58-encoded Alephium address.
+The string representation of an address is the base58 encoding of its byte representation. At the protocol level, each address on Alephium belongs to a group, which can be derived deterministically from the address. In Ralph, address literals must start with `@` followed by a valid base58-encoded Alephium address.
 
 ```rust
 Contract AddressTest () {
@@ -406,16 +422,22 @@ Contract AddressTest () {
       let p2mpkh = @2jW1n2icPtc55Cdm8TF9FjGH681cWthsaZW3gaUFekFZepJoeyY3ZbY7y5SCtAjyCjLL24c4L2Vnfv3KDdAypCddfAY
       let p2sh = @ibsc1yJLJxxVcsPfSDJoR3mzrasrZq2Rn63dFQGcDAYE
       let p2c = @26j4viXkBzJd5SaDtQzyGM6joqoECmajncT4QS3tmT9hb
+      let p2pk = @3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:1
+      let p2hmpk = @CSYxX7pdWvrbqAQFfHaUsrL4xpgXKktsQF2yJ8P53AmCyGiNbU:0
 
       assert!(prefix(p2pkh) == #00, 0)
       assert!(prefix(p2mpkh) == #01, 1)
       assert!(prefix(p2sh) == #02, 2)
       assert!(prefix(p2c) == #03, 3)
+      assert!(prefix(p2pk) == #04, 4)
+      assert!(prefix(p2hmpk) == #05, 5)
 
       assert!(groupOfAddress!(p2pkh) == 0, 4)
       assert!(groupOfAddress!(p2mpkh) == 0, 5)
       assert!(groupOfAddress!(p2sh) == 0, 6)
       assert!(groupOfAddress!(p2c) == 2, 7)
+      assert!(groupOfAddress!(p2pk) == 1, 8)
+      assert!(groupOfAddress!(p2hmpk) == 3, 9)
 
       emit Debug(`Test successful for Address`)
    }
@@ -424,7 +446,56 @@ Contract AddressTest () {
 
 The `prefix` function is a helper function that extracts the address type from an address. The `groupOfAddress!` function is a built-in function that returns the group of an address.
 
-With the Danube upgrade, Alephium will introduce groupless addresses known as `P2PK`. This enhancement enables wallets and dApps to abstract away the complexity of the group concept, offering a smoother and more user-friendly experience.
+###### Groupless Address
+
+Before the Danube upgrade, Alephium addresses included group information at both the protocol and application level. The Danube upgrade introduced groupless address types, which abstract away the complexity of groups at the application level. This enables wallets and dApps to offer a significantly smoother and more intuitive user experience.
+
+Note that group information is still required at the protocol level, for example in the Ralph code. Currently, the supported groupless address types include both `P2PK` and `P2HMPK`.
+
+```rust
+let p2pk = @3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:1  // explicit group required
+let p2hmpk = @CSYxX7pdWvrbqAQFfHaUsrL4xpgXKktsQF2yJ8P53AmCyGiNbU:0   // explicit group required
+
+assert!(prefix(p2pk) == #04, 4)
+assert!(prefix(p2hmpk) == #05, 5)
+
+assert!(groupOfAddress!(p2pk) == 1, 8)
+assert!(groupOfAddress!(p2hmpk) == 3, 9)
+```
+
+At the application level, `3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK` is a valid `P2PK` groupless address. This is what user would normally see and use. Under the hood, it contains the following grouped addresses:
+
+```
+3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:0
+3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:1
+3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:2
+3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK:3
+```
+
+When user checks the balance of `3cUqhqEgt8qFAokkD7qRsy9Q2Q9S1LEiSdogbBmaq7CnshB8BdjfK`, it returns the combined balance of all the underlying grouped addresses. When the user uses this address to transfer assets or interact with dApps, the system automatically picks the appropriate underlying grouped address and performs any neccessary internal transfers to complete the transaction seamlessly. The same logic applies to the `P2HMPK` addresses as well.
+
+For `P2PK` address, the content bytes of the address consist of the following components:
+
+```fundamental
+content bytes = public key type || public key || checksum || group
+```
+
+Unlike `P2PKH` which only supports the `SecP256K1` public keys, `P2PK` also supports the following public key types to enable more use cases such as `PassKey`:
+
+- `0x00` - SecP256K1
+- `0x01` - SecP256R1
+- `0x02` - ED25519
+- `0x03` - WebAuthn
+
+The checksum is a 4-byte `djb2` hash of the public key, the purpose is to provide simple integrity check for the public key. Group information is also included.
+
+For `P2HMPK` address, the address content bytes are composed of the following components:
+
+```fundamental
+content bytes = blake2b(address type || public keys || multisig threshold) | checksum | group
+```
+
+The content of the `P2HMPK` address is constructed by first computing a `Blake2b` hash over the concatenation of the address type (`06`), all public keys and the multisig threshold. This hash is then followed by a 4-byte `djb2` checksum of the hash and finally a single byte indicating the group.
 
 #### Composite Types
 
@@ -579,52 +650,59 @@ Maps provide three essential built-in methods: `insert!` for creating entries, `
 
 ```rust
 Contract Counters() {
-  // All maps must be defined at the contract level
-  mapping[Address, U256] counters
+    // All maps must be defined at the contract level
+    mapping[Address, U256] counters
 
-  @using(preapprovedAssets = true, checkExternalCaller = false)
-  pub fn create() -> () {
-    let key = callerAddress!()
-    let depositor = key
-    // The depositor will deposit a minimal ALPH deposit for the new map entry
-    counters.insert!(depositor, key, 1)
-  }
+    @using(checkExternalCaller = false, updateFields = true)
+    pub fn create() -> () {
+      let key = callerAddress!()
+      // let depositor = key
+      // Prior to the Danube upgrade, the depositor deposits the map entry deposit
+      // counters.insert!(depositor, key, 1)
 
-  @using(checkExternalCaller = false)
-  pub fn increase() -> () {
-    let key = callerAddress!()
-    let value = counters[key]
-    // Update the map entry value
-    counters[key] = value + 1
-  }
-
-  pub fn currentCount(key: Address) -> U256 {
-    if (counters.contains!(key)) {
-      return counters[key]
-    } else {
-      return 0
+      // After the Danube upgrade, map entry deposit is funded by the transaction caller by default
+      counters.insert!(key, 1)
     }
-  }
 
-  @using(checkExternalCaller = false)
-  pub fn clear() -> U256 {
-    let key = callerAddress!()
-    let depositRecipient = key
-    let value = counters[key]
-    // Each map entry removal redeems the map entry deposit
-    counters.remove!(depositRecipient, key)
-    return value
-  }
+    @using(checkExternalCaller = false, updateFields = true)
+    pub fn increase() -> () {
+      let key = callerAddress!()
+      let value = counters[key]
+      // Update the map entry value
+      counters[key] = value + 1
+    }
+
+    pub fn currentCount(key: Address) -> U256 {
+      if (counters.contains!(key)) {
+        return counters[key]
+      } else {
+        return 0
+      }
+    }
+
+    @using(checkExternalCaller = false, updateFields = true)
+    pub fn clear() -> U256 {
+      let key = callerAddress!()
+      let value = counters[key]
+      // Prior to the Danube upgrade, map entry deposit recipient needs to be specified explicitly
+      // let depositRecipient = key
+      // counters.remove!(depositRecipient, key)
+
+      // After the Danube upgrade, map entry deposit is redeemed to the transaction caller by default
+      counters.remove!(key)
+      return value
+    }
 }
 ```
-
 
 The `Counters` contract demonstrates maps in Ralph by implementing a simple personal counter. Users can create a counter tied to their address (with a map entry deposit), increment it, check its value, and eventually clear it (recovering their deposit).
 
 Function annotations play a crucial role in Ralph smart contracts, and we'll explore them in more details in the [Function Annotations](#function-annotations) section. For now, let's briefly examine the annotations used in the `Counters` contract to understand their purpose:
 
-- `@using(preapprovedAssets = true)`: This annotation requires the caller to approve assets before calling the function. In this case, the caller needs to approve enough ALPH to cover the map entry deposit.
 - `@using(checkExternalCaller = false)`: By default, Ralph requires public functions that can potentially update blockchain state to check the caller, otherwise it won't compile. This annotation allows any caller to call the function.
+- `@using(updateFields = true)`: Updating the map entries is considered updating contract fields.
+
+Prior to the Danube upgrade, both the depositor of a map entry deposit and the recipient of that deposit upon removal had to be explicitly specified. After the upgrade, this process is simplified. By default, the transaction caller automatically provides the deposit when the map entry is created and receives it back when the entry is removed, unless alternative addresses are explicitly sepeficied.
 
 Let's test the `Counters` contract using the TypeScript code below:
 
@@ -729,6 +807,7 @@ Ralph functions support annotations to specify behavior and permissions. Current
 | `payToContractOnly`    | Whether the function only receives assets into the contract | `false`       |
 | `checkExternalCaller`  | Whether the function is required to check the caller        | `true`        |
 | `updateFields`         | Whether the function updates the contract fields            | `false`       |
+| `preserveCaller`       | Whether the function preseves the caller information        | `false`       |
 
 We will discuss each of these annotations in detail in the rest of this section, including how they affect function behavior and when they should be used.
 
@@ -811,12 +890,14 @@ Contract WithdrawToken() {
     pub fn withdraw() -> () {
       let caller = callerAddress!()
       transferTokenFromSelf!(caller, selfTokenId!(), 1)
-      transferTokenFromSelf!(caller, ALPH, dustAmount!())
+      // Prior to the Danube upgrade, dustAmount!() needs to be transferred explicitly
+      // After the Danube upgrade, transaction caller will fund the dust amount by default
+      // transferTokenFromSelf!(caller, ALPH, dustAmount!())
     }
 }
 ```
 
-In the example above, the `withdraw` function uses the contract's assets, and it transfers 1 token and dust amount of ALPH to the caller. Dust amount is the minimal amount of ALPH required for each UTXO to prevent the bloating of UTXO set, it is currently set to `0.001` ALPH.
+In the example above, the `withdraw` function uses the contract's assets to transfers 1 token to the caller. Before the Danube upgrade, it also needed to explicitly transfer `dustAmount!()` (currently `0.001`) of ALPH to the caller. This minimal amount of ALPH is required for each UTXO to prevent bloating of UTXO set. After the Danube upgrade, the transaction caller automatically covers the dust amount by default, eliminating the need for an explicit transfer.
 
 We can test the `Withdraw` contract using the TypeScript code below:
 
@@ -969,8 +1050,10 @@ To check the identity of a function caller, Ralph provides the built-in function
 
 There are also a few built-in functions that can be used to get the caller's information:
 
-- `callerAddress!()`: Returns caller's address. When called from a `TxScript`, it returns the address of the user who initiated the transaction. When called by another contract, it returns the address of that contract.
-- `callerContractId!()`: Returns caller's contract ID. This function can only be used when the caller is a contract. If called from a `TxScript` it will fail the transaction with the `NoCaller` error.
+- `callerAddress!()` - Returns caller's address. When called from a `TxScript` or a contract function directly called from `TxScript`, it returns the address of the transaction caller. When called from a function invoked from another contract function, it returns the address of that contract.
+- `callerContractId!()` - Returns caller's contract ID. This function can only be used when the caller is a contract. If called from a `TxScript` it will fail the transaction with the `NoCaller` error.
+- `externalCallerAddress!()` - Behaves like `callerAddress!()`, except when invoked from a contract function called by another function within the same contract. In such cases, it returns the address of the first external caller in the call stack, skipping all internal calls from the current contract.
+- `externalCallerContractId!()` - Returns the contract ID of the first external caller in the call stack, skipping all intermediate calls originating from the current contract.
 
 ```rust
 Contract CheckExternal(owner: Address, mut value: U256) {
@@ -978,10 +1061,9 @@ Contract CheckExternal(owner: Address, mut value: U256) {
         return getValuePrivate()
     }
 
-    @using(updateFields = true)
     pub fn setValue(v: U256) -> () {
         checkCaller!(callerAddress!() == owner, 0)
-        value = v
+        setValuePrivate(v)
     }
 
     @using(updateFields = true, checkExternalCaller = false)
@@ -992,10 +1074,19 @@ Contract CheckExternal(owner: Address, mut value: U256) {
     fn getValuePrivate() -> U256 {
         return value
     }
+
+    @using(updateFields = true)
+    fn setValuePrivate(v: U256) -> () {
+        checkCaller!(callerAddress!() == selfAddress!(), 1)
+        checkCaller!(externalCallerAddress!() == owner, 2)
+        value = v
+    }
 }
 ```
 
-In the `CheckExternal` contract, `getValue` is a `view` function, so no external caller checks are needed. The `setValue` function updates contract fields and properly checks the caller using `checkCaller!`. Meanwhile, `setValueUnsafe` also updates fields but deliberately bypasses the external caller check with the `@using(checkExternalCaller = false)` annotation.
+In the `CheckExternal` contract, `getValue` is a `view` function, so no external caller checks are needed. The `setValue` function calls the `setValuePrivate` function to update the contract field `value` and properly checks the caller using `checkCaller!`. Meanwhile, `setValueUnsafe` also updates fields but deliberately bypasses the external caller check with the `@using(checkExternalCaller = false)` annotation.
+
+Note that in `setValuePrivate`, `callerAddress!()` returns the address of the current contract because the function is invoked internally via `setValue`. In contrast, `externalCallerAddress!()` skips the internal contract calls and returns the address of the transaction caller.
 
 We can test the `CheckExternal` contract using the TypeScript code below:
 
@@ -1035,6 +1126,39 @@ test()
 ```
 
 In test code above, we deploy the `CheckExternal` contract and set the initial owner to `authorizedSigner.address` and initial value to `0`. We then call the `setValue` and `setValueUnsafe` functions to update the value to `1` and `2` respectively. Note that if `setValue` is not called using `authorizedSigner`, transaction will abort with error code `0`.
+
+##### Preserve Caller
+
+The Danube upgrade introduces the `@preserveCaller` function annotation, which ensures that the original caller's address is preserved and passed along to the next function in the call chain.
+
+More specifically, if a function annotated with `@preserveCaller` calls another function, the `callerAddress!()` in the called function returns the original caller of the annotated function, rather than the annotated function itself. This feature is particularly useful for implementing routing patterns in smart contracts, where preserving the identity of the original caller is crucial for enforcing access control and authorization. The same caller preservation logic also applies to the build-in functions `callerContractId!()`, `externalCallerAddress!()` and `externalCallerContractId!()`.
+
+Here's a simple example illustrating how `@preserveCaller` works in practice:
+
+```rust
+Contract Router(internal: Internal) {
+    pub fn default() -> Address {
+        let address = internal.call()
+        assert!(address == selfAddress!(), 0)
+        return address
+    }
+
+    @using(preserveCaller = true)
+    pub fn preserveCaller() -> Address {
+        let address = internal.call()
+        assert!(address == callerAddress!(), 1)
+        return address
+    }
+}
+
+Contract Internal() {
+    pub fn call() -> Address {
+        return callerAddress!()
+    }
+}
+```
+
+When `Router.default` is called, it returns the address of the `Router` contract since `Router.default` is the direct caller of `Internal.call()`. In contrast, when `Router.preserveCaller` is called from a `TxScript`, it returns the address of the original transaction caller instead. This is because the `@preserveCaller` annotation ensures that the caller’s information is preserved and passed along to the next function in the call chain.
 
 #### Function Calls
 
@@ -1234,7 +1358,7 @@ Contract CarFactory(mut carAddress: Address) {
         return Car(carId)
     }
 
-    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
+    @using(checkExternalCaller = false, updateFields = true)
     pub fn copyCreateCar(
         carContractId: ByteVec,
         model: ByteVec,
@@ -1242,14 +1366,12 @@ Contract CarFactory(mut carAddress: Address) {
         price: U256
     ) -> Car {
         let (immFields, mutFields) = Car.encodeFields!(model, year, price)
-        let carId = copyCreateContract!{callerAddress!() -> ALPH: minimalContractDeposit!()}(
-            carContractId, immFields, mutFields
-        )
+        let carId = copyCreateContract!(carContractId, immFields, mutFields)
         carAddress = contractIdToAddress!(carId)
         return Car(carId)
     }
 
-    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
+    @using(checkExternalCaller = false, updateFields = true)
     pub fn copyCreateCarWithToken(
         carContractId: ByteVec,
         model: ByteVec,
@@ -1258,7 +1380,7 @@ Contract CarFactory(mut carAddress: Address) {
         tokenAmount: U256
     ) -> Car {
         let (immFields, mutFields) = Car.encodeFields!(model, year, price)
-        let carId = copyCreateContractWithToken!{callerAddress!() -> ALPH: minimalContractDeposit!()}(
+        let carId = copyCreateContractWithToken!(
             carContractId, immFields, mutFields, tokenAmount
         )
         carAddress = contractIdToAddress!(carId)
@@ -1279,6 +1401,8 @@ Contract Car(model: ByteVec, year: U256, mut price: U256) {
 ```
 
 In the example above, `createCar` and `copyCreateCar` use the `createContract!` and `copyCreateContract!` built-in functions, respectively, to create a new contract. The difference between the two is that `createContract!` creates a new contract using the contract's bytecode, while `copyCreateContract!` creates a new contract by copying the bytecode from an existing contract, which is a lot more gas efficient. If the goal is to create many instance of the same contract, `copyCreateContract!` is recommended.
+
+Another notable difference between the `createCar` and `copyCreateCar` functions is that in `createCar`, the `minimalContractDeposit` is explicitly approved by the transaction caller, whereas in `copyCreateCar`, this approval is omitted. This is because, starting with the Danube upgrade, the contract deposit is by default automatically funded by the transaction caller, eliminating the need for explicit approval.
 
 Contracts in Alephium have both immutable and mutable fields, which are stored and handled differently in the VM for security and efficiency reasons. When creating a contract, you must provide encoded versions of both the immutable and mutable fields. The `encodeFields!` built-in function handles this encoding for you. In the example above, `Car.encodeFields!` encodes the `model`, `year`, and `price` fields and returns a tuple containing both the encoded immutable and mutable fields, which can be passed to the `createContract!` and `copyCreateContract!` built-in functions.
 
@@ -2506,6 +2630,90 @@ TxScript Withdraw(myToken: MyToken) {
 
 For simple `TxScript` that only calls a single contract function, Web3 SDK provides a convenient shortcut through the `transact` method. This method automatically generates the necessary `TxScript` bytecode behind the scenes, eliminating the need to manually create and execute transaction scripts for basic contract interactions. So executing the `Withdraw` `TxScript` is equivalent to calling `myToken.transact.withdraw(...)`.
 
+###### Chained Contract Calls
+
+Alephium follows the stateful UTXO (sUTXO) model, where transaction outputs created within a transaction cannot be spent in the same transaction. This design provides important security benefits. For example flashloans are disabled by default because assets cannot be borrowed and returned within the same transaction.
+
+After the Danube upgrade, this limitation is relaxed in `TxScript`, which now supports calling multiple contracts and chaining asset outputs from the transaction caller. This enhancement improves composability and enables more sophisticated contract interactions, allowing developers to build more complex dApps and DeFi protocols.
+
+There are a few things worth emphasizing here:
+
+- TxScript can only chain transaction caller's asset outputs from the contract call. Asset ouputs owned by other addresses as well as the contract outputs cannot be chained
+- At the contract level, UTXO restrictions remain fully enforced, preserving the security properties of the UTXO model
+
+Here's an example of using chained transactions in a TxScript to perform token swaps across multiple liquidity pools in a single transaction:
+
+```rust
+Contract Swap(tokenId1: ByteVec, tokenId2: ByteVec, mut token1Reserve: U256, mut token2Reserve: U256) {
+    @using(preapprovedAssets = true, assetsInContract = true, updateFields = true, checkExternalCaller = false)
+    pub fn addLiquidity(lp: Address, token1Amount: U256, token2Amount: U256) -> () {
+        transferTokenToSelf!(lp, tokenId1, token1Amount)
+        transferTokenToSelf!(lp, tokenId2, token2Amount)
+        token1Reserve = token1Reserve + token1Amount
+        token2Reserve = token2Reserve + token2Amount
+    }
+
+    @using(preapprovedAssets = true, assetsInContract = true, updateFields = true, checkExternalCaller = false)
+    pub fn swap(buyer: Address, tokenId: ByteVec, tokenAmount: U256) -> () {
+        assert!(tokenId == tokenId1 || tokenId == tokenId2, 0)
+
+        if (tokenId == tokenId1) {
+            let token1Amount = tokenAmount
+            let token2Amount = token2Reserve - token1Reserve * token2Reserve / (token1Reserve + token1Amount)
+            transferTokenToSelf!(buyer, tokenId1, token1Amount)
+            transferTokenFromSelf!(buyer, tokenId2, token2Amount)
+            token1Reserve = token1Reserve + token1Amount
+            token2Reserve = token2Reserve - token2Amount
+        } else {
+            let token2Amount = tokenAmount
+            let token1Amount = token1Reserve - token1Reserve * token2Reserve / (token2Reserve + token2Amount)
+            transferTokenToSelf!(buyer, tokenId2, token2Amount)
+            transferTokenFromSelf!(buyer, tokenId1, token1Amount)
+            token1Reserve = token1Reserve + token1Amount
+            token2Reserve = token2Reserve - token2Amount
+        }
+    }
+}
+
+TxScript ChainedSwapToken(tokenPair12: Swap, tokenPair23: Swap, token1: ByteVec, token2: ByteVec) {
+    let caller = callerAddress!()
+    tokenPair12.swap{caller -> token1: 5}(caller, token1, 5)
+    tokenPair23.swap{caller -> token2: 4}(caller, token2, 4)
+}
+```
+
+As demonstrated in the `ChainedSwapToken` script, the caller first swaps 5 `token1` tokens for 4 `token2` tokens, and then immediately swaps those 4 `token2` token for `token3` tokens, all within the same transaction.
+
+#### Assets Issuance
+
+In Alephium, assets are issued through contract creation, and the token ID is identical to the ID of the contract that issued it. This applies to both fungible and non-fungible tokens, as demonstracted in the sections above. Prior to the Danube upgrade, assets from the newly created contracts could not be used within the same transaction because they were treated as part of contract's outputs and constrained by the UTXO model. The Danube upgrade removes this limitation, allowing immediate use of these assets. Conceptually, assets from a newly created contract is now considered "prepared" for use during the transaction, if they are not used, they are automatically included in the contract outputs.
+
+```rust
+Contract FancyToken(name: ByteVec) {
+    pub fn getName() -> ByteVec {
+        return name
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn transferTokens(recipient: Address, amount: U256) -> () {
+       transferTokenFromSelf!(recipient, selfTokenId!(), amount)
+    }
+}
+
+Contract FancyTokenFactory(fancyTokenTemplateId: ByteVec) {
+  @using(checkExternalCaller = false)
+  pub fn mint(name: ByteVec) -> () {
+    let (immFields, mutFields) = FancyToken.encodeFields!(name)
+    let fancyTokenContractId = copyCreateSubContractWithToken!(
+        name, fancyTokenTemplateId, immFields, mutFields, 2
+    )
+    FancyToken(fancyTokenContractId).transferTokens(callerAddress!(), 1)
+  }
+}
+```
+
+As we can see in the example above. `FancyTokenFactory` contract creates a sub contract `FancyToken` and issues 2 tokens. Immediately after the contract is created, it calls the `transferTokens` function on the `FancyToken` contract to transfer one of the tokens to the transaction caller.
+
 #### Events
 
 Events are immutable, verifiable objects emitted by the smart contracts, stored and served by the full node. They have many practical use cases in the blockchain ecosystem: DEXes use events to maintain records of token swaps within specific trading pairs. NFT marketplaces leverage events to efficiently index listing information. Oracles utilize events as communication channels, allowing smart contracts to signal requests for specific off-chain data. Cross-chain bridges use events to capture actions that require consensus from bridge operators, etc. Events play a critical role in facilitating efficient and transparent communication between smart contracts and off-chain applications.
@@ -2865,7 +3073,11 @@ In a sophisticated dApp transaction, Asset Permission System ensures that the fl
 
 Testing is essential to ensure the functionality, quality and security of any software products. This is especially true when it comes to smart contracts development because once deployed, smart contracts are much more difficult, if possible, to update compared to traditional software, and bugs in them can potentially lead to significant financial losses.
 
-Testing smart contracts can be challenging. Alephium's Web3 SDK makes the following opinionated design decisions when it comes to its testing framework:
+Testing smart contracts can be challenging, but Alephium provides comprehensive support for both unit and integration testing. Unit tests can be written directly in Ralph or in TypeScript using the Web3 SDK, while integration tests are fully supported through the Web3 SDK.
+
+The unit testing framework in Ralph is currently experimental, best suited for testing pure functions. For more complex contract interactions and end-to-end scenarios, the Web3 SDK offers a more mature and flexible testing environment.
+
+Alephium's Web3 SDK makes the following opinionated design decisions for its testing framework:
 
 - Both unit tests and integration tests are important. Although the distinction between them can be blurry, the test framework defines integration tests as the tests that require smart contracts under test to be deployed, whereas unit tests do not
 - Test code should be clean and maintainable, just like any other code. The Web3 SDK automatically generates testing boilerplates to simplify the process of writing and maintaining test cases
@@ -2873,7 +3085,127 @@ Testing smart contracts can be challenging. Alephium's Web3 SDK makes the follow
 
 Ralph also allows developers to emit debug statements within smart contracts, which is very useful to diagnose issues during development.
 
-### Unit Test
+### Unit Test in Ralph
+
+Ralph features a simple and intuitive domain-specific language (DSL) for unit testing, built directly into the language itself. It provides a set of assertion functions such as `testEqual!`, `testCheck!`, `testError!` and `testFail!` for validating expected conditions. It also allows you to initialize and verify the contract state before and after the test execution.
+
+Here is an simple example that demonstrates the basic features of Ralph's unit testing:
+
+```rust
+Contract UnitTest(mut count: U256) {
+
+    pub fn add(a: U256, b: U256) -> U256 {
+        return a + b
+    }
+
+    pub fn divide(a: U256, b: U256) -> U256 {
+        return a / b
+    }
+
+    pub fn isAdult(age: U256) -> Bool {
+        return age >= 18
+    }
+
+    @using(updateFields = true, checkExternalCaller = false)
+    pub fn increment() -> () {
+        count = count + 1
+    }
+
+    test "should add two numbers correctly" {
+        testEqual!(add(2, 3), 5)
+        testEqual!(add(0, 10), 10)
+        testEqual!(add(100, 200), 300)
+    }
+
+    test "addition should be commutative" {
+        let a = randomU256!() / 2
+        let b = randomU256!() / 2
+        testEqual!(add(a, b), add(b, a))
+    }
+
+    test "should validate age correctly" {
+        testCheck!(isAdult(25))
+        testCheck!(!isAdult(17))
+    }
+
+    test "should fail on division by zero" {
+        testFail!(divide(10, 0))
+        testFail!(divide(0, 0))
+    }
+
+    test "should increment count by one"
+    before
+        Self(5)  // Initial state: count = 5
+    after
+        Self(6)  // Expected state: count = 6
+    {
+        increment()
+    }
+}
+```
+
+In addition to contract state, Ralph's unit testing framework supports initializing and verifying asset balances before and after test execution. It also supports testing of contracts that depend on or interact with other contracts, allowing for more realistic test scenarios.
+
+```rust
+Contract Bank(mut totalDeposits: U256) {
+    enum ErrorCodes {
+        InsufficientFunds = 0
+    }
+
+    @using(preapprovedAssets = true, updateFields = true, checkExternalCaller = false, assetsInContract = true)
+    pub fn deposit(depositor: Address) -> () {
+        totalDeposits = totalDeposits + 1 alph
+        transferTokenToSelf!(depositor, ALPH, 1 alph)
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn withdraw(amount: U256) -> () {
+        assert!(amount <= 100, ErrorCodes.InsufficientFunds)
+        transferTokenFromSelf!(callerAddress!(), ALPH, amount)
+    }
+
+    test "should throw insufficient funds error" {
+        testError!(withdraw(1000), ErrorCodes.InsufficientFunds)
+    }
+
+    test "should increase contract balance on deposit"
+    before
+        Self{ALPH: 1 alph}(1 alph)
+    after
+        Self{ALPH: 2 alph}(2 alph)
+    approve{ address -> ALPH: 2 alph }
+    {
+        let depositor = callerAddress!()
+        deposit{depositor -> ALPH: 2 alph}(depositor)
+    }
+}
+
+Contract Customer() {
+    @using(preapprovedAssets = true, checkExternalCaller = false)
+    pub fn makeDeposit(bank: Bank) -> () {
+        let depositor = externalCallerAddress!()
+        bank.deposit{depositor -> ALPH: 1 alph}(depositor)
+    }
+
+    test "customer should be able to make deposit to bank"
+    before
+        Bank{ALPH: 0 alph}(0)@bank
+        Self()
+    after
+        Bank{ALPH: 1 alph}(1 alph)@bank
+        Self()
+    approve{address -> ALPH: 1 alph}
+    {
+        makeDeposit{callerAddress!() -> ALPH: 1 alph}(bank)
+    }
+}
+```
+
+In the example above, the `should increase contract balance on deposit` unit test within the `Bank` contract initializes the `totalDeposits` contract field and the contract's asset balances to `1 alph`, and approves `2 alph` from the test executor. After executing the test, it verifies that both the `totalDeposits` field and the asset balances have increased to `2 alph`.
+
+In the `customer should be able to make deposit to bank` test within the `Consumer` contract, the test sets up the initial state and balances for the `Bank` contract and assigns it to a variable named `bank`. This `bank` variable is then passed to the `Customer.makeDeposit` function during the test. The test also approves `1 alph` from the test executor. After execution, the test verifies that both the contract state and asset balances have been updated as expected.
+
+### Unit Test in SDK
 
 A unit test tests a specific function of a contract, without requiring the contract to be deployed. Let's use the following contract as an example:
 
@@ -3075,7 +3407,7 @@ expectAssertionError(
 
 `expectAssertionError` function takes three arguments: the execution promise, the address of the contract where the error is expected to be thrown, and the error code.
 
-### Integration Test
+### Integration Test in SDK
 
 An integration test tests a feature of a set of deployed contracts. Let's try to test the `ALPHFaucet` contract from the [Unit Test](#unit-test) section:
 

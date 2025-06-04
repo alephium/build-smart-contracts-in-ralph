@@ -1,0 +1,29 @@
+{
+  "version": "v3.15.1",
+  "name": "Customer",
+  "bytecode": "0001402301030102000bd3dc35a69ad61701160113c40de0b6b3a7640000a216010d0c16000100",
+  "codeHash": "079469f831c04da0c47fe4525ecdf660a2cca687634399c8cefd1016187e0c0e",
+  "fieldsSig": {
+    "names": [],
+    "types": [],
+    "isMutable": []
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "makeDeposit",
+      "paramNames": [
+        "bank"
+      ],
+      "paramTypes": [
+        "Bank"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

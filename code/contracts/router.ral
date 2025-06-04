@@ -1,0 +1,20 @@
+Contract Router(internal: Internal) {
+    pub fn default() -> Address {
+        let address = internal.call()
+        assert!(address == selfAddress!(), 0)
+        return address
+    }
+
+    @using(preserveCaller = true)
+    pub fn preserveCaller() -> Address {
+        let address = internal.call()
+        assert!(address == callerAddress!(), 1)
+        return address
+    }
+}
+
+Contract Internal() {
+    pub fn call() -> Address {
+        return callerAddress!()
+    }
+}

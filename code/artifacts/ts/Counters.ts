@@ -115,7 +115,7 @@ class Factory extends ContractFactory<CountersInstance, {}> {
     create: async (
       params?: Omit<
         TestContractParams<never, never, CountersTypes.Maps>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResult<null, CountersTypes.Maps>> => {
       return testMethod(
@@ -128,7 +128,7 @@ class Factory extends ContractFactory<CountersInstance, {}> {
     increase: async (
       params?: Omit<
         TestContractParams<never, never, CountersTypes.Maps>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResult<null, CountersTypes.Maps>> => {
       return testMethod(
@@ -149,7 +149,7 @@ class Factory extends ContractFactory<CountersInstance, {}> {
     clear: async (
       params?: Omit<
         TestContractParams<never, never, CountersTypes.Maps>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResult<bigint, CountersTypes.Maps>> => {
       return testMethod(
@@ -175,8 +175,8 @@ class Factory extends ContractFactory<CountersInstance, {}> {
 export const Counters = new Factory(
   Contract.fromJson(
     CountersContractJson,
-    "=6-2=1-3+4=2-2+84=2+b=1-1+411b=10-2+11=64+7a7e0214696e73657274206174206d617020706174683a2000=265-1+c=112+7a7e021472656d6f7665206174206d617020706174683a2000=12",
-    "a7a4f839f75f11ec742c3c31d21228f7c14eae3e111f1cc909746a4b86929538",
+    "=6-2+3d=2-2+7d=2-2+b7=1+1=1-2+f=11-1+d=50+7a7e0214696e73657274206174206d617020706174683a2000=265-1+a=102+7a7e021472656d6f7665206174206d617020706174683a2000=12",
+    "972a6604a87b36bd0818e182d0d08300fd5da1024892a0e8574ed3d264c9f3ee",
     AllStructs
   )
 );

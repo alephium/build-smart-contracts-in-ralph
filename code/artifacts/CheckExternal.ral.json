@@ -1,8 +1,8 @@
 {
-  "version": "v3.12.2",
+  "version": "v3.15.1",
   "name": "CheckExternal",
-  "bytecode": "02040e40234032403b010000000103d341030341000302010001010008d3757677cdb4ce00450c7b1600a100010001010003d31d24b36f1600a100000000000102a00002",
-  "codeHash": "48a6579f3a1d24bfc543af68c864106b67b3165a4b00b9f4e59abe2e3831366b",
+  "bytecode": "02050e40234032403b4050010000000103d341030341000302010001010008d3757677cdb4ce00450c7b16000004010001010003d31d24b36f1600a100000000000102a0000200000101000cb4b2450d7bd6ce00450e7b1600a100",
+  "codeHash": "c997b200345ee46980b4c1eefee941fbee504e624dc5c3fa5a2e51455876a471",
   "fieldsSig": {
     "names": [
       "owner",
@@ -62,6 +62,19 @@
       "returnTypes": [
         "U256"
       ]
+    },
+    {
+      "name": "setValuePrivate",
+      "paramNames": [
+        "v"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
     }
   ],
   "constants": [],

@@ -1,4 +1,4 @@
-import { ONE_ALPH, web3 } from '@alephium/web3'
+import { DUST_AMOUNT, ONE_ALPH, web3 } from '@alephium/web3'
 import { getSigner, mintToken } from '@alephium/web3-test'
 import { WithdrawToken } from '../artifacts/ts'
 
@@ -13,7 +13,7 @@ async function test() {
     issueTokenAmount: 10n
   })
 
-  await withdrawToken.transact.withdraw({ signer })
+  await withdrawToken.transact.withdraw({ signer, attoAlphAmount: DUST_AMOUNT })
 
   async function getBalance(address: string) {
     return await nodeProvider.addresses.getAddressesAddressBalance(address)

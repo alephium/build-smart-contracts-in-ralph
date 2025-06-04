@@ -1,0 +1,35 @@
+{
+  "version": "v3.15.1",
+  "name": "FancyTokenFactory",
+  "bytecode": "0101402b010001040015d380a9d53c1600130164130064170217011600ce00160116020ec21703b40d0e0c16030101",
+  "codeHash": "81c640586b906a08356a0b3da3818a0961344589f86d0ecd429b262b2c4b3317",
+  "fieldsSig": {
+    "names": [
+      "fancyTokenTemplateId"
+    ],
+    "types": [
+      "ByteVec"
+    ],
+    "isMutable": [
+      false
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "mint",
+      "paramNames": [
+        "name"
+      ],
+      "paramTypes": [
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

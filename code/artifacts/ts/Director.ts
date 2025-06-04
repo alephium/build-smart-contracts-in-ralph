@@ -137,7 +137,7 @@ class Factory extends ContractFactory<DirectorInstance, DirectorTypes.Fields> {
     status: async (
       params: Omit<
         TestContractParamsWithoutMaps<DirectorTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<HexString>> => {
       return testMethod(this, "status", params, getContractByCodeHash);
@@ -145,7 +145,7 @@ class Factory extends ContractFactory<DirectorInstance, DirectorTypes.Fields> {
     getManagementLevel: async (
       params: Omit<
         TestContractParamsWithoutMaps<DirectorTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<HexString>> => {
       return testMethod(
@@ -158,7 +158,7 @@ class Factory extends ContractFactory<DirectorInstance, DirectorTypes.Fields> {
     getName: async (
       params: Omit<
         TestContractParamsWithoutMaps<DirectorTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<HexString>> => {
       return testMethod(this, "getName", params, getContractByCodeHash);
@@ -166,7 +166,7 @@ class Factory extends ContractFactory<DirectorInstance, DirectorTypes.Fields> {
     getId: async (
       params: Omit<
         TestContractParamsWithoutMaps<DirectorTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<bigint>> => {
       return testMethod(this, "getId", params, getContractByCodeHash);

@@ -205,7 +205,7 @@ export const CarFactory = new Factory(
   Contract.fromJson(
     CarFactoryContractJson,
     "",
-    "745e27a5263bc699605f477866d98839cedfdc9b5d73a4b78d61a6e71d887f62",
+    "db9759978478498a71d105c1b78a0a1306d5fb1211309132215021c8a1b2fb46",
     AllStructs
   )
 );

@@ -118,7 +118,7 @@ class Factory extends ContractFactory<ShinyTokenInstance, {}> {
     getSymbol: async (
       params: Omit<
         TestContractParamsWithoutMaps<ShinyTokenTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<HexString>> => {
       return testMethod(this, "getSymbol", params, getContractByCodeHash);
@@ -126,7 +126,7 @@ class Factory extends ContractFactory<ShinyTokenInstance, {}> {
     getName: async (
       params: Omit<
         TestContractParamsWithoutMaps<ShinyTokenTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<HexString>> => {
       return testMethod(this, "getName", params, getContractByCodeHash);
@@ -134,7 +134,7 @@ class Factory extends ContractFactory<ShinyTokenInstance, {}> {
     getDecimals: async (
       params: Omit<
         TestContractParamsWithoutMaps<ShinyTokenTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<bigint>> => {
       return testMethod(this, "getDecimals", params, getContractByCodeHash);
@@ -142,7 +142,7 @@ class Factory extends ContractFactory<ShinyTokenInstance, {}> {
     getTotalSupply: async (
       params: Omit<
         TestContractParamsWithoutMaps<ShinyTokenTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<bigint>> => {
       return testMethod(this, "getTotalSupply", params, getContractByCodeHash);

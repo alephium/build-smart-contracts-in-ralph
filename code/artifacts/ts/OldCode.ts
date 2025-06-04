@@ -121,7 +121,7 @@ class Factory extends ContractFactory<OldCodeInstance, OldCodeTypes.Fields> {
     get: async (
       params: Omit<
         TestContractParamsWithoutMaps<OldCodeTypes.Fields, never>,
-        "testArgs"
+        "args"
       >
     ): Promise<TestContractResultWithoutMaps<bigint>> => {
       return testMethod(this, "get", params, getContractByCodeHash);

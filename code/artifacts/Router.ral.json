@@ -1,0 +1,40 @@
+{
+  "version": "v3.15.1",
+  "name": "Router",
+  "bytecode": "01021c403801000001010dd3d94feb5d0c0dce00010017001600b2450c7b16000201080001010dd3ee05ad570c0dce00010017001600b4450d7b160002",
+  "codeHash": "8827f93b0d8d3549eb4b2b7fc863e08bd3bb10ae937f3f4e022e43ebea330d7a",
+  "fieldsSig": {
+    "names": [
+      "internal"
+    ],
+    "types": [
+      "Internal"
+    ],
+    "isMutable": [
+      false
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "default",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "Address"
+      ]
+    },
+    {
+      "name": "preserveCaller",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "Address"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

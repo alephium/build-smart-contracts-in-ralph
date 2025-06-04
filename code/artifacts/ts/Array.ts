@@ -88,7 +88,7 @@ class Factory extends ContractFactory<ArrayInstance, {}> {
     test: async (
       params?: Omit<
         TestContractParamsWithoutMaps<never, never>,
-        "testArgs" | "initialFields"
+        "args" | "initialFields"
       >
     ): Promise<TestContractResultWithoutMaps<null>> => {
       return testMethod(

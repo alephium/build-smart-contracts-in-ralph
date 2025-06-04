@@ -1,5 +1,5 @@
 {
-  "fullNodeVersion": "v3.12.2",
+  "fullNodeVersion": "v3.15.1",
   "compilerOptionsUsed": {
     "ignoreUnusedConstantsWarnings": false,
     "ignoreUnusedVariablesWarnings": false,
@@ -8,14 +8,15 @@
     "ignoreUpdateFieldsCheckWarnings": false,
     "ignoreCheckExternalCallerWarnings": false,
     "ignoreUnusedFunctionReturnWarnings": false,
-    "skipAbstractContractCheck": false
+    "skipAbstractContractCheck": false,
+    "skipTests": false
   },
   "infos": {
     "AddressTest": {
       "sourceFile": "address.ral",
-      "sourceCodeHash": "e36a243ddbef1c051028c3fb0b541b1064145320e05cb880fe492f2e9fcf2a64",
-      "bytecodeDebugPatch": "=8-2+2f=39-1+a=506+7e011b54657374207375636365737366756c20666f722041646472657373",
-      "codeHashDebug": "f581f1ea92f8da236b32390fb91afea41631de8a56f7d5cde42d12947f67d8d7"
+      "sourceCodeHash": "83fd2fafe632b69ca6267c6a872bce1f80b3d2c4a2840fb0fd5d213d20590caa",
+      "bytecodeDebugPatch": "=8-2+a7=39-1+6=746+7e011b54657374207375636365737366756c20666f722041646472657373",
+      "codeHashDebug": "ea3611b6f332efd49ab7984611b6e8c04273286988e18d73eaee6fb92f6f8fb6"
     },
     "Admin": {
       "sourceFile": "admin.ral",
@@ -47,6 +48,12 @@
       "bytecodeDebugPatch": "",
       "codeHashDebug": "86f278d2de249eca00d0c68f12167da0c1a54c02eaa8c148f89e659ae7cf11af"
     },
+    "Bank": {
+      "sourceFile": "unit-test.ral",
+      "sourceCodeHash": "f339c5b89d0eeb2082ef22262be44e60a567fbeed0fa72255e9341e792c9f50d",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "71ae38151a7762d3767975964982066bd733753e940b274e13c8b5e69b87480c"
+    },
     "Bar": {
       "sourceFile": "struct.ral",
       "sourceCodeHash": "8b75b0fb08f6b1d87a6250e99c41811733bec19809cecbf7de659ec7d6158a49",
@@ -73,15 +80,15 @@
     },
     "Car": {
       "sourceFile": "car-factory.ral",
-      "sourceCodeHash": "0958b4125a9832b899f19a433ecc1afc5d42e406133a93745ef538d8abafa4d4",
+      "sourceCodeHash": "a4e73e432a124402dd995b17383dc0a872694824f45d8cfeec10b3fbe9b397b6",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "2d3fda158b1ee9ca828ca9cdab0333a9d6607ab0b80726606df0a94fc066ce0b"
     },
     "CarFactory": {
       "sourceFile": "car-factory.ral",
-      "sourceCodeHash": "0958b4125a9832b899f19a433ecc1afc5d42e406133a93745ef538d8abafa4d4",
+      "sourceCodeHash": "a4e73e432a124402dd995b17383dc0a872694824f45d8cfeec10b3fbe9b397b6",
       "bytecodeDebugPatch": "",
-      "codeHashDebug": "745e27a5263bc699605f477866d98839cedfdc9b5d73a4b78d61a6e71d887f62"
+      "codeHashDebug": "db9759978478498a71d105c1b78a0a1306d5fb1211309132215021c8a1b2fb46"
     },
     "Chain": {
       "sourceFile": "chain-functions.ral",
@@ -89,11 +96,17 @@
       "bytecodeDebugPatch": "=12+1a557e020c4e6574776f726b2069643a2000567e0211426c6f636b2074696d657374616d703a2000577e020e426c6f636b207461726765743a2000587e02105472616e73616374696f6e2069643a20005a7e02185472616e73616374696f6e20696e7075742073697a653a20000c597e0240214669727374207472616e73616374696f6e20696e70757420616464726573733a2000817e02=2+476173206665653a2000807e020c47617320616d6f756e743a2000=50",
       "codeHashDebug": ""
     },
+    "ChainedSwapToken": {
+      "sourceFile": "swap.ral",
+      "sourceCodeHash": "3082edb22ce4acdf2ad96bbd4c7d82b66826f354bd8d5d3cd2acb4e94c7ad5e7",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
     "CheckExternal": {
       "sourceFile": "check-external.ral",
-      "sourceCodeHash": "43903d33153e2400f5fcd27accba004ff30ffbf891b9809af28f9e4119a840b2",
+      "sourceCodeHash": "0dba7166cf105159556c1cb13198a71dde15aa23d5140c1e8236f06d1f420f27",
       "bytecodeDebugPatch": "",
-      "codeHashDebug": "48a6579f3a1d24bfc543af68c864106b67b3165a4b00b9f4e59abe2e3831366b"
+      "codeHashDebug": "c997b200345ee46980b4c1eefee941fbee504e624dc5c3fa5a2e51455876a471"
     },
     "Company": {
       "sourceFile": "contract-inheritance.ral",
@@ -115,15 +128,21 @@
     },
     "Counters": {
       "sourceFile": "map.ral",
-      "sourceCodeHash": "30b40633c26e87039419eed77d2c3c17b7a7483edec4c93c1ac6ae675f771130",
-      "bytecodeDebugPatch": "=6-2=1-3+4=2-2+84=2+b=1-1+411b=10-2+11=64+7a7e0214696e73657274206174206d617020706174683a2000=265-1+c=112+7a7e021472656d6f7665206174206d617020706174683a2000=12",
-      "codeHashDebug": "a7a4f839f75f11ec742c3c31d21228f7c14eae3e111f1cc909746a4b86929538"
+      "sourceCodeHash": "27f984dad2bf2cd2d45c03937d1b8d9277dd83a956016adb8f212081b097b265",
+      "bytecodeDebugPatch": "=6-2+3d=2-2+7d=2-2+b7=1+1=1-2+f=11-1+d=50+7a7e0214696e73657274206174206d617020706174683a2000=265-1+a=102+7a7e021472656d6f7665206174206d617020706174683a2000=12",
+      "codeHashDebug": "972a6604a87b36bd0818e182d0d08300fd5da1024892a0e8574ed3d264c9f3ee"
     },
     "CryptographyFunctions": {
       "sourceFile": "cryptograph-functions.ral",
       "sourceCodeHash": "24371fb6e186abb0a83773c772e416bcc7de086c50afc190d716c0b14319ac49",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "3219704c52b1e9960913c67bfc91252716e9d4447ad6a0e67b6576a579ced572"
+    },
+    "Customer": {
+      "sourceFile": "unit-test.ral",
+      "sourceCodeHash": "f339c5b89d0eeb2082ef22262be44e60a567fbeed0fa72255e9341e792c9f50d",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "079469f831c04da0c47fe4525ecdf660a2cca687634399c8cefd1016187e0c0e"
     },
     "Deposit": {
       "sourceFile": "deposit.ral",
@@ -154,6 +173,18 @@
       "sourceCodeHash": "b171285f5f550c133fc96637a56a3051eedfe0959d96c23c9f3b4fe280d8ee89",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "f97a233d1a8d5bae3ff4d6e49cd9b4518cf1172b3eeede5ba9b0f2e3e4a0a37b"
+    },
+    "FancyToken": {
+      "sourceFile": "new-contract-assets.ral",
+      "sourceCodeHash": "ca8f9e3d2d4dac590e49d5615a5ffbb2f9621e48b7e52e53ac23907fc22ed6cb",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "68d65cfcb347d91ca13378da5f35efeb58832cbdc2e8aa536e4e89782b5ae0fa"
+    },
+    "FancyTokenFactory": {
+      "sourceFile": "new-contract-assets.ral",
+      "sourceCodeHash": "ca8f9e3d2d4dac590e49d5615a5ffbb2f9621e48b7e52e53ac23907fc22ed6cb",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "81c640586b906a08356a0b3da3818a0961344589f86d0ecd429b262b2c4b3317"
     },
     "Fib": {
       "sourceFile": "function-calls.ral",
@@ -199,9 +230,15 @@
     },
     "Integer": {
       "sourceFile": "integer.ral",
-      "sourceCodeHash": "a22ef0168373bf43835738a532876ae32ea13e5bbe85db0235b717ecaf8ef0df",
-      "bytecodeDebugPatch": "=6-2+89=13-1+b=712+7e011b54657374207375636365737366756c20666f7220496e7465676572",
-      "codeHashDebug": "eeb0bee7aabc8eff8f465e94efb64ab566063893e3f028ad132635186d27f660"
+      "sourceCodeHash": "647cafff923ee55ae0240ba1f19906cd4ad565d614da73dbaf357da124796671",
+      "bytecodeDebugPatch": "=6-2+a4=13-1+d=766+7e011b54657374207375636365737366756c20666f7220496e7465676572",
+      "codeHashDebug": "209deb6260b9be03528e9df802b346e5825baa424ac51932d48d2173386a5ef8"
+    },
+    "Internal": {
+      "sourceFile": "router.ral",
+      "sourceCodeHash": "029ddd82603889daae310526675f79977b97a7e98659c9a5a9f22c29cc1ffa9e",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "092813100f04c0e237f43fab51043db392ff88d094cf786cfb6c6c79d121947b"
     },
     "Loop": {
       "sourceFile": "loops.ral",
@@ -239,6 +276,12 @@
       "bytecodeDebugPatch": "",
       "codeHashDebug": ""
     },
+    "Router": {
+      "sourceFile": "router.ral",
+      "sourceCodeHash": "029ddd82603889daae310526675f79977b97a7e98659c9a5a9f22c29cc1ffa9e",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "8827f93b0d8d3549eb4b2b7fc863e08bd3bb10ae937f3f4e022e43ebea330d7a"
+    },
     "ShinyToken": {
       "sourceFile": "fungible-token.ral",
       "sourceCodeHash": "bbaba157d0df7a68095cba36d33ea5927bfc5cd296239781fd2834aafe5ef840",
@@ -263,6 +306,12 @@
       "bytecodeDebugPatch": "",
       "codeHashDebug": "fced46b77d552aaf826aae11354f3218c7420adfc917cb8159d6babf3e73e606"
     },
+    "Swap": {
+      "sourceFile": "swap.ral",
+      "sourceCodeHash": "3082edb22ce4acdf2ad96bbd4c7d82b66826f354bd8d5d3cd2acb4e94c7ad5e7",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "c8e1bd347ee2f8561eaac9478d2ff7bb1899099261e436ce4e324e8c27827af8"
+    },
     "TokenFaucet": {
       "sourceFile": "token.ral",
       "sourceCodeHash": "3a12c7604f3899bde03ab81e81eac394a53e723c6e99bc38aeb722689826759f",
@@ -274,6 +323,12 @@
       "sourceCodeHash": "88bd0d5ba87a120ba53e2ff9b5fe1ac3024e6c023fd870b71bfb8ddbb335595b",
       "bytecodeDebugPatch": "=8-2+6d=63-1+9=106+7e01155475706c652074657374207375636365737366756c",
       "codeHashDebug": "9770b3222cd87a67fb5f91857a2cd553281f5978c64aee64e699e9156ef5ab30"
+    },
+    "UnitTest": {
+      "sourceFile": "unit-test.ral",
+      "sourceCodeHash": "f339c5b89d0eeb2082ef22262be44e60a567fbeed0fa72255e9341e792c9f50d",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "a894d6453b5f062d3bebef09be783e28f5c93beca8f20df4b91dfe89d514a5cb"
     },
     "UtilsFunctions": {
       "sourceFile": "utils-functions.ral",
@@ -289,9 +344,9 @@
     },
     "WithdrawToken": {
       "sourceFile": "withdraw-token.ral",
-      "sourceCodeHash": "9ba882ff9e20ad2399f1db8bb7718aab47f8ebbc13be661163340079209cb702",
+      "sourceCodeHash": "9bf2cabe0e63bb4edcc32b9904dd8c8ec44ccc1051fb3e1a3e22d897d4ad1604",
       "bytecodeDebugPatch": "",
-      "codeHashDebug": "dd2f159729700b2b233f41a27561c000b7b80578560c86d9b234f1019026abdc"
+      "codeHashDebug": "37a6da8c823f42a97d090e5ff2fda6fed4a60afef1fe35c291b8fbf04e923c7e"
     }
   }
 }
