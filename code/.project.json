@@ -90,9 +90,15 @@
       "bytecodeDebugPatch": "=12+1a557e020c4e6574776f726b2069643a2000567e0211426c6f636b2074696d657374616d703a2000577e020e426c6f636b207461726765743a2000587e02105472616e73616374696f6e2069643a20005a7e02185472616e73616374696f6e20696e7075742073697a653a20000c597e0240214669727374207472616e73616374696f6e20696e70757420616464726573733a2000817e02=2+476173206665653a2000807e020c47617320616d6f756e743a2000=50",
       "codeHashDebug": ""
     },
+    "ChainedSwapToken": {
+      "sourceFile": "swap.ral",
+      "sourceCodeHash": "3082edb22ce4acdf2ad96bbd4c7d82b66826f354bd8d5d3cd2acb4e94c7ad5e7",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
     "CheckExternal": {
       "sourceFile": "check-external.ral",
-      "sourceCodeHash": "52c1ce321d2fcab69ebbb5d6400a9030365ffdea5350327a5a8dd0904f506de1",
+      "sourceCodeHash": "0dba7166cf105159556c1cb13198a71dde15aa23d5140c1e8236f06d1f420f27",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "c997b200345ee46980b4c1eefee941fbee504e624dc5c3fa5a2e51455876a471"
     },
@@ -155,6 +161,18 @@
       "sourceCodeHash": "b171285f5f550c133fc96637a56a3051eedfe0959d96c23c9f3b4fe280d8ee89",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "f97a233d1a8d5bae3ff4d6e49cd9b4518cf1172b3eeede5ba9b0f2e3e4a0a37b"
+    },
+    "FancyToken": {
+      "sourceFile": "new-contract-assets.ral",
+      "sourceCodeHash": "ca8f9e3d2d4dac590e49d5615a5ffbb2f9621e48b7e52e53ac23907fc22ed6cb",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "68d65cfcb347d91ca13378da5f35efeb58832cbdc2e8aa536e4e89782b5ae0fa"
+    },
+    "FancyTokenFactory": {
+      "sourceFile": "new-contract-assets.ral",
+      "sourceCodeHash": "ca8f9e3d2d4dac590e49d5615a5ffbb2f9621e48b7e52e53ac23907fc22ed6cb",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "81c640586b906a08356a0b3da3818a0961344589f86d0ecd429b262b2c4b3317"
     },
     "Fib": {
       "sourceFile": "function-calls.ral",
@@ -263,6 +281,12 @@
       "sourceCodeHash": "c114af45dad2ab91a2b6dc3123228e83748827011d7bc73e8b5c421af0eee6b2",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "fced46b77d552aaf826aae11354f3218c7420adfc917cb8159d6babf3e73e606"
+    },
+    "Swap": {
+      "sourceFile": "swap.ral",
+      "sourceCodeHash": "3082edb22ce4acdf2ad96bbd4c7d82b66826f354bd8d5d3cd2acb4e94c7ad5e7",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "c8e1bd347ee2f8561eaac9478d2ff7bb1899099261e436ce4e324e8c27827af8"
     },
     "TokenFaucet": {
       "sourceFile": "token.ral",

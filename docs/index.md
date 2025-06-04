@@ -2587,6 +2587,60 @@ TxScript Withdraw(myToken: MyToken) {
 
 For simple `TxScript` that only calls a single contract function, Web3 SDK provides a convenient shortcut through the `transact` method. This method automatically generates the necessary `TxScript` bytecode behind the scenes, eliminating the need to manually create and execute transaction scripts for basic contract interactions. So executing the `Withdraw` `TxScript` is equivalent to calling `myToken.transact.withdraw(...)`.
 
+###### Chained Contract Calls
+
+Alephium follows the stateful UTXO (sUTXO) model, where transaction outputs created within a transaction cannot be spent in the same transaction. This design provides important security benefits. For example flashloans are disabled by default because assets cannot be borrowed and returned within the same transaction.
+
+After the Danube upgrade, this limitation is relaxed in `TxScript`, which now supports calling multiple contracts and chaining asset outputs from the transaction caller. This enhancement improves composability and enables more sophisticated contract interactions, allowing developers to build more complex dApps and DeFi protocols.
+
+There are a few things worth emphasizing here:
+
+- TxScript can only chain transaction caller's asset outputs from the contract call. Asset ouputs owned by other addresses as well as the contract outputs cannot be chained
+- At the contract level, UTXO restrictions remain fully enforced, preserving the security properties of the UTXO model
+
+Here's an example of using chained transactions in a TxScript to perform token swaps across multiple liquidity pools in a single transaction:
+
+```rust
+Contract Swap(tokenId1: ByteVec, tokenId2: ByteVec, mut token1Reserve: U256, mut token2Reserve: U256) {
+    @using(preapprovedAssets = true, assetsInContract = true, updateFields = true, checkExternalCaller = false)
+    pub fn addLiquidity(lp: Address, token1Amount: U256, token2Amount: U256) -> () {
+        transferTokenToSelf!(lp, tokenId1, token1Amount)
+        transferTokenToSelf!(lp, tokenId2, token2Amount)
+        token1Reserve = token1Reserve + token1Amount
+        token2Reserve = token2Reserve + token2Amount
+    }
+
+    @using(preapprovedAssets = true, assetsInContract = true, updateFields = true, checkExternalCaller = false)
+    pub fn swap(buyer: Address, tokenId: ByteVec, tokenAmount: U256) -> () {
+        assert!(tokenId == tokenId1 || tokenId == tokenId2, 0)
+
+        if (tokenId == tokenId1) {
+            let token1Amount = tokenAmount
+            let token2Amount = token2Reserve - token1Reserve * token2Reserve / (token1Reserve + token1Amount)
+            transferTokenToSelf!(buyer, tokenId1, token1Amount)
+            transferTokenFromSelf!(buyer, tokenId2, token2Amount)
+            token1Reserve = token1Reserve + token1Amount
+            token2Reserve = token2Reserve - token2Amount
+        } else {
+            let token2Amount = tokenAmount
+            let token1Amount = token1Reserve - token1Reserve * token2Reserve / (token2Reserve + token2Amount)
+            transferTokenToSelf!(buyer, tokenId2, token2Amount)
+            transferTokenFromSelf!(buyer, tokenId1, token1Amount)
+            token1Reserve = token1Reserve + token1Amount
+            token2Reserve = token2Reserve - token2Amount
+        }
+    }
+}
+
+TxScript ChainedSwapToken(tokenPair12: Swap, tokenPair23: Swap, token1: ByteVec, token2: ByteVec) {
+    let caller = callerAddress!()
+    tokenPair12.swap{caller -> token1: 5}(caller, token1, 5)
+    tokenPair23.swap{caller -> token2: 5}(caller, token2, 5)
+}
+```
+
+As demonstrated in the `ChainedSwapToken` script, the caller first swaps 5 `token1` tokens for 5 `token2` tokens, and then immediately swaps those 5 `token2` token for 5 `token3` tokens, all within the same transaction.
+
 #### Assets Issuance
 
 In Alephium, assets are issued through contract creation, and the token ID is identical to the ID of the contract that issued it. This applies to both fungible and non-fungible tokens, as demonstracted in the sections above. Prior to the Danube upgrade, assets from the newly created contracts could not be used within the same transaction because they were treated as part of contract's outputs and constrained by the UTXO model. The Danube upgrade removes this limitation, allowing immediate use of these assets. Conceptually, assets from a newly created contract is now considered "prepared" for use during the transaction, if they are not used, they are automatically included in the contract outputs.
