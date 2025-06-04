@@ -653,9 +653,14 @@ Contract Counters() {
     // All maps must be defined at the contract level
     mapping[Address, U256] counters
 
-    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
+    @using(checkExternalCaller = false, updateFields = true)
     pub fn create() -> () {
       let key = callerAddress!()
+      // let depositor = key
+      // Prior to the Danube upgrade, the depositor deposits the map entry deposit
+      // counters.insert!(depositor, key, 1)
+
+      // After the Danube upgrade, map entry deposit is funded by the transaction caller by default
       counters.insert!(key, 1)
     }
 
@@ -679,19 +684,25 @@ Contract Counters() {
     pub fn clear() -> U256 {
       let key = callerAddress!()
       let value = counters[key]
+      // Prior to the Danube upgrade, map entry deposit recipient needs to be specified explicitly
+      // let depositRecipient = key
+      // counters.remove!(depositRecipient, key)
+
+      // After the Danube upgrade, map entry deposit is redeemed to the transaction caller by default
       counters.remove!(key)
       return value
     }
 }
 ```
 
-
 The `Counters` contract demonstrates maps in Ralph by implementing a simple personal counter. Users can create a counter tied to their address (with a map entry deposit), increment it, check its value, and eventually clear it (recovering their deposit).
 
 Function annotations play a crucial role in Ralph smart contracts, and we'll explore them in more details in the [Function Annotations](#function-annotations) section. For now, let's briefly examine the annotations used in the `Counters` contract to understand their purpose:
 
-- `@using(preapprovedAssets = true)`: This annotation requires the caller to approve assets before calling the function. In this case, the caller needs to approve enough ALPH to cover the map entry deposit.
 - `@using(checkExternalCaller = false)`: By default, Ralph requires public functions that can potentially update blockchain state to check the caller, otherwise it won't compile. This annotation allows any caller to call the function.
+- `@using(updateFields = true)`: Updating the map entries is considered updating contract fields.
+
+Prior to the Danube upgrade, both the depositor of a map entry deposit and the recipient of that deposit upon removal had to be explicitly specified. After the upgrade, this process is simplified. By default, the transaction caller automatically provides the deposit when the map entry is created and receives it back when the entry is removed, unless alternative addresses are explicitly sepeficied.
 
 Let's test the `Counters` contract using the TypeScript code below:
 
@@ -1345,7 +1356,7 @@ Contract CarFactory(mut carAddress: Address) {
         return Car(carId)
     }
 
-    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
+    @using(checkExternalCaller = false, updateFields = true)
     pub fn copyCreateCar(
         carContractId: ByteVec,
         model: ByteVec,
@@ -1353,14 +1364,12 @@ Contract CarFactory(mut carAddress: Address) {
         price: U256
     ) -> Car {
         let (immFields, mutFields) = Car.encodeFields!(model, year, price)
-        let carId = copyCreateContract!{callerAddress!() -> ALPH: minimalContractDeposit!()}(
-            carContractId, immFields, mutFields
-        )
+        let carId = copyCreateContract!(carContractId, immFields, mutFields)
         carAddress = contractIdToAddress!(carId)
         return Car(carId)
     }
 
-    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
+    @using(checkExternalCaller = false, updateFields = true)
     pub fn copyCreateCarWithToken(
         carContractId: ByteVec,
         model: ByteVec,
@@ -1369,7 +1378,7 @@ Contract CarFactory(mut carAddress: Address) {
         tokenAmount: U256
     ) -> Car {
         let (immFields, mutFields) = Car.encodeFields!(model, year, price)
-        let carId = copyCreateContractWithToken!{callerAddress!() -> ALPH: minimalContractDeposit!()}(
+        let carId = copyCreateContractWithToken!(
             carContractId, immFields, mutFields, tokenAmount
         )
         carAddress = contractIdToAddress!(carId)
@@ -1390,6 +1399,8 @@ Contract Car(model: ByteVec, year: U256, mut price: U256) {
 ```
 
 In the example above, `createCar` and `copyCreateCar` use the `createContract!` and `copyCreateContract!` built-in functions, respectively, to create a new contract. The difference between the two is that `createContract!` creates a new contract using the contract's bytecode, while `copyCreateContract!` creates a new contract by copying the bytecode from an existing contract, which is a lot more gas efficient. If the goal is to create many instance of the same contract, `copyCreateContract!` is recommended.
+
+Another notable difference between the `createCar` and `copyCreateCar` functions is that in `createCar`, the `minimalContractDeposit` is explicitly approved by the transaction caller, whereas in `copyCreateCar`, this approval is omitted. This is because, starting with the Danube upgrade, the contract deposit is by default automatically funded by the transaction caller, eliminating the need for explicit approval.
 
 Contracts in Alephium have both immutable and mutable fields, which are stored and handled differently in the VM for security and efficiency reasons. When creating a contract, you must provide encoded versions of both the immutable and mutable fields. The `encodeFields!` built-in function handles this encoding for you. In the example above, `Car.encodeFields!` encodes the `model`, `year`, and `price` fields and returns a tuple containing both the encoded immutable and mutable fields, which can be passed to the `createContract!` and `copyCreateContract!` built-in functions.
 

@@ -2,12 +2,15 @@ Contract Counters() {
     // All maps must be defined at the contract level
     mapping[Address, U256] counters
   
-    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
+    @using(checkExternalCaller = false, updateFields = true)
     pub fn create() -> () {
       let key = callerAddress!()
-      let depositor = key
-      // The depositor will deposit a minimal ALPH deposit for the new map entry
-      counters.insert!(depositor, key, 1)
+      // let depositor = key
+      // Prior to the Danube upgrade, the depositor deposits the map entry deposit
+      // counters.insert!(depositor, key, 1)
+
+      // After the Danube upgrade, map entry deposit is funded by the transaction caller by default
+      counters.insert!(key, 1)
     }
   
     @using(checkExternalCaller = false, updateFields = true)
@@ -30,7 +33,12 @@ Contract Counters() {
     pub fn clear() -> U256 {
       let key = callerAddress!()
       let value = counters[key]
+      // Prior to the Danube upgrade, map entry deposit recipient needs to be specified explicitly
+      // let depositRecipient = key
+      // counters.remove!(depositRecipient, key)
+
+      // After the Danube upgrade, map entry deposit is redeemed to the transaction caller by default
       counters.remove!(key)
       return value
     }
-  }
+}

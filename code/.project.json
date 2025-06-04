@@ -74,15 +74,15 @@
     },
     "Car": {
       "sourceFile": "car-factory.ral",
-      "sourceCodeHash": "0958b4125a9832b899f19a433ecc1afc5d42e406133a93745ef538d8abafa4d4",
+      "sourceCodeHash": "a4e73e432a124402dd995b17383dc0a872694824f45d8cfeec10b3fbe9b397b6",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "2d3fda158b1ee9ca828ca9cdab0333a9d6607ab0b80726606df0a94fc066ce0b"
     },
     "CarFactory": {
       "sourceFile": "car-factory.ral",
-      "sourceCodeHash": "0958b4125a9832b899f19a433ecc1afc5d42e406133a93745ef538d8abafa4d4",
+      "sourceCodeHash": "a4e73e432a124402dd995b17383dc0a872694824f45d8cfeec10b3fbe9b397b6",
       "bytecodeDebugPatch": "",
-      "codeHashDebug": "745e27a5263bc699605f477866d98839cedfdc9b5d73a4b78d61a6e71d887f62"
+      "codeHashDebug": "db9759978478498a71d105c1b78a0a1306d5fb1211309132215021c8a1b2fb46"
     },
     "Chain": {
       "sourceFile": "chain-functions.ral",
@@ -122,9 +122,9 @@
     },
     "Counters": {
       "sourceFile": "map.ral",
-      "sourceCodeHash": "ef2aa22f21f6ce7b5b8e7badc04c380268610359229320c8922e5e8d57988219",
-      "bytecodeDebugPatch": "=6-2+4=1-3=2-2+84=2+b=2+116=10-2+11=64+7a7e0214696e73657274206174206d617020706174683a2000=265-1+a=102+7a7e021472656d6f7665206174206d617020706174683a2000=12",
-      "codeHashDebug": "bb1fa96c57df58f8e384a48f3b0f1b42967108c5f2aa89b71db3c2d469972ccb"
+      "sourceCodeHash": "27f984dad2bf2cd2d45c03937d1b8d9277dd83a956016adb8f212081b097b265",
+      "bytecodeDebugPatch": "=6-2+3d=2-2+7d=2-2+b7=1+1=1-2+f=11-1+d=50+7a7e0214696e73657274206174206d617020706174683a2000=265-1+a=102+7a7e021472656d6f7665206174206d617020706174683a2000=12",
+      "codeHashDebug": "972a6604a87b36bd0818e182d0d08300fd5da1024892a0e8574ed3d264c9f3ee"
     },
     "CryptographyFunctions": {
       "sourceFile": "cryptograph-functions.ral",
