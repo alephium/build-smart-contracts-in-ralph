@@ -294,7 +294,7 @@ Contract Integer () {
 
 Ralph supports standard arithmetic operators that you would expect in most programming languages: `+` (addition), `-` (subtraction), `*` (multiplication), `/` (division), `**` (exponentiation), and `%` (modulo). These operators work with both `I256` and `U256` types. Ralph performs automatic overflow checking at runtime to prevent silent arithmetic errors that could lead to security vulnerabilities.
 
-Ralph offers two division modes: round up (`/`) and round down (`\`). This is especially useful in DeFi applications where unintended rounding errors is a key exploitation vector.
+Ralph offers two division modes: round up (`\`) and round down (`/`). This is especially useful in DeFi applications where unintended rounding errors is a key exploitation vector.
 
 ```rust
 assert!(10 / 3 == 3, 6)       // round down
