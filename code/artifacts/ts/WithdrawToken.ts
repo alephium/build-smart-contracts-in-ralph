@@ -110,7 +110,7 @@ export const WithdrawToken = new Factory(
   Contract.fromJson(
     WithdrawTokenContractJson,
     "",
-    "dd2f159729700b2b233f41a27561c000b7b80578560c86d9b234f1019026abdc",
+    "37a6da8c823f42a97d090e5ff2fda6fed4a60afef1fe35c291b8fbf04e923c7e",
     AllStructs
   )
 );

@@ -890,12 +890,14 @@ Contract WithdrawToken() {
     pub fn withdraw() -> () {
       let caller = callerAddress!()
       transferTokenFromSelf!(caller, selfTokenId!(), 1)
-      transferTokenFromSelf!(caller, ALPH, dustAmount!())
+      // Prior to the Danube upgrade, dustAmount!() needs to be transferred explicitly
+      // After the Danube upgrade, transaction caller will fund the dust amount by default
+      // transferTokenFromSelf!(caller, ALPH, dustAmount!())
     }
 }
 ```
 
-In the example above, the `withdraw` function uses the contract's assets, and it transfers 1 token and dust amount of ALPH to the caller. Dust amount is the minimal amount of ALPH required for each UTXO to prevent the bloating of UTXO set, it is currently set to `0.001` ALPH.
+In the example above, the `withdraw` function uses the contract's assets to transfers 1 token to the caller. Before the Danube upgrade, it also needed to explicitly transfer `dustAmount!()` (currently `0.001`) of ALPH to the caller. This minimal amount of ALPH is required for each UTXO to prevent bloating of UTXO set. After the Danube upgrade, the transaction caller automatically covers the dust amount by default, eliminating the need for an explicit transfer.
 
 We can test the `Withdraw` contract using the TypeScript code below:
 

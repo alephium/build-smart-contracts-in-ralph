@@ -326,9 +326,9 @@
     },
     "WithdrawToken": {
       "sourceFile": "withdraw-token.ral",
-      "sourceCodeHash": "9ba882ff9e20ad2399f1db8bb7718aab47f8ebbc13be661163340079209cb702",
+      "sourceCodeHash": "9bf2cabe0e63bb4edcc32b9904dd8c8ec44ccc1051fb3e1a3e22d897d4ad1604",
       "bytecodeDebugPatch": "",
-      "codeHashDebug": "dd2f159729700b2b233f41a27561c000b7b80578560c86d9b234f1019026abdc"
+      "codeHashDebug": "37a6da8c823f42a97d090e5ff2fda6fed4a60afef1fe35c291b8fbf04e923c7e"
     }
   }
 }
