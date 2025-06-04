@@ -2,7 +2,7 @@ Contract Counters() {
     // All maps must be defined at the contract level
     mapping[Address, U256] counters
   
-    @using(preapprovedAssets = true, checkExternalCaller = false)
+    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
     pub fn create() -> () {
       let key = callerAddress!()
       let depositor = key
@@ -10,7 +10,7 @@ Contract Counters() {
       counters.insert!(depositor, key, 1)
     }
   
-    @using(checkExternalCaller = false)
+    @using(checkExternalCaller = false, updateFields = true)
     pub fn increase() -> () {
       let key = callerAddress!()
       let value = counters[key]
@@ -26,13 +26,11 @@ Contract Counters() {
       }
     }
   
-    @using(checkExternalCaller = false)
+    @using(checkExternalCaller = false, updateFields = true)
     pub fn clear() -> U256 {
       let key = callerAddress!()
-      let depositRecipient = key
       let value = counters[key]
-      // Each map entry removal redeems the map entry deposit
-      counters.remove!(depositRecipient, key)
+      counters.remove!(key)
       return value
     }
   }

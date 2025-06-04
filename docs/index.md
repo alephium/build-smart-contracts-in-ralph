@@ -650,42 +650,38 @@ Maps provide three essential built-in methods: `insert!` for creating entries, `
 
 ```rust
 Contract Counters() {
-  // All maps must be defined at the contract level
-  mapping[Address, U256] counters
+    // All maps must be defined at the contract level
+    mapping[Address, U256] counters
 
-  @using(preapprovedAssets = true, checkExternalCaller = false)
-  pub fn create() -> () {
-    let key = callerAddress!()
-    let depositor = key
-    // The depositor will deposit a minimal ALPH deposit for the new map entry
-    counters.insert!(depositor, key, 1)
-  }
-
-  @using(checkExternalCaller = false)
-  pub fn increase() -> () {
-    let key = callerAddress!()
-    let value = counters[key]
-    // Update the map entry value
-    counters[key] = value + 1
-  }
-
-  pub fn currentCount(key: Address) -> U256 {
-    if (counters.contains!(key)) {
-      return counters[key]
-    } else {
-      return 0
+    @using(preapprovedAssets = true, checkExternalCaller = false, updateFields = true)
+    pub fn create() -> () {
+      let key = callerAddress!()
+      counters.insert!(key, 1)
     }
-  }
 
-  @using(checkExternalCaller = false)
-  pub fn clear() -> U256 {
-    let key = callerAddress!()
-    let depositRecipient = key
-    let value = counters[key]
-    // Each map entry removal redeems the map entry deposit
-    counters.remove!(depositRecipient, key)
-    return value
-  }
+    @using(checkExternalCaller = false, updateFields = true)
+    pub fn increase() -> () {
+      let key = callerAddress!()
+      let value = counters[key]
+      // Update the map entry value
+      counters[key] = value + 1
+    }
+
+    pub fn currentCount(key: Address) -> U256 {
+      if (counters.contains!(key)) {
+        return counters[key]
+      } else {
+        return 0
+      }
+    }
+
+    @using(checkExternalCaller = false, updateFields = true)
+    pub fn clear() -> U256 {
+      let key = callerAddress!()
+      let value = counters[key]
+      counters.remove!(key)
+      return value
+    }
 }
 ```
 
