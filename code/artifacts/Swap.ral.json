@@ -1,0 +1,69 @@
+{
+  "version": "v3.15.1",
+  "name": "Swap",
+  "bytecode": "0402402740ac010103030011d37f26565b1600ce001601ac1600ce011602aca00016012aa100a00116022aa10101010307004049d3637e48ef1601ce00417a4b04181601ce01410c7b1601ce00414c1d16021703a001a000a0012ca00016032a2d2b17041600ce001603ac1600ce011604aba00016032aa100a00116042ba1014a1c16021705a000a000a0012ca00116052a2d2b17061600ce011605ac1600ce001606aba00016062aa100a00116052ba101",
+  "codeHash": "c8e1bd347ee2f8561eaac9478d2ff7bb1899099261e436ce4e324e8c27827af8",
+  "fieldsSig": {
+    "names": [
+      "tokenId1",
+      "tokenId2",
+      "token1Reserve",
+      "token2Reserve"
+    ],
+    "types": [
+      "ByteVec",
+      "ByteVec",
+      "U256",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      false,
+      true,
+      true
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "addLiquidity",
+      "paramNames": [
+        "lp",
+        "token1Amount",
+        "token2Amount"
+      ],
+      "paramTypes": [
+        "Address",
+        "U256",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false,
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "swap",
+      "paramNames": [
+        "buyer",
+        "tokenId",
+        "tokenAmount"
+      ],
+      "paramTypes": [
+        "Address",
+        "ByteVec",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false,
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}

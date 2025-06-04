@@ -222,6 +222,12 @@
       "bytecodeDebugPatch": "=6-2+a4=13-1+d=766+7e011b54657374207375636365737366756c20666f7220496e7465676572",
       "codeHashDebug": "209deb6260b9be03528e9df802b346e5825baa424ac51932d48d2173386a5ef8"
     },
+    "Internal": {
+      "sourceFile": "router.ral",
+      "sourceCodeHash": "029ddd82603889daae310526675f79977b97a7e98659c9a5a9f22c29cc1ffa9e",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "092813100f04c0e237f43fab51043db392ff88d094cf786cfb6c6c79d121947b"
+    },
     "Loop": {
       "sourceFile": "loops.ral",
       "sourceCodeHash": "2cc6fe816f272c2981e2c254824e0a83c0290e7f0482b4b4366d74861de437cd",
@@ -257,6 +263,12 @@
       "sourceCodeHash": "95cc8ecf7e6fdd12ca4686a1eabbd1c1a60d8780c7d50b2a85cf902d114b3f68",
       "bytecodeDebugPatch": "",
       "codeHashDebug": ""
+    },
+    "Router": {
+      "sourceFile": "router.ral",
+      "sourceCodeHash": "029ddd82603889daae310526675f79977b97a7e98659c9a5a9f22c29cc1ffa9e",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "8827f93b0d8d3549eb4b2b7fc863e08bd3bb10ae937f3f4e022e43ebea330d7a"
     },
     "ShinyToken": {
       "sourceFile": "fungible-token.ral",
