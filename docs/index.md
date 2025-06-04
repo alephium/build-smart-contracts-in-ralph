@@ -2635,11 +2635,11 @@ Contract Swap(tokenId1: ByteVec, tokenId2: ByteVec, mut token1Reserve: U256, mut
 TxScript ChainedSwapToken(tokenPair12: Swap, tokenPair23: Swap, token1: ByteVec, token2: ByteVec) {
     let caller = callerAddress!()
     tokenPair12.swap{caller -> token1: 5}(caller, token1, 5)
-    tokenPair23.swap{caller -> token2: 5}(caller, token2, 5)
+    tokenPair23.swap{caller -> token2: 4}(caller, token2, 4)
 }
 ```
 
-As demonstrated in the `ChainedSwapToken` script, the caller first swaps 5 `token1` tokens for 5 `token2` tokens, and then immediately swaps those 5 `token2` token for 5 `token3` tokens, all within the same transaction.
+As demonstrated in the `ChainedSwapToken` script, the caller first swaps 5 `token1` tokens for 4 `token2` tokens, and then immediately swaps those 4 `token2` token for `token3` tokens, all within the same transaction.
 
 #### Assets Issuance
 

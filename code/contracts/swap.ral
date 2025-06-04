@@ -1,0 +1,36 @@
+Contract Swap(tokenId1: ByteVec, tokenId2: ByteVec, mut token1Reserve: U256, mut token2Reserve: U256) {
+    @using(preapprovedAssets = true, assetsInContract = true, updateFields = true, checkExternalCaller = false)
+    pub fn addLiquidity(lp: Address, token1Amount: U256, token2Amount: U256) -> () {
+        transferTokenToSelf!(lp, tokenId1, token1Amount)
+        transferTokenToSelf!(lp, tokenId2, token2Amount)
+        token1Reserve = token1Reserve + token1Amount
+        token2Reserve = token2Reserve + token2Amount
+    }
+
+    @using(preapprovedAssets = true, assetsInContract = true, updateFields = true, checkExternalCaller = false)
+    pub fn swap(buyer: Address, tokenId: ByteVec, tokenAmount: U256) -> () {
+        assert!(tokenId == tokenId1 || tokenId == tokenId2, 0)
+
+        if (tokenId == tokenId1) {
+            let token1Amount = tokenAmount
+            let token2Amount = token2Reserve - token1Reserve * token2Reserve / (token1Reserve + token1Amount)
+            transferTokenToSelf!(buyer, tokenId1, token1Amount)
+            transferTokenFromSelf!(buyer, tokenId2, token2Amount)
+            token1Reserve = token1Reserve + token1Amount
+            token2Reserve = token2Reserve - token2Amount
+        } else {
+            let token2Amount = tokenAmount
+            let token1Amount = token1Reserve - token1Reserve * token2Reserve / (token2Reserve + token2Amount)
+            transferTokenToSelf!(buyer, tokenId2, token2Amount)
+            transferTokenFromSelf!(buyer, tokenId1, token1Amount)
+            token1Reserve = token1Reserve + token1Amount
+            token2Reserve = token2Reserve - token2Amount
+        }
+    }
+}
+
+TxScript ChainedSwapToken(tokenPair12: Swap, tokenPair23: Swap, token1: ByteVec, token2: ByteVec) {
+    let caller = callerAddress!()
+    tokenPair12.swap{caller -> token1: 5}(caller, token1, 5)
+    tokenPair23.swap{caller -> token2: 4}(caller, token2, 4)
+}
