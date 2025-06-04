@@ -1043,7 +1043,7 @@ There are also a few built-in functions that can be used to get the caller's inf
 - `callerAddress!()` - Returns caller's address. When called from a `TxScript` or a contract function directly called from `TxScript`, it returns the address of the transaction caller. When called from a function invoked from another contract function, it returns the address of that contract.
 - `callerContractId!()` - Returns caller's contract ID. This function can only be used when the caller is a contract. If called from a `TxScript` it will fail the transaction with the `NoCaller` error.
 - `externalCallerAddress!()` - Behaves like `callerAddress!()`, except when invoked from a contract function called by another function within the same contract. In such cases, it returns the address of the first external caller in the call stack, skipping all internal calls from the current contract.
-- `externalCallerContractId!()` - Returns the contract id of the first external caller in the call stack, skipping all intermediate calls originating from the current contract.
+- `externalCallerContractId!()` - Returns the contract ID of the first external caller in the call stack, skipping all intermediate calls originating from the current contract.
 
 ```rust
 Contract CheckExternal(owner: Address, mut value: U256) {
@@ -2586,6 +2586,36 @@ TxScript Withdraw(myToken: MyToken) {
 ```
 
 For simple `TxScript` that only calls a single contract function, Web3 SDK provides a convenient shortcut through the `transact` method. This method automatically generates the necessary `TxScript` bytecode behind the scenes, eliminating the need to manually create and execute transaction scripts for basic contract interactions. So executing the `Withdraw` `TxScript` is equivalent to calling `myToken.transact.withdraw(...)`.
+
+#### Assets Issuance
+
+In Alephium, assets are issued through contract creation, and the token ID is identical to the ID of the contract that issued it. This applies to both fungible and non-fungible tokens, as demonstracted in the sections above. Prior to the Danube upgrade, assets from the newly created contracts could not be used within the same transaction because they were treated as part of contract's outputs and constrained by the UTXO model. The Danube upgrade removes this limitation, allowing immediate use of these assets. Conceptually, assets from a newly created contract is now considered "prepared" for use during the transaction, if they are not used, they are automatically included in the contract outputs.
+
+```rust
+Contract FancyToken(name: ByteVec) {
+    pub fn getName() -> ByteVec {
+        return name
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn transferTokens(recipient: Address, amount: U256) -> () {
+       transferTokenFromSelf!(recipient, selfTokenId!(), amount)
+    }
+}
+
+Contract FancyTokenFactory(fancyTokenTemplateId: ByteVec) {
+  @using(checkExternalCaller = false)
+  pub fn mint(name: ByteVec) -> () {
+    let (immFields, mutFields) = FancyToken.encodeFields!(name)
+    let fancyTokenContractId = copyCreateSubContractWithToken!(
+        name, fancyTokenTemplateId, immFields, mutFields, 2
+    )
+    FancyToken(fancyTokenContractId).transferTokens(callerAddress!(), 1)
+  }
+}
+```
+
+As we can see in the example above. `FancyTokenFactory` contract creates a sub contract `FancyToken` and issues 2 tokens. Immediately after the contract is created, it calls the `transferTokens` function on the `FancyToken` contract to transfer one of the tokens to the transaction caller.
 
 #### Events
 
