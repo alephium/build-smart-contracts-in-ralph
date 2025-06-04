@@ -3073,7 +3073,11 @@ In a sophisticated dApp transaction, Asset Permission System ensures that the fl
 
 Testing is essential to ensure the functionality, quality and security of any software products. This is especially true when it comes to smart contracts development because once deployed, smart contracts are much more difficult, if possible, to update compared to traditional software, and bugs in them can potentially lead to significant financial losses.
 
-Testing smart contracts can be challenging. Alephium's Web3 SDK makes the following opinionated design decisions when it comes to its testing framework:
+Testing smart contracts can be challenging, but Alephium provides comprehensive support for both unit and integration testing. Unit tests can be written directly in Ralph or in TypeScript using the Web3 SDK, while integration tests are fully supported through the Web3 SDK.
+
+The unit testing framework in Ralph is currently experimental, best suited for testing pure functions. For more complex contract interactions and end-to-end scenarios, the Web3 SDK offers a more mature and flexible testing environment.
+
+Alephium's Web3 SDK makes the following opinionated design decisions for its testing framework:
 
 - Both unit tests and integration tests are important. Although the distinction between them can be blurry, the test framework defines integration tests as the tests that require smart contracts under test to be deployed, whereas unit tests do not
 - Test code should be clean and maintainable, just like any other code. The Web3 SDK automatically generates testing boilerplates to simplify the process of writing and maintaining test cases
@@ -3081,7 +3085,127 @@ Testing smart contracts can be challenging. Alephium's Web3 SDK makes the follow
 
 Ralph also allows developers to emit debug statements within smart contracts, which is very useful to diagnose issues during development.
 
-### Unit Test
+### Unit Test in Ralph
+
+Ralph features a simple and intuitive domain-specific language (DSL) for unit testing, built directly into the language itself. It provides a set of assertion functions such as `testEqual!`, `testCheck!`, `testError!` and `testFail!` for validating expected conditions. It also allows you to initialize and verify the contract state before and after the test execution.
+
+Here is an simple example that demonstrates the basic features of Ralph's unit testing:
+
+```rust
+Contract UnitTest(mut count: U256) {
+
+    pub fn add(a: U256, b: U256) -> U256 {
+        return a + b
+    }
+
+    pub fn divide(a: U256, b: U256) -> U256 {
+        return a / b
+    }
+
+    pub fn isAdult(age: U256) -> Bool {
+        return age >= 18
+    }
+
+    @using(updateFields = true, checkExternalCaller = false)
+    pub fn increment() -> () {
+        count = count + 1
+    }
+
+    test "should add two numbers correctly" {
+        testEqual!(add(2, 3), 5)
+        testEqual!(add(0, 10), 10)
+        testEqual!(add(100, 200), 300)
+    }
+
+    test "addition should be commutative" {
+        let a = randomU256!() / 2
+        let b = randomU256!() / 2
+        testEqual!(add(a, b), add(b, a))
+    }
+
+    test "should validate age correctly" {
+        testCheck!(isAdult(25))
+        testCheck!(!isAdult(17))
+    }
+
+    test "should fail on division by zero" {
+        testFail!(divide(10, 0))
+        testFail!(divide(0, 0))
+    }
+
+    test "should increment count by one"
+    before
+        Self(5)  // Initial state: count = 5
+    after
+        Self(6)  // Expected state: count = 6
+    {
+        increment()
+    }
+}
+```
+
+In addition to contract state, Ralph's unit testing framework supports initializing and verifying asset balances before and after test execution. It also supports testing of contracts that depend on or interact with other contracts, allowing for more realistic test scenarios.
+
+```rust
+Contract Bank(mut totalDeposits: U256) {
+    enum ErrorCodes {
+        InsufficientFunds = 0
+    }
+
+    @using(preapprovedAssets = true, updateFields = true, checkExternalCaller = false, assetsInContract = true)
+    pub fn deposit(depositor: Address) -> () {
+        totalDeposits = totalDeposits + 1 alph
+        transferTokenToSelf!(depositor, ALPH, 1 alph)
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn withdraw(amount: U256) -> () {
+        assert!(amount <= 100, ErrorCodes.InsufficientFunds)
+        transferTokenFromSelf!(callerAddress!(), ALPH, amount)
+    }
+
+    test "should throw insufficient funds error" {
+        testError!(withdraw(1000), ErrorCodes.InsufficientFunds)
+    }
+
+    test "should increase contract balance on deposit"
+    before
+        Self{ALPH: 1 alph}(1 alph)
+    after
+        Self{ALPH: 2 alph}(2 alph)
+    approve{ address -> ALPH: 2 alph }
+    {
+        let depositor = callerAddress!()
+        deposit{depositor -> ALPH: 2 alph}(depositor)
+    }
+}
+
+Contract Customer() {
+    @using(preapprovedAssets = true, checkExternalCaller = false)
+    pub fn makeDeposit(bank: Bank) -> () {
+        let depositor = externalCallerAddress!()
+        bank.deposit{depositor -> ALPH: 1 alph}(depositor)
+    }
+
+    test "customer should be able to make deposit to bank"
+    before
+        Bank{ALPH: 0 alph}(0)@bank
+        Self()
+    after
+        Bank{ALPH: 1 alph}(1 alph)@bank
+        Self()
+    approve{address -> ALPH: 1 alph}
+    {
+        makeDeposit{callerAddress!() -> ALPH: 1 alph}(bank)
+    }
+}
+```
+
+In the example above, the `should increase contract balance on deposit` unit test within the `Bank` contract initializes the `totalDeposits` contract field and the contract's asset balances to `1 alph`, and approves `2 alph` from the test executor. After executing the test, it verifies that both the `totalDeposits` field and the asset balances have increased to `2 alph`.
+
+In the `customer should be able to make deposit to bank` test within the `Consumer` contract, the test sets up the initial state and balances for the `Bank` contract and assigns it to a variable named `bank`. This `bank` variable is then passed to the `Customer.makeDeposit` function during the test. The test also approves `1 alph` from the test executor. After execution, the test verifies that both the contract state and asset balances have been updated as expected.
+
+### Unit Test in SDK
 
 A unit test tests a specific function of a contract, without requiring the contract to be deployed. Let's use the following contract as an example:
 
@@ -3283,7 +3407,7 @@ expectAssertionError(
 
 `expectAssertionError` function takes three arguments: the execution promise, the address of the contract where the error is expected to be thrown, and the error code.
 
-### Integration Test
+### Integration Test in SDK
 
 An integration test tests a feature of a set of deployed contracts. Let's try to test the `ALPHFaucet` contract from the [Unit Test](#unit-test) section:
 

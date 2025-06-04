@@ -48,6 +48,12 @@
       "bytecodeDebugPatch": "",
       "codeHashDebug": "86f278d2de249eca00d0c68f12167da0c1a54c02eaa8c148f89e659ae7cf11af"
     },
+    "Bank": {
+      "sourceFile": "unit-test.ral",
+      "sourceCodeHash": "f339c5b89d0eeb2082ef22262be44e60a567fbeed0fa72255e9341e792c9f50d",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "71ae38151a7762d3767975964982066bd733753e940b274e13c8b5e69b87480c"
+    },
     "Bar": {
       "sourceFile": "struct.ral",
       "sourceCodeHash": "8b75b0fb08f6b1d87a6250e99c41811733bec19809cecbf7de659ec7d6158a49",
@@ -131,6 +137,12 @@
       "sourceCodeHash": "24371fb6e186abb0a83773c772e416bcc7de086c50afc190d716c0b14319ac49",
       "bytecodeDebugPatch": "",
       "codeHashDebug": "3219704c52b1e9960913c67bfc91252716e9d4447ad6a0e67b6576a579ced572"
+    },
+    "Customer": {
+      "sourceFile": "unit-test.ral",
+      "sourceCodeHash": "f339c5b89d0eeb2082ef22262be44e60a567fbeed0fa72255e9341e792c9f50d",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "079469f831c04da0c47fe4525ecdf660a2cca687634399c8cefd1016187e0c0e"
     },
     "Deposit": {
       "sourceFile": "deposit.ral",
@@ -311,6 +323,12 @@
       "sourceCodeHash": "88bd0d5ba87a120ba53e2ff9b5fe1ac3024e6c023fd870b71bfb8ddbb335595b",
       "bytecodeDebugPatch": "=8-2+6d=63-1+9=106+7e01155475706c652074657374207375636365737366756c",
       "codeHashDebug": "9770b3222cd87a67fb5f91857a2cd553281f5978c64aee64e699e9156ef5ab30"
+    },
+    "UnitTest": {
+      "sourceFile": "unit-test.ral",
+      "sourceCodeHash": "f339c5b89d0eeb2082ef22262be44e60a567fbeed0fa72255e9341e792c9f50d",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "a894d6453b5f062d3bebef09be783e28f5c93beca8f20df4b91dfe89d514a5cb"
     },
     "UtilsFunctions": {
       "sourceFile": "utils-functions.ral",

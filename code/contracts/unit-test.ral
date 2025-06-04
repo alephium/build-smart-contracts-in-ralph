@@ -1,0 +1,103 @@
+Contract UnitTest(mut count: U256) {
+
+    pub fn add(a: U256, b: U256) -> U256 {
+        return a + b
+    }
+
+    pub fn divide(a: U256, b: U256) -> U256 {
+        return a / b
+    }
+
+    pub fn isAdult(age: U256) -> Bool {
+        return age >= 18
+    }
+
+    @using(updateFields = true, checkExternalCaller = false)
+    pub fn increment() -> () {
+        count = count + 1
+    }
+
+    test "should add two numbers correctly" {
+        testEqual!(add(2, 3), 5)
+        testEqual!(add(0, 10), 10)
+        testEqual!(add(100, 200), 300)
+    }
+
+    test "addition should be commutative" {
+        let a = randomU256!() / 2
+        let b = randomU256!() / 2
+        testEqual!(add(a, b), add(b, a))
+    }
+
+    test "should validate age correctly" {
+        testCheck!(isAdult(25))
+        testCheck!(!isAdult(17))
+    }
+
+    test "should fail on division by zero" {
+        testFail!(divide(10, 0))
+        testFail!(divide(0, 0))
+    }
+
+    test "should increment count by one"
+    before
+        Self(5)  // Initial state: count = 5
+    after
+        Self(6)  // Expected state: count = 6
+    {
+        increment()
+    }
+}
+
+Contract Bank(mut totalDeposits: U256) {
+    enum ErrorCodes {
+        InsufficientFunds = 0
+    }
+
+    @using(preapprovedAssets = true, updateFields = true, checkExternalCaller = false, assetsInContract = true)
+    pub fn deposit(depositor: Address) -> () {
+        totalDeposits = totalDeposits + 1 alph
+        transferTokenToSelf!(depositor, ALPH, 1 alph)
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn withdraw(amount: U256) -> () {
+        assert!(amount <= 100, ErrorCodes.InsufficientFunds)
+        transferTokenFromSelf!(callerAddress!(), ALPH, amount)
+    }
+
+    test "should throw insufficient funds error" {
+        testError!(withdraw(1000), ErrorCodes.InsufficientFunds)
+    }
+
+    test "should increase contract balance on deposit"
+    before
+        Self{ALPH: 1 alph}(1 alph)
+    after
+        Self{ALPH: 2 alph}(2 alph)
+    approve{ address -> ALPH: 2 alph }
+    {
+        let depositor = callerAddress!()
+        deposit{depositor -> ALPH: 2 alph}(depositor)
+    }
+}
+
+Contract Customer() {
+    @using(preapprovedAssets = true, checkExternalCaller = false)
+    pub fn makeDeposit(bank: Bank) -> () {
+        let depositor = externalCallerAddress!()
+        bank.deposit{depositor -> ALPH: 1 alph}(depositor)
+    }
+
+    test "customer should be able to make deposit to bank"
+    before
+        Bank{ALPH: 0 alph}(0)@bank
+        Self()
+    after
+        Bank{ALPH: 1 alph}(1 alph)@bank
+        Self()
+    approve{address -> ALPH: 1 alph}
+    {
+        makeDeposit{callerAddress!() -> ALPH: 1 alph}(bank)
+    }
+}

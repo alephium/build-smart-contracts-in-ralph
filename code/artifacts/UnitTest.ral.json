@@ -1,0 +1,80 @@
+{
+  "version": "v3.15.1",
+  "name": "UnitTest",
+  "bytecode": "010411402240334044010002020105d347e81a7d160016012a02010002020105d37eb83f69160016012d02010001010105d354bebe66160013123402010000000005d396511ef7a0000d2aa100",
+  "codeHash": "a894d6453b5f062d3bebef09be783e28f5c93beca8f20df4b91dfe89d514a5cb",
+  "fieldsSig": {
+    "names": [
+      "count"
+    ],
+    "types": [
+      "U256"
+    ],
+    "isMutable": [
+      true
+    ]
+  },
+  "eventsSig": [],
+  "functions": [
+    {
+      "name": "add",
+      "paramNames": [
+        "a",
+        "b"
+      ],
+      "paramTypes": [
+        "U256",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "divide",
+      "paramNames": [
+        "a",
+        "b"
+      ],
+      "paramTypes": [
+        "U256",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "isAdult",
+      "paramNames": [
+        "age"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "Bool"
+      ]
+    },
+    {
+      "name": "increment",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": []
+}
